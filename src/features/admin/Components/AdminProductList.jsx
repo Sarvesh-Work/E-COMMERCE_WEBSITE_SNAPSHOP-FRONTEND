@@ -3,20 +3,18 @@ import {
   SelectAllProduct,
   SelectTotalItems,
   fetchProductsByAsync,
-} from "../ProductSlice";
-import ProductCard from "./ProductCard";
-import ProductFilter from "./ProductFilter";
+} from "../../Product/ProductSlice";
+import AdminProductCard from "./AdminProductCard";
+import AdminProductFilter from "./AdminProductFilter";
 import { useEffect, useState } from "react";
 import { ITEMS_PER_PAGE } from "../../../app/constant";
-import ProductPagination from "./ProductPagination";
-import Loading from "../../../Pages/loading";
+import AdminProductPagination from "./AdminProductPagination";
 
-const ProductList = () => {
+const AdminProductList = () => {
   const dispatch = useDispatch();
   const [filter, setFilter] = useState({});
   const [sort, setSort] = useState({});
   const [page, setPage] = useState(1);
-  const [loading, setLoading] = useState(false);
 
   const products = useSelector(SelectAllProduct);
   const totalItems = useSelector(SelectTotalItems);
@@ -70,32 +68,24 @@ const ProductList = () => {
 
   useEffect(() => {
     setPage(1);
-    setInterval(() => {
-      setLoading(true);
-    }, 1000);
   }, [totalItems, sort]);
 
   return (
     <div className=" container-lg container-fluid">
       <div className="row p-3 mt-1">
-        <div
-          className="col-12 text-center p-0 m-0"
-          style={{ fontSize: "50px", lineHeight: "1.2", fontWeight: "700" }}
-        >
-          <div className="m-0 p-0">Your ultimate destination for online </div>
-          <div className="m-0 p-0">
-            shopping <span style={{ color: "#0066b2" }}>delight! </span>
-          </div>
-        </div>
-        <div className="col-12 text-center mt-3">
-          Welcome to Snapshop. Every products on our platform is verified by our
-          team to <br />
-          ensure our highest quality standard
-        </div>
+         <div className="col-12 text-center p-0 m-0" style={{fontSize:"50px",lineHeight:"1.2" ,fontWeight:"700"}}>
+           <div className="m-0 p-0">Your ultimate destination for online  </div>
+          <div className="m-0 p-0" > shopping <span style={{color:"#0066b2"}}>delight! </span></div>
+          
+         </div>
+         <div className="col-12 text-center mt-3">
+            Welcome to Snapshop. Every products on our platform is verified by our team to <br />
+            ensure our highest quality standard
+         </div>
       </div>
       <div
         className="row p-1 py-2 mt-5 "
-        // style={{ borderBottom: "1px solid #CCCCCC" }}
+        style={{ borderBottom: "1px solid #CCCCCC" }}
         id="AllProducts-media"
       >
         <h1
@@ -151,24 +141,17 @@ const ProductList = () => {
 
       <div className="row  d-flex justify-content-between">
         <div className="col-3 d-lg-inline d-none">
-          <ProductFilter handleFilter={handleFilter} />
+          <AdminProductFilter handleFilter={handleFilter} />
         </div>
         <div className="col-lg-9 col-12 px-lg-3">
-          {loading == false ? (
-            <Loading />
-          ) : (
-            <>
-              <ProductCard products={products} />
-
-              <ProductPagination
-                page={page}
-                totalPage={totalPage}
-                totalItems={totalItems}
-                handlPage={handlPage}
-                ITEMS_PER_PAGE={ITEMS_PER_PAGE}
-              />
-            </>
-          )}
+          <AdminProductCard products={products} />
+          <AdminProductPagination
+            page={page}
+            totalPage={totalPage}
+            totalItems={totalItems}
+            handlPage={handlPage}
+            ITEMS_PER_PAGE={ITEMS_PER_PAGE}
+          />
         </div>
       </div>
 
@@ -189,11 +172,11 @@ const ProductList = () => {
           ></button>
         </div>
         <div className="offcanvas-body">
-          <ProductFilter handleFilter={handleFilter} />
+          <AdminProductFilter handleFilter={handleFilter} />
         </div>
       </div>
     </div>
   );
 };
 
-export default ProductList;
+export default AdminProductList;

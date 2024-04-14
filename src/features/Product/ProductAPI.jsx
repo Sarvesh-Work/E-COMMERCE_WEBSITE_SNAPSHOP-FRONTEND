@@ -1,6 +1,6 @@
 export const fetchAllProducts = async () => {
   try {
-    const response = await fetch("http://localhost:3004/products");
+    const response = await fetch("http://localhost:8080/products");
     return await response.json();
   } catch (error) {
     console.error("Error fetching products:", error);
@@ -28,7 +28,7 @@ export const fetchAllProductsByFilter = async (filter,sort,pagination) => {
     }
 
     const response = await fetch(
-      "http://localhost:3004/products?" + queryString
+      "http://localhost:8080/products?" + queryString
     );
     const data = await response.json();
     const totalItems=await response.headers.get("x-Total-Count")
@@ -42,7 +42,7 @@ export const fetchAllProductsByFilter = async (filter,sort,pagination) => {
 
 export const fetchAllBrands = async () => {
   try {
-    const response = await fetch("http://localhost:3004/Brands");
+    const response = await fetch("http://localhost:8080/Brands");
     const data= await response.json();
    
     return {data}
@@ -55,7 +55,7 @@ export const fetchAllBrands = async () => {
 
 export const fetchAllCategories = async () => {
   try {
-    const response = await fetch(" http://localhost:3004/Categories");
+    const response = await fetch(" http://localhost:8080/Categories");
     const data= await response.json();
     return {data}
   } catch (error) {
@@ -66,10 +66,12 @@ export const fetchAllCategories = async () => {
 
 export const fetchProductById = async (id) => {
   try {
-    const response = await fetch("http://localhost:3004/products/"+id);
+
+      const response = await fetch("http://localhost:8080/products/"+id);
     const data= await response.json();
     console.log("new data",data)
     return {data}
+   
   } catch (error) {
     console.error("Error fetching products:", error);
     throw error;

@@ -2,19 +2,23 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { SelectCartItems } from "../cart/cartSlice";
+import { selectUserInfo } from "../user/userSlice";
 
 const Navbar = ({ children }) => {
-  // selecter for displaying total product in cart
   const CartProduct = useSelector(SelectCartItems);
-
+  const Navigate = [
+    { data: "Admin", link: "/admin", admin: true },
+    { data: "Dashbord", link: "/", user: true },
+  ];
+  const user = useSelector(selectUserInfo);
   return (
     <>
       <nav
-        className="navbar navbar-expand-lg navbar-light py-0 pt-2  sticky-top"
-        style={{ backgroundColor: "#FFFFFF", }}
+        className="navbar navbar-expand-lg navbar-light py-0  sticky-top"
+        style={{ backgroundColor: "#FFFFFF" }}
       >
         <div
-          className="container-lg container-fluid px-1 pb-1"
+          className="container-lg container-fluid px-1 "
           style={{ borderBottom: "1px solid #CCCCCC" }}
         >
           <Link to="/" className=" text-decoration-none">
@@ -35,6 +39,7 @@ const Navbar = ({ children }) => {
               P
             </div>
           </Link>
+
           <div
             className="navbar-toggler border-0"
             type="button"
@@ -47,7 +52,28 @@ const Navbar = ({ children }) => {
             <span className="navbar-toggler-icon text-dark"></span>
           </div>
           <div className="collapse navbar-collapse " id="navbarNavAltMarkup">
-            <div className="navbar-nav mx-lg-auto gap-lg-4 gap-lg-2 p-1"></div>
+            <div className="navbar-nav mx-lg-auto gap-lg-4 gap-lg-2 p-1">
+              <ul className="navbar-nav me-auto mb-2 mb-lg-0 gap-2">
+                {Navigate.map((item) =>
+                  item[user?.role] ? (
+                    <li className="nav-item p-0 m-0" key={item.admin}>
+                      <Link
+                        to={item.link}
+                        className="nav-link active p-0 mt-1 "
+                        aria-current="page"
+                        style={{
+                          color: "#0066b2",
+                          fontSize: "20px",
+                          fontWeight: "500",
+                        }}
+                      >
+                        {item.data}
+                      </Link>
+                    </li>
+                  ) : null
+                )}
+              </ul>
+            </div>
             <div className="navbar-nav d-flex gap-lg-4 h-100 mt-2">
               <Link to="/cart">
                 <div
@@ -94,8 +120,12 @@ const Navbar = ({ children }) => {
                   }}
                 >
                   <li className="">
-                    <Link to="/profile" className="drop dropdown-item   " href="#">
-                       Profile
+                    <Link
+                      to="/profile"
+                      className="drop dropdown-item   "
+                      href="#"
+                    >
+                      Profile
                     </Link>
                   </li>
                   <li>

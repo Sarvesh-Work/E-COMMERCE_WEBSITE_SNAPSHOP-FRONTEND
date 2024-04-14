@@ -82,7 +82,7 @@ const FormCheckOut = ({handelAddress,handelPaymentMethod,PaymentMethod}) => {
             />
           </div>
 
-          <div className="mb-3 ">
+          <div className="mb-3 w-75">
             <label htmlFor="address" className="form-label">
               Address
             </label>
@@ -95,7 +95,7 @@ const FormCheckOut = ({handelAddress,handelPaymentMethod,PaymentMethod}) => {
               {...register(" Address", { required: " Address is required" })}
             />
           </div>
-          <div className="mb-3 d-flex gap-3">
+          <div className="mb-3 d-flex gap-3 w-100">
             <div>
               <label htmlFor="City" className="form-label">
                 City

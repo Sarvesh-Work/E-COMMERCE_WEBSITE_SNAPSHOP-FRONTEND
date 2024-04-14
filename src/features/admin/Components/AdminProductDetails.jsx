@@ -1,14 +1,13 @@
 import { useDispatch, useSelector } from "react-redux";
 
-import { SelectProductById, SelectProductListStatus, fetchProductByIdAsync } from "../ProductSlice";
+import { SelectProductById, fetchProductByIdAsync } from "../../Product/ProductSlice";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { AddItemsAsync } from "../../cart/cartSlice";
 import { selectLoggedUser } from "../../auth/AuthSlice";
-import Loading from "../../../Pages/loading";
 
 
-const ProductDetails = () => {
+const AdminProductDetails = () => {
   const reviews = { href: "#", average: 4, totalCount: 117 };
   const [addToCart, setAddToCart]=useState("Add to cart")
 
@@ -17,9 +16,7 @@ const ProductDetails = () => {
   }
 
   const ProductById = useSelector(SelectProductById);
-  console.log({ProductById})
   const user = useSelector(selectLoggedUser);
-  const status=useSelector(SelectProductListStatus)
 
   const dispatch = useDispatch();
 
@@ -41,7 +38,7 @@ const ProductDetails = () => {
 
   return (
    <>
-      {status=="loading" || !ProductById? <Loading/> :(
+      {ProductById ? (
         <div className=" container-lg container-fluid px-lg-3 mb-2">
           <div className="row px-5 px-lg-1 mt-4 d-flex justify-content-between">
             <div className="col-lg-4 h-100   col-5 p-0 box overflow-hidden d-md-inline d-none">
@@ -154,9 +151,9 @@ const ProductDetails = () => {
             </div>
           </div>
         </div>
-      )}
+      ) : null}
    </>
   );
 };
 
-export default ProductDetails;
+export default AdminProductDetails;

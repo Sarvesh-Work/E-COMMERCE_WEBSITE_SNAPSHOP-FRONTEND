@@ -1,10 +1,18 @@
 import { Link } from "react-router-dom";
 import { PropTypes } from "prop-types";
 
-const ProductCard = ({ products }) => {
+const AdminProductCard = ({ products }) => {
   return (
-    <div className="row py-3">
-      <div className="col-12 m-0 px-sm-3 p-2 d-flex flex-wrap justify-content-between gap-sm-3 mt-sm-0  gap-3">
+    <div className="row py-2 ">
+        <div className=" col-12 px-4 py-2 d-flex justify-content-center" >
+           <Link to="/admin/productForm">
+          <button className="px-2 py-0 mb-2 " id="Admin-Button" >
+            Add new product
+          </button>
+          </Link>
+        </div>
+      <div className="col-12 m-0 px-sm-3 p-0 d-flex flex-wrap justify-content-between gap-sm-3 mt-sm-0  gap-3">
+      
         {products.map((data) => (
           <Link
             to={`/productDetails/${data.id}`}
@@ -21,8 +29,7 @@ const ProductCard = ({ products }) => {
                   className="card-img-top   w-100"
                   style={{
                     height: "180px",
-                    // boxShadow:
-                    //   "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px",
+
                     boxShadow:
                       " rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em",
                     borderRadius: "5px  5px 0px 0px",
@@ -71,6 +78,11 @@ const ProductCard = ({ products }) => {
                     </div>
                   </div>
                 </div>
+                <div className="py-2" style={{ borderTop: "1px solid #cccc" }}>
+                  <button id="Admin-Button" className="px-2 py-0">
+                    Edit
+                  </button>
+                </div>
               </div>
             </div>
           </Link>
@@ -80,8 +92,8 @@ const ProductCard = ({ products }) => {
   );
 };
 
-export default ProductCard;
+export default AdminProductCard;
 
-ProductCard.propTypes = {
+AdminProductCard.propTypes = {
   products: PropTypes.array,
 };

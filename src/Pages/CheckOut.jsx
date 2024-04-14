@@ -66,14 +66,14 @@ const CheckOut = () => {
       {currentOrder && <Navigate to={`/order-success/${currentOrder.id}`} />}
       <div className="container-lg container-fluid mt-4 p-lg-0 ">
         <div className="row  d-flex justify-content-center p-1 px-3 ">
-          <div className="col-lg-7 p-md-0 p-2">
+          <div className="col-lg-7 p-md-0 p-2 mt-3">
             <FormCheckOut
               PaymentMethod={PaymentMethod}
               handelAddress={handelAddress}
               handelPaymentMethod={handelPaymentMethod}
             />
           </div>
-          <div className="col-lg-4 mt-lg-0 mt-3   ">
+          <div className="col-lg-4 mt-lg-0 mt-3 z-0" >
             <div
               className="row box  ms-lg-auto sticky-lg-top"
               style={{top:"100px"}}

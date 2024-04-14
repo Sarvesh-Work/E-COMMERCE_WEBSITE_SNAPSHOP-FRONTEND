@@ -20,12 +20,50 @@ import { fetchLogInUserInfoAsync } from "./features/user/userSlice";
 import SignUpPage from "./Pages/SignUpPage";
 import ProductDetailPage from "./Pages/ProductDetailPage";
 import UserProfilePage from "./Pages/UserProfilePage";
+import ProtectedAdmin from "./features/auth/components/ProtectedAdmin";
+import AdminHome from "./Pages/AdminHome";
+import AdminProductDetailPage from "./Pages/AdminProductDetailPage copy";
+import AdminProductForm from "./Pages/AdminProductForm";
 
 const router = createBrowserRouter([
+  
+  {
+    path: "/admin",
+    element: (
+      <ProtectedAdmin>
+        <AdminHome />
+      </ProtectedAdmin>
+    ),
+  },
+  {
+    path: "/admin",
+    element: (
+      <ProtectedAdmin>
+        <AdminHome />
+      </ProtectedAdmin>
+    ),
+  },
+  {
+    path: "/admin/productDetails/:id",
+    element: (
+      <ProtectedAdmin>
+        <AdminProductDetailPage/>
+      </ProtectedAdmin>
+    ),
+  },
+  {
+    path: "/admin/productForm",
+    element: (
+      <ProtectedAdmin>
+        <AdminProductForm/>
+      </ProtectedAdmin>
+    ),
+  },
   {
     path: "/",
     element: <Home />,
   },
+
   {
     path: "/login",
     element: <LoginPage />,
@@ -54,6 +92,7 @@ const router = createBrowserRouter([
     path: "/productDetails/:id",
     element: <ProductDetailPage />,
   },
+
   {
     path: "/emptyCart",
     element: (
@@ -82,6 +121,7 @@ const router = createBrowserRouter([
       </Protected>
     ),
   },
+
   {
     path: "*",
     element: <PageNotFound />,
