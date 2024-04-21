@@ -61,6 +61,7 @@ export function Login() {
               {errors.email && (
                 <p className=" text-danger">{errors.email.message}</p>
               )}
+               
             </div>
             <div className="mb-3 mt-2">
               <label
@@ -86,7 +87,7 @@ export function Login() {
               {errors.password && (
                 <div className=" text-danger">{errors.password.message}</div>
               )}
-              {error && <div className=" text-danger">{error.message}</div>}
+              {error && <div className=" text-danger mt-2">{error.error}</div>}
             </div>
 
             <button

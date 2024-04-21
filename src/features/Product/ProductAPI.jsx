@@ -1,6 +1,11 @@
-export const fetchAllProducts = async () => {
+export const createProducts = async (product) => {
   try {
-    const response = await fetch("http://localhost:8080/products");
+    const response = await fetch("http://localhost:3004/products", {
+      method: "POST",
+      body: JSON.stringify(product),
+      headers: { "content-type": "application/json" },
+    });
+    
     return await response.json();
   } catch (error) {
     console.error("Error fetching products:", error);
@@ -8,7 +13,7 @@ export const fetchAllProducts = async () => {
   }
 };
 
-export const fetchAllProductsByFilter = async (filter,sort,pagination) => {
+export const fetchAllProductsByFilter = async (filter, sort, pagination) => {
   try {
     let queryString = "";
     for (let key in filter) {
@@ -20,44 +25,44 @@ export const fetchAllProductsByFilter = async (filter,sort,pagination) => {
     }
 
     for (let key in sort) {
-      queryString+=`${key}=${sort[key]}&`
+      queryString += `${key}=${sort[key]}&`;
     }
 
     for (let key in pagination) {
-      queryString+=`${key}=${pagination[key]}&`
+      queryString += `${key}=${pagination[key]}&`;
     }
 
     const response = await fetch(
-      "http://localhost:8080/products?" + queryString
+      // "http://localhost:8080/products?" + queryString
+      "http://localhost:3004/products?" + queryString
     );
     const data = await response.json();
-    const totalItems=await response.headers.get("x-Total-Count")
-    return ({ data:{products:data,totalItems:+totalItems}});
+    console.log({ data });
+    const totalItems = await response.headers.get("x-Total-Count");
+    return { data: { products: data, totalItems: +totalItems } };
   } catch (error) {
     console.error("Error fetching products:", error);
     throw error;
   }
 };
-
 
 export const fetchAllBrands = async () => {
   try {
     const response = await fetch("http://localhost:8080/Brands");
-    const data= await response.json();
-   
-    return {data}
+    const data = await response.json();
+
+    return { data };
   } catch (error) {
     console.error("Error fetching products:", error);
     throw error;
   }
 };
 
-
 export const fetchAllCategories = async () => {
   try {
     const response = await fetch(" http://localhost:8080/Categories");
-    const data= await response.json();
-    return {data}
+    const data = await response.json();
+    return { data };
   } catch (error) {
     console.error("Error fetching products:", error);
     throw error;
@@ -66,15 +71,30 @@ export const fetchAllCategories = async () => {
 
 export const fetchProductById = async (id) => {
   try {
-
-      const response = await fetch("http://localhost:8080/products/"+id);
-    const data= await response.json();
-    console.log("new data",data)
-    return {data}
-   
+    const response = await fetch("http://localhost:3004/products/" + id);
+    const data = await response.json();
+    console.log("new data", data);
+    return { data };
   } catch (error) {
     console.error("Error fetching products:", error);
     throw error;
   }
 };
 
+export const updateProduct = async (product) => {
+  try {
+    const response = await fetch(
+      "http://localhost:3004/products/" + product.id,
+      {
+        method: "PATCH",
+        body: JSON.stringify(product),
+        headers: { "content-type": "application/json" },
+      }
+    );
+    const data = await response.json();
+    return { data };
+  } catch (error) {
+    console.error("Error in adding user", error);
+    throw error;
+  }
+};

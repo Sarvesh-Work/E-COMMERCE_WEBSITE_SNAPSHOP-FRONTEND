@@ -4,15 +4,14 @@ import { PropTypes } from "prop-types";
 const AdminProductCard = ({ products }) => {
   return (
     <div className="row py-2 ">
-        <div className=" col-12 px-4 py-2 d-flex justify-content-center" >
-           <Link to="/admin/productForm">
-          <button className="px-2 py-0 mb-2 " id="Admin-Button" >
+      <div className=" col-12 px-4 py-2 d-flex justify-content-center">
+        <Link to="/admin/productForm">
+          <button className="px-2 py-0 mb-2 " id="Admin-Button">
             Add new product
           </button>
-          </Link>
-        </div>
+        </Link>
+      </div>
       <div className="col-12 m-0 px-sm-3 p-0 d-flex flex-wrap justify-content-between gap-sm-3 mt-sm-0  gap-3">
-      
         {products.map((data) => (
           <Link
             to={`/productDetails/${data.id}`}
@@ -58,6 +57,11 @@ const AdminProductCard = ({ products }) => {
                         {data.brand.slice(0, 12)}
                         {data.brand.length > 12 ? "..." : ""}
                       </div>
+                      {data.deleted && (
+                        <div className=" text-secondary text-danger">
+                          Product Deleted
+                        </div>
+                      )}
                     </div>
                     <div className="text-center">
                       <div
@@ -79,9 +83,13 @@ const AdminProductCard = ({ products }) => {
                   </div>
                 </div>
                 <div className="py-2" style={{ borderTop: "1px solid #cccc" }}>
-                  <button id="Admin-Button" className="px-2 py-0">
-                    Edit
-                  </button>
+                  <Link
+                    to={`/admin/productForm/edit/${data.id}`}
+                    id="Admin-Button"
+                    className="px-2 py-0"
+                  >
+                    Edit Product
+                  </Link>
                 </div>
               </div>
             </div>

@@ -1,38 +1,42 @@
 import { useDispatch, useSelector } from "react-redux";
 
-import { SelectProductById, SelectProductListStatus, fetchProductByIdAsync } from "../ProductSlice";
+import {
+  SelectProductById,
+  SelectProductListStatus,
+  fetchProductByIdAsync,
+} from "../ProductSlice";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { AddItemsAsync } from "../../cart/cartSlice";
+import { AddItemsAsync, SelectCartItems } from "../../cart/cartSlice";
 import { selectLoggedUser } from "../../auth/AuthSlice";
 import Loading from "../../../Pages/loading";
 
-
 const ProductDetails = () => {
   const reviews = { href: "#", average: 4, totalCount: 117 };
-  const [addToCart, setAddToCart]=useState("Add to cart")
+  const [addToCart, setAddToCart] = useState("Add to cart");
 
   function classNames(...classes) {
     return classes.filter(Boolean).join(" ");
   }
 
   const ProductById = useSelector(SelectProductById);
-  console.log({ProductById})
+  console.log({ ProductById });
   const user = useSelector(selectLoggedUser);
-  const status=useSelector(SelectProductListStatus)
+  const status = useSelector(SelectProductListStatus);
+  const items=useSelector(SelectCartItems)
 
   const dispatch = useDispatch();
 
   const Params = useParams();
 
   const handelCart = (e) => {
-  
-      e.preventDefault();
-      setAddToCart("Added!")
-      const newItem = { ...ProductById, quantity: 1, user: user.id };
-      delete newItem["id"];
-      dispatch(AddItemsAsync({ ...ProductById, quantity: 1, user: user.id }));
-      
+    e.preventDefault();
+    setAddToCart("Added!");
+    if(items.findIndex((item)=>item.product.id=== ProductById.id)<0){
+    const newItem = {product:ProductById.id ,quantity: 1, user: user.id };
+    delete newItem["id"];
+    dispatch(AddItemsAsync(newItem));
+    }
   };
 
   useEffect(() => {
@@ -40,8 +44,10 @@ const ProductDetails = () => {
   }, [Params.id]);
 
   return (
-   <>
-      {status=="loading" || !ProductById? <Loading/> :(
+    <>
+      {status == "loading" || !ProductById ? (
+        <Loading />
+      ) : (
         <div className=" container-lg container-fluid px-lg-3 mb-2">
           <div className="row px-5 px-lg-1 mt-4 d-flex justify-content-between">
             <div className="col-lg-4 h-100   col-5 p-0 box overflow-hidden d-md-inline d-none">
@@ -142,7 +148,6 @@ const ProductDetails = () => {
                 ))}
               </div>
 
-              
               <div
                 onClick={handelCart}
                 className="mt-5 p-2 rounded-3 text-center cursor"
@@ -150,12 +155,11 @@ const ProductDetails = () => {
               >
                 {addToCart}
               </div>
-             
             </div>
           </div>
         </div>
       )}
-   </>
+    </>
   );
 };
 

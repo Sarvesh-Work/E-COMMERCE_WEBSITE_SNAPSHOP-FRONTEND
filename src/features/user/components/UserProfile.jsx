@@ -1,10 +1,10 @@
 import { useSelector, useDispatch } from "react-redux";
-import { selectUserInfo, updateUserAsync } from "../userSlice";
+import {  selectUserInfo, updateUserAsync } from "../userSlice";
 import { useForm } from "react-hook-form";
-import { useState } from "react";
+import {  useState } from "react";
 
 const UserProfile = () => {
-  const userInfo = useSelector(selectUserInfo);
+  const userInfo = useSelector(selectUserInfo)
   const dispatch = useDispatch();
   const [editAddress, setEditAddress] = useState(-1);
   const [showAddAddress, setAddAddress] = useState(false);
@@ -45,6 +45,8 @@ const UserProfile = () => {
     setEditAddress(-1);
     setValue(null);
   };
+
+
 
   return (
     <>
@@ -243,9 +245,9 @@ const UserProfile = () => {
               >
                 Existing address:
               </h5>
-              {userInfo.address.length == 0
-                ? "No Address Found! Please Add a Address"
-                : userInfo.address.map((data, index) => (
+              
+                {
+                 userInfo.address?.map((data, index) => (
                     <div key={index} className="px-1">
                       {editAddress == index ? (
                         <div className="p-1 mt-2">

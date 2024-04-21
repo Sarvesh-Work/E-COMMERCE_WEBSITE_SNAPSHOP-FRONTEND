@@ -22,9 +22,11 @@ export function SignUp() {
             noValidate
             className="mb-1 p-3"
             onSubmit={handleSubmit((data) => {
+             
               dispatch(
                 createUserAsync({ email: data.email, password: data.password,address:[],role:'user' })
               );
+              return <Navigate to="/login"/>
             })}
           >
                 <div
