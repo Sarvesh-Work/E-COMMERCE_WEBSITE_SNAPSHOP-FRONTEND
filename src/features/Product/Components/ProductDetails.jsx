@@ -7,9 +7,11 @@ import {
 } from "../ProductSlice";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { AddItemsAsync, SelectCartItems } from "../../cart/cartSlice";
+// import { AddItemsAsync, SelectCartItems } from "../../cart/cartSlice";
+import { AddItemsAsync} from "../../cart/cartSlice"
 import { selectLoggedUser } from "../../auth/AuthSlice";
 import Loading from "../../../Pages/loading";
+import { discountPrice } from "../../../app/constant";
 
 const ProductDetails = () => {
   const reviews = { href: "#", average: 4, totalCount: 117 };
@@ -23,21 +25,32 @@ const ProductDetails = () => {
   console.log({ ProductById });
   const user = useSelector(selectLoggedUser);
   const status = useSelector(SelectProductListStatus);
-  const items=useSelector(SelectCartItems)
+  // const items=useSelector(SelectCartItems)
 
   const dispatch = useDispatch();
 
   const Params = useParams();
 
+  // const handelCart = (e) => {
+  //   e.preventDefault();
+  //   setAddToCart("Added!");
+  //   if(items.findIndex((item)=>item.product.id=== ProductById.id)<0){
+  //   const newItem = {product:ProductById.id ,quantity: 1, user: user.id };
+  //   delete newItem["id"];
+  //   dispatch(AddItemsAsync(newItem));
+  //   }
+  // };
+
   const handelCart = (e) => {
+  
     e.preventDefault();
-    setAddToCart("Added!");
-    if(items.findIndex((item)=>item.product.id=== ProductById.id)<0){
-    const newItem = {product:ProductById.id ,quantity: 1, user: user.id };
+    setAddToCart("Added!")
+    const newItem = { ...ProductById, quantity: 1, user: user.id };
     delete newItem["id"];
-    dispatch(AddItemsAsync(newItem));
-    }
-  };
+    dispatch(AddItemsAsync({ ...ProductById, quantity: 1, user: user.id }));
+    
+};
+
 
   useEffect(() => {
     dispatch(fetchProductByIdAsync(Params.id));
@@ -89,7 +102,10 @@ const ProductDetails = () => {
             <div className="col-md-7 p-0 col-12">
               <h1>{ProductById.title}</h1>
 
-              <h2 className="d-md-none d-block mt-3">${ProductById.price}</h2>
+              <h2 className="d-md-none d-block mt-3 text-decoration-line-through">${ProductById.price}</h2>
+              <h2 className="d-md-none d-block mt-3">
+                ${discountPrice(ProductById)}
+              </h2>
 
               <div className=" d-md-none d-block">
                 {[0, 1, 2, 3, 4].map((rating) => (
@@ -132,7 +148,12 @@ const ProductDetails = () => {
             ></div>
 
             <div className="col-md-4 col-12 px-md-2 p-0 ">
-              <h2 className="d-md-block d-none">${ProductById.price}</h2>
+              
+
+              <h2 className="d-md-block d-none text-decoration-line-through">${ProductById.price}</h2>
+              <h2 className="d-md-block d-none mt-3">
+                ${discountPrice(ProductById)}
+              </h2>
 
               <div className=" d-md-block d-none">
                 {[0, 1, 2, 3, 4].map((rating) => (

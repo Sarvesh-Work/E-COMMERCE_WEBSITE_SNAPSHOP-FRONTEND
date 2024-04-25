@@ -10,6 +10,7 @@ import {
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
+import { discountPrice } from "../../../app/constant";
 
 export default function ProductForm() {
   const brand = useSelector(SelectBrands);
@@ -36,7 +37,7 @@ export default function ProductForm() {
     if (selectProduct && params.id) {
       setValue("title", selectProduct.title);
       setValue("description", selectProduct.description);
-      setValue("price", selectProduct.price);
+      setValue("price", discountPrice(selectProduct));
       setValue("discountPercentage", selectProduct.discountPercentage);
       setValue("category", selectProduct.category);
       setValue("brand", selectProduct.brand);

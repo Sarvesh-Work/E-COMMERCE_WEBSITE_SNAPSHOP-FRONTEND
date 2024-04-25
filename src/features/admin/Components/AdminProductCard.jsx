@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { PropTypes } from "prop-types";
+import { discountPrice } from "../../../app/constant";
 
 const AdminProductCard = ({ products }) => {
   return (
@@ -14,7 +15,7 @@ const AdminProductCard = ({ products }) => {
       <div className="col-12 m-0 px-sm-3 p-0 d-flex flex-wrap justify-content-between gap-sm-3 mt-sm-0  gap-3">
         {products.map((data) => (
           <Link
-            to={`/productDetails/${data.id}`}
+            to={`/admin/productDetails/${data.id}`}
             key={data.id}
             style={{ textDecoration: "none" }}
           >
@@ -64,20 +65,19 @@ const AdminProductCard = ({ products }) => {
                       )}
                     </div>
                     <div className="text-center">
+                      
+                      <div
+                        className=" text-secondary"
+                        style={{ textDecoration: "line-through"}}
+                      >
+                        $ {data.price}
+                      </div>
                       <div
                         className=""
                         style={{ fontSize: "20px", fontWeight: "500" }}
                       >
                         $
-                        {Math.round(
-                          data.price * (1 - data.discountPercentage / 100)
-                        )}
-                      </div>
-                      <div
-                        className=" text-secondary"
-                        style={{ textDecoration: "line-through" }}
-                      >
-                        $ {data.price}
+                        {discountPrice(data)}
                       </div>
                     </div>
                   </div>

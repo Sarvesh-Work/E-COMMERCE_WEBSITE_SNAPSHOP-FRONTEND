@@ -17,7 +17,7 @@ const AdminProductList = () => {
   const [page, setPage] = useState(1);
 
   const products = useSelector(SelectAllProduct);
-  
+
   const totalItems = useSelector(SelectTotalItems);
   const totalPage = Math.ceil(totalItems / ITEMS_PER_PAGE);
 

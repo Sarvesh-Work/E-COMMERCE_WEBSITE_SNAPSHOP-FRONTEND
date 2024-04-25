@@ -12,3 +12,25 @@ export const AddOrders = async (order) => {
     throw error;
   }
 };
+
+export const fetchAllOrder = async ( pagination) => {
+  try {
+    let queryString = "";
+
+    for (let key in pagination) {
+      queryString += `${key}=${pagination[key]}&`;
+    }
+
+    const response = await fetch(
+      // "http://localhost:8080/products?" + queryString
+      "http://localhost:3004/Orders?" + queryString
+    );
+    const data = await response.json();
+    console.log({ data });
+    const totalOrder = await response.headers.get("x-Total-Count");
+    return { data: { order: data, totalOrder: +totalOrder } };
+  } catch (error) {
+    console.error("Error fetching products:", error);
+    throw error;
+  }
+};

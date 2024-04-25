@@ -5,13 +5,14 @@ import {
   SelectCartItems,
   UpdateItemAsync,
 } from "./cartSlice";
+import { discountPrice } from "../../app/constant";
 
 export function Cart() {
   const items = useSelector(SelectCartItems);
   const dispatch = useDispatch();
 
   const totalAmount = items.reduce(
-    (amount, item) => item.price * item.quantity + amount,
+    (amount, item) => discountPrice(item) * item.quantity + amount,
     0
   );
   const totalItems = items.reduce((total, item) => item.quantity + total, 0);
@@ -89,11 +90,15 @@ export function Cart() {
                     </div>
                   </div>
                   <div className="ms-auto col-lg-1 col-3 text-end p-0 d-flex flex-column justify-content-between mt-1">
-                    <div className="ms-auto">$ {product.price}</div>
+                    <div className="ms-auto">$ {discountPrice(product)}</div>
                     <div
                       className="px-2 cursor fw-bold  ms-auto mb-2"
                       onClick={() => DeleteItem(product.id)}
-                      style={{color:"#0066b2",border:"1px solid #0066b2",borderRadius:"5px"}}
+                      style={{
+                        color: "#0066b2",
+                        border: "1px solid #0066b2",
+                        borderRadius: "5px",
+                      }}
                     >
                       Remove
                     </div>
@@ -120,7 +125,7 @@ export function Cart() {
               or
               <Link to="/" style={{ textDecoration: "none" }}>
                 <span className="text-dark mx-1" style={{ fontWeight: "500" }}>
-                  Continue Shopping <i className="fa-solid fa-arrow-right "></i>{" "}
+                  Continue Shopping <i className="fa-solid fa-arrow-right "></i>
                 </span>
               </Link>
             </div>

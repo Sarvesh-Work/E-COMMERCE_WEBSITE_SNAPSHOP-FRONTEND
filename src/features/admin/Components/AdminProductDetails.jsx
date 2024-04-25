@@ -1,15 +1,18 @@
 import { useDispatch, useSelector } from "react-redux";
 
-import { SelectProductById, fetchProductByIdAsync } from "../../Product/ProductSlice";
+import {
+  SelectProductById,
+  fetchProductByIdAsync,
+} from "../../Product/ProductSlice";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { AddItemsAsync } from "../../cart/cartSlice";
 import { selectLoggedUser } from "../../auth/AuthSlice";
-
+import { discountPrice } from "../../../app/constant";
 
 const AdminProductDetails = () => {
   const reviews = { href: "#", average: 4, totalCount: 117 };
-  const [addToCart, setAddToCart]=useState("Add to cart")
+  const [addToCart, setAddToCart] = useState("Add to cart");
 
   function classNames(...classes) {
     return classes.filter(Boolean).join(" ");
@@ -23,13 +26,11 @@ const AdminProductDetails = () => {
   const Params = useParams();
 
   const handelCart = (e) => {
-  
-      e.preventDefault();
-      setAddToCart("Added!")
-      const newItem = { ...ProductById, quantity: 1, user: user.id };
-      delete newItem["id"];
-      dispatch(AddItemsAsync({ ...ProductById, quantity: 1, user: user.id }));
-      
+    e.preventDefault();
+    setAddToCart("Added!");
+    const newItem = { ...ProductById, quantity: 1, user: user.id };
+    delete newItem["id"];
+    dispatch(AddItemsAsync({ ...ProductById, quantity: 1, user: user.id }));
   };
 
   useEffect(() => {
@@ -37,7 +38,7 @@ const AdminProductDetails = () => {
   }, [Params.id]);
 
   return (
-   <>
+    <>
       {ProductById ? (
         <div className=" container-lg container-fluid px-lg-3 mb-2">
           <div className="row px-5 px-lg-1 mt-4 d-flex justify-content-between">
@@ -79,8 +80,15 @@ const AdminProductDetails = () => {
           <div className="row p-lg-1 px-4 mt-2 mt-4 d-flex justify-content-between">
             <div className="col-md-7 p-0 col-12">
               <h1>{ProductById.title}</h1>
-
-              <h2 className="d-md-none d-block mt-3">${ProductById.price}</h2>
+              <div
+                className=" text-secondary d-md-none d-block"
+                style={{ textDecoration: "line-through" }}
+              >
+                $ {ProductById.price}
+              </div>
+              <h2 className="d-md-none d-block mt-3">
+                ${discountPrice(ProductById)}
+              </h2>
 
               <div className=" d-md-none d-block">
                 {[0, 1, 2, 3, 4].map((rating) => (
@@ -123,7 +131,15 @@ const AdminProductDetails = () => {
             ></div>
 
             <div className="col-md-4 col-12 px-md-2 p-0 ">
-              <h2 className="d-md-block d-none">${ProductById.price}</h2>
+              <div
+                className=" text-secondary "
+                style={{ textDecoration: "line-through" }}
+              >
+                $ {ProductById.price}
+              </div>
+              <h2 className=" mt-3">
+                ${discountPrice(ProductById)}
+              </h2>
 
               <div className=" d-md-block d-none">
                 {[0, 1, 2, 3, 4].map((rating) => (
@@ -139,7 +155,6 @@ const AdminProductDetails = () => {
                 ))}
               </div>
 
-              
               <div
                 onClick={handelCart}
                 className="mt-5 p-2 rounded-3 text-center cursor"
@@ -147,12 +162,11 @@ const AdminProductDetails = () => {
               >
                 {addToCart}
               </div>
-             
             </div>
           </div>
         </div>
       ) : null}
-   </>
+    </>
   );
 };
 

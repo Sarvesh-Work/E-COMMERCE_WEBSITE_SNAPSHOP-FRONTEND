@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { PropTypes } from "prop-types";
+import { discountPrice } from "../../../app/constant";
 
 const ProductCard = ({ products }) => {
   return (
@@ -58,9 +59,7 @@ const ProductCard = ({ products }) => {
                         style={{ fontSize: "20px", fontWeight: "500" }}
                       >
                         $
-                        {Math.round(
-                          data.price * (1 - data.discountPercentage / 100)
-                        )}
+                        {discountPrice(data)}
                       </div>
                       <div
                         className=" text-secondary"

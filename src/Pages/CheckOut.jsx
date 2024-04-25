@@ -10,12 +10,14 @@ import { useState } from "react";
 import {
   orderItemsAsync,
   selectCurrentOrder,
-} from "../features/order/orderSlice";
+} from "../features/order/OrderSlice";
 import { selectUserInfo } from "../features/user/userSlice";
 import Navbar from "../features/Navbar/Navbar";
+import { discountPrice } from "../app/constant";
 
 const CheckOut = () => {
   const items = useSelector(SelectCartItems);
+  console.log({items})
   const user = useSelector(selectUserInfo);
   const dispatch = useDispatch();
   const [SelectAddress, setSelectAddress] = useState(null);
@@ -23,8 +25,11 @@ const CheckOut = () => {
   const currentOrder = useSelector(selectCurrentOrder);
 
   const totalAmount = items.reduce(
-    (amount, item) => item.product.price * item.quantity + amount,
-    0
+    // (amount, item) => discountPrice(item.product) * item.quantity + amount,
+    // 0
+    
+      (amount, item) => discountPrice(item) * item.quantity + amount,
+      0
   );
   const totalItems = items.reduce((total, item) => item.quantity + total, 0);
 
@@ -64,7 +69,7 @@ const CheckOut = () => {
     <Navbar/>
       {items.length <= 0 && <Navigate to="/EmptyCart" replace={true} />}
       {currentOrder && <Navigate to={`/order-success/${currentOrder.id}`} />}
-      <div className="container-lg container-fluid mt-4 p-lg-0 ">
+      <div className="container-lg container-fluid mt-3 p-lg-0 ">
         <div className="row  d-flex justify-content-center p-1 px-3 ">
           <div className="col-lg-7 p-md-0 p-2 mt-3">
             <FormCheckOut
@@ -73,10 +78,10 @@ const CheckOut = () => {
               handelPaymentMethod={handelPaymentMethod}
             />
           </div>
-          <div className="col-lg-4 mt-lg-0 mt-3 z-0" >
+          <div className="col-lg-4 mt-lg-0 mt-3 z-0 mb-4" >
             <div
               className="row box  ms-lg-auto sticky-lg-top"
-              style={{top:"100px"}}
+              style={{top:"90px"}}
             >
               <div className="p-2 col-12 ">
                 <div
@@ -89,9 +94,9 @@ const CheckOut = () => {
                 >
                   Cart
                 </div>
-                <div className="col-12 p-1">
+                <div className="col-12 p-1 ">
                   {items.map((products) => (
-                    <div key={products.product.id} className=" container-fluid">
+                    <div key={products.id} className=" container-fluid">
                       <div
                         style={{ borderBottom: "1px solid #CED3D8" }}
                         className="row gap-1 p-1"
@@ -107,7 +112,8 @@ const CheckOut = () => {
                           }}
                         >
                           <img
-                            src={products.product.thumbnail}
+                            // src={products.product.thumbnail}
+                            src={products.thumbnail}
                             alt=""
                             className="w-100 h-100"
                           />
@@ -117,10 +123,12 @@ const CheckOut = () => {
                             className=""
                             style={{ fontSize: "20px", fontWeight: "500" }}
                           >
-                            {products.product.title}
+                            {/* {products.product.title} */}
+                            {products.title} 
                           </div>
                           <div style={{ color: "gray" }}>
-                            Rating: {products.product.rating}
+                            {/* Rating: {products.product.rating} */}
+                            Rating: {products.rating}
                           </div>
                           <div className="d-flex gap-1 mt-1">
                             <div>Qty</div>
@@ -129,7 +137,8 @@ const CheckOut = () => {
                               id=""
                               className="bg-dark text-white rounded-2"
                               onChange={(e) => handelCart(e, products)}
-                              value={products.product.quantity}
+                              // value={products.product.quantity}
+                              value={products.quantity}
                             >
                               <option value="1">1</option>
                               <option value="2">2</option>
@@ -137,10 +146,12 @@ const CheckOut = () => {
                           </div>
                         </div>
                         <div className="ms-auto col-lg-3 col-3  text-lg-end p-0 d-flex flex-column justify-content-between mt-1">
-                          <div className="ms-auto">$ {products.product.price}</div>
+                          {/* <div className="ms-auto">$ {discountPrice(products.product)}</div> */}
+                           <div className="ms-auto">$ {discountPrice(products)}</div> 
                           <div
                             className="cursor fw-bold  ms-auto mb-2 px-2"
-                            onClick={() => DeleteItem(products.product.id)}
+                            // onClick={() => DeleteItem(products.product.id)}
+                            onClick={() => DeleteItem(products.id)}
                             style={{color:"#0066b2",border:"1px solid #0066b2",borderRadius:"5px"}}
                           >
                             Remove

@@ -5,6 +5,7 @@ import {
   selectUserInfo,
 } from "../userSlice";
 import { useEffect } from "react";
+import { discountPrice } from "../../../app/constant";
 
 const UserOrder = () => {
   const orders = useSelector(selectAllOrders);
@@ -73,7 +74,7 @@ const UserOrder = () => {
                       </div>
                       <div className="d-flex gap-1 mt-1 ">
                         <div>Qty:{product.quantity}</div>
-                        <div className="ms-auto">Price: ${product.price}</div>
+                        <div className="ms-auto">Price: ${discountPrice(product)}</div>
                       </div>
                     </div>
                   </div>
