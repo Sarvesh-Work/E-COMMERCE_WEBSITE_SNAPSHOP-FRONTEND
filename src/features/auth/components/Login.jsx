@@ -1,14 +1,12 @@
 import { useDispatch, useSelector } from "react-redux";
-
 import { useForm } from "react-hook-form";
-
 import { Link, Navigate } from "react-router-dom";
 import { checkUserAsync, selectError, selectLoggedUser } from "../AuthSlice";
 
 export function Login() {
   const dispatch = useDispatch();
   const error = useSelector(selectError);
-  const user=useSelector(selectLoggedUser)
+  const user = useSelector(selectLoggedUser);
 
   const {
     register,
@@ -18,7 +16,7 @@ export function Login() {
 
   return (
     <>
-    {user && <Navigate to="/" replace={true}/>}
+      {user && <Navigate to="/" replace={true} />}
       <div className="d-flex justify-content-center align-items-center h-100 py-2">
         <div className="box px-sm-4 px-3 py-2">
           <form
@@ -33,9 +31,19 @@ export function Login() {
             <div
               className="navbar-brand fs-4 fw-bold text-center  p-0 mx-auto"
               href="#"
-              style={{  color: "#0066b2",letterSpacing:"0.4px",border:"1px solid", width:"143px" }}
+              style={{
+                color: "#0066b2",
+                letterSpacing: "0.4px",
+                border: "1px solid",
+                width: "143px",
+              }}
             >
-              SNAPSH<i className="fa-solid fa-face-grin-wink " style={{fontSize:"21px"}}></i>P
+              SNAPSH
+              <i
+                className="fa-solid fa-face-grin-wink "
+                style={{ fontSize: "21px" }}
+              ></i>
+              P
             </div>
             <div className="mb-3 mt-4" style={{ width: "280px" }}>
               <label
@@ -61,7 +69,6 @@ export function Login() {
               {errors.email && (
                 <p className=" text-danger">{errors.email.message}</p>
               )}
-               
             </div>
             <div className="mb-3 mt-2">
               <label
@@ -74,7 +81,7 @@ export function Login() {
               <input
                 type="password"
                 {...register("password", {
-                  required: "Password is required",
+                  required: "required",
                 })}
                 className="form-control"
                 id="exampleInputPassword1"
@@ -85,7 +92,13 @@ export function Login() {
                 }}
               />
               {errors.password && (
-                <div className=" text-danger">{errors.password.message}</div>
+                <div className=" text-danger">
+                  <p>
+                    -Password at least 8 characters <br /> - must contain at
+                    least 1 uppercase letter <br /> -1 lowercase letter, and 1
+                    number <br />- Can contain special characters
+                  </p>
+                </div>
               )}
               {error && <div className=" text-danger mt-2">{error.error}</div>}
             </div>

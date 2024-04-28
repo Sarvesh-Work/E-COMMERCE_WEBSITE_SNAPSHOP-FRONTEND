@@ -1,14 +1,15 @@
 import { useDispatch, useSelector } from "react-redux";
+import { Bounce, toast } from "react-toastify";
 
 import {
   SelectProductById,
   SelectProductListStatus,
   fetchProductByIdAsync,
 } from "../ProductSlice";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 // import { AddItemsAsync, SelectCartItems } from "../../cart/cartSlice";
-import { AddItemsAsync} from "../../cart/cartSlice"
+import { AddItemsAsync, SelectCartItems } from "../../cart/cartSlice";
 import { selectLoggedUser } from "../../auth/AuthSlice";
 import Loading from "../../../Pages/loading";
 import { discountPrice } from "../../../app/constant";
@@ -21,8 +22,10 @@ const ProductDetails = () => {
     return classes.filter(Boolean).join(" ");
   }
 
+  const items = useSelector(SelectCartItems);
+
   const ProductById = useSelector(SelectProductById);
-  console.log({ ProductById });
+
   const user = useSelector(selectLoggedUser);
   const status = useSelector(SelectProductListStatus);
   // const items=useSelector(SelectCartItems)
@@ -41,16 +44,42 @@ const ProductDetails = () => {
   //   }
   // };
 
-  const handelCart = (e) => {
-  
-    e.preventDefault();
-    setAddToCart("Added!")
-    const newItem = { ...ProductById, quantity: 1, user: user.id };
-    delete newItem["id"];
-    dispatch(AddItemsAsync({ ...ProductById, quantity: 1, user: user.id }));
-    
-};
+  const Success = () =>
+    toast.success("Added to cart", {
+      position: "bottom-left",
+      autoClose: 5000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      transition: Bounce,
+    });
 
+  const handelCart = (e) => {
+    e.preventDefault();
+    if (items.findIndex((item) => item.id === ProductById.id) < 0) {
+      setAddToCart("Added!");
+      const newItem = { ...ProductById, quantity: 1, user: user.id };
+      delete newItem["id"];
+      dispatch(AddItemsAsync({ ...ProductById, quantity: 1, user: user.id }));
+
+      Success();
+    } else {
+      return toast.warn("Already added in cart", {
+        position: "bottom-left",
+        autoClose: 3003,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
+    }
+  };
 
   useEffect(() => {
     dispatch(fetchProductByIdAsync(Params.id));
@@ -102,7 +131,9 @@ const ProductDetails = () => {
             <div className="col-md-7 p-0 col-12">
               <h1>{ProductById.title}</h1>
 
-              <h2 className="d-md-none d-block mt-3 text-decoration-line-through">${ProductById.price}</h2>
+              <h2 className="d-md-none d-block mt-3 text-decoration-line-through">
+                ${ProductById.price}
+              </h2>
               <h2 className="d-md-none d-block mt-3">
                 ${discountPrice(ProductById)}
               </h2>
@@ -148,9 +179,9 @@ const ProductDetails = () => {
             ></div>
 
             <div className="col-md-4 col-12 px-md-2 p-0 ">
-              
-
-              <h2 className="d-md-block d-none text-decoration-line-through">${ProductById.price}</h2>
+              <h2 className="d-md-block d-none text-decoration-line-through">
+                ${ProductById.price}
+              </h2>
               <h2 className="d-md-block d-none mt-3">
                 ${discountPrice(ProductById)}
               </h2>
@@ -169,13 +200,24 @@ const ProductDetails = () => {
                 ))}
               </div>
 
-              <div
-                onClick={handelCart}
-                className="mt-5 p-2 rounded-3 text-center cursor"
-                id="all-btn"
-              >
-                {addToCart}
-              </div>
+              {!user ? (
+                <Link to="/login" className=" text-decoration-none">
+                  <div
+                    className="mt-5 p-2 rounded-3 text-center cursor"
+                    id="all-btn"
+                  >
+                    Please Login to Buy the Product
+                  </div>
+                </Link>
+              ) : (
+                <div
+                  onClick={handelCart}
+                  className="mt-5 p-2 rounded-3 text-center cursor"
+                  id="all-btn"
+                >
+                  {addToCart}
+                </div>
+              )}
             </div>
           </div>
         </div>

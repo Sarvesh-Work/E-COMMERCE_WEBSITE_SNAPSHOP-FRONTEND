@@ -13,6 +13,22 @@ export const AddOrders = async (order) => {
   }
 };
 
+
+export const UpdateOrder = async (order) => {
+  try {
+    const response = await fetch("http://localhost:3004/Orders/"+order.id, {
+      method: "PATCH",
+      body: JSON.stringify(order),
+      headers: { "content-type": "application/json" },
+    });
+    const data = await response.json();
+    return { data };
+  } catch (error) {
+    console.error("Error in adding user", error);
+    throw error;
+  }
+};
+
 export const fetchAllOrder = async ( pagination) => {
   try {
     let queryString = "";

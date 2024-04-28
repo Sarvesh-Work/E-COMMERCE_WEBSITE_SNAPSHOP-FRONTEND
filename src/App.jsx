@@ -26,6 +26,9 @@ import AdminProductDetailPage from "./Pages/AdminProductDetailPage copy";
 import AdminProductForm from "./Pages/AdminProductForm";
 import AdminOrderPage from "./Pages/AdminOrderpage";
 
+import {  ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const router = createBrowserRouter([
   {
     path: "/admin",
@@ -157,7 +160,25 @@ function App() {
 
   return (
     <div className="Background  h-100">
+    
       <RouterProvider router={router} />
+      <ToastContainer
+         position="bottom-left"
+         autoClose={3000}
+         hideProgressBar={false}
+         newestOnTop={false}
+         closeOnClick
+         rtl={false}
+         pauseOnFocusLoss
+         draggable
+         pauseOnHover
+         transition: Bounce
+         theme="light"
+         
+         
+       
+       />
+
     </div>
 
     //  ToDo ="Scroll Top karaycha aahe "

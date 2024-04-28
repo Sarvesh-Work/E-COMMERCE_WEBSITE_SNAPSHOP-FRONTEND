@@ -158,13 +158,23 @@ const Navbar = ({ children }) => {
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    to="/login"
-                    className="drop dropdown-item rounded-3 "
-                    href="#"
-                  >
-                    Sign Out
-                  </Link>
+                  {!user ? (
+                    <Link
+                      to="/login"
+                      className="drop dropdown-item rounded-3 cursor"
+                      href="#"
+                    >
+                      Login
+                    </Link>
+                  ) : (
+                    <Link
+                      to="/login"
+                      className="drop dropdown-item rounded-3 cursor"
+                      href="#"
+                    >
+                      Sign Out
+                    </Link>
+                  )}
                 </li>
               </ul>
             </div>

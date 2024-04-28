@@ -1,17 +1,53 @@
 import { useEffect, useState } from "react";
 import { ITEMS_PER_PAGE, discountPrice } from "../../../app/constant";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchAllOrderAsync, selectAllOrders } from "../../order/OrderSlice";
+import {
+  UpdateOrderAsync,
+  fetchAllOrderAsync,
+  selectAllOrders,
+} from "../../order/OrderSlice";
 
 export default function AdminOrder() {
   const [page, setPage] = useState(1);
   const dispatch = useDispatch();
   const Orders = useSelector(selectAllOrders);
-  console.log({ Orders });
+
   useEffect(() => {
     const pagination = { _page: page, _limit: ITEMS_PER_PAGE };
     dispatch(fetchAllOrderAsync({ pagination }));
   }, [dispatch, page]);
+
+  const [EditOrderItemId, setOrderItemId] = useState(-1);
+
+  const handelShow = () => {
+    console.log("show");
+  };
+
+  const handelEdit = (e, order) => {
+    setOrderItemId(order.id);
+  };
+
+  const handelUpdate = (e, order) => {
+    const newOrder = { ...order, status: e.target.value };
+    dispatch(UpdateOrderAsync(newOrder));
+    setOrderItemId(-1);
+  };
+
+  const color = (color) => {
+    switch (color) {
+      case "pending":
+        return "purple";
+
+      case "dispatch":
+        return "orange";
+      case "cancel":
+        return "red";
+
+      default:
+        return "green";
+    }
+  };
+
   return (
     <div className=" container-lg container-fluid px-2 mt-md-2">
       {Orders == [] ? null : (
@@ -79,17 +115,32 @@ export default function AdminOrder() {
                   </td>
                   <td
                     className=" border-1 text-center "
-                    style={{ color: "#d90166" }}
+                    style={{ color: `${color(order.status)}` }}
                   >
-                    {order.status.toUpperCase()}
+                    {EditOrderItemId == order.id ? (
+                      <select onChange={(e) => handelUpdate(e, order)}>
+                        <option value="pending">pending</option>
+                        <option value="dispatch">dispatch</option>
+                        <option value="delivered">Delivered</option>
+                        <option value="cancel">cancel</option>
+                      </select>
+                    ) : (
+                      <div>{order.status.toUpperCase()}</div>
+                    )}
                   </td>
                   <td className=" border-1 ">
                     <div className="gap-2 d-flex justify-content-center">
                       <div className=" cursor">
-                        <i className="fa-regular fa-eye"></i>
+                        <i
+                          className="fa-regular fa-eye"
+                          onClick={(e) => handelShow(e, order)}
+                        ></i>
                       </div>
                       <div className=" cursor">
-                        <i className="fa-solid fa-pencil"></i>
+                        <i
+                          className="fa-solid fa-pencil"
+                          onClick={(e) => handelEdit(e, order)}
+                        ></i>
                       </div>
                     </div>
                   </td>

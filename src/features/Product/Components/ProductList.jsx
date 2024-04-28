@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import {
   SelectAllProduct,
+  SelectProductListStatus,
   SelectTotalItems,
   fetchProductsByAsync,
 } from "../ProductSlice";
@@ -16,11 +17,11 @@ const ProductList = () => {
   const [filter, setFilter] = useState({});
   const [sort, setSort] = useState({});
   const [page, setPage] = useState(1);
-  const [loading, setLoading] = useState(false);
 
   const products = useSelector(SelectAllProduct);
   const totalItems = useSelector(SelectTotalItems);
   const totalPage = Math.ceil(totalItems / ITEMS_PER_PAGE);
+  const status = useSelector(SelectProductListStatus);
 
   const sortOptions = [
     { name: "Best Rating", sort: "rating", order: "desc", current: false },
@@ -70,9 +71,7 @@ const ProductList = () => {
 
   useEffect(() => {
     setPage(1);
-    setInterval(() => {
-      setLoading(true);
-    }, 1000);
+    setInterval(() => {}, 1000);
   }, [totalItems, sort]);
 
   return (
@@ -154,7 +153,7 @@ const ProductList = () => {
           <ProductFilter handleFilter={handleFilter} />
         </div>
         <div className="col-lg-9 col-12 px-lg-3">
-          {loading == false ? (
+          {status == "loading" ? (
             <Loading />
           ) : (
             <>
