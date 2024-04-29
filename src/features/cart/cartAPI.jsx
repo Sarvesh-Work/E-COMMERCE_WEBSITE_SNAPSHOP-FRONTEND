@@ -1,7 +1,7 @@
 // API for adding Items or Products to cart!
 export const AddItemsToCart = async (items) => {
   try {
-    const response = await fetch("http://localhost:3004/Cart", {
+    const response = await fetch("http://localhost:8080/cart/", {
       method: "POST",
       body: JSON.stringify(items),
       headers: { "content-type": "application/json" },
@@ -19,7 +19,7 @@ export const AddItemsToCart = async (items) => {
 
 export const FetchAllProductsByUserId = async (userId) => {
   try {
-    const response = await fetch("http://localhost:3004/Cart/?user=" + userId);
+    const response = await fetch("http://localhost:8080/Cart/?user=" + userId);
     const data = await response.json();
     console.log({ data });
     return { data };
@@ -34,7 +34,7 @@ export const FetchAllProductsByUserId = async (userId) => {
 // Api for updating product in cart
 export const UpdateItem = async (update) => {
   try {
-    const response = await fetch("http://localhost:3004/Cart/" + update.id, {
+    const response = await fetch("http://localhost:8080/cart/updateInCart/" + update.id, {
       method: "PATCH",
       body: JSON.stringify(update),
       headers: { "content-type": "application/json" },
@@ -49,14 +49,15 @@ export const UpdateItem = async (update) => {
 // Api for updating product in  cart
 
 // Api for deleting the product from cart
-export const DeleteItem = async (item) => {
+export const DeleteItem = async (itemId) => {
   try {
-    const response = await fetch("http://localhost:3004/Cart/" + item, {
+    const response = await fetch("http://localhost:8080/cart/deleteFromCart/" + itemId, {
       method: "DELETE",
+      
       headers: { "content-type": "application/json" },
     });
-    const data = await response.json();
-    return { data: { id: data.id } };
+
+    return { data: { id: itemId } };
   } catch (error) {
     console.error("Error in adding user", error);
     throw error;
@@ -71,7 +72,7 @@ export const ResetCart = async (userId) => {
     for (let item of items) {
       await DeleteItem(item.id);
     }
-    return {status:"success"}
+    return { status: "success" };
   } catch (error) {
     console.error("Error in adding user", error);
     throw error;

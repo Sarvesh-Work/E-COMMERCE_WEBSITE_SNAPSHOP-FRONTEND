@@ -38,8 +38,8 @@ export const fetchAllOrder = async ( pagination) => {
     }
 
     const response = await fetch(
-      // "http://localhost:8080/products?" + queryString
-      "http://localhost:3004/Orders?" + queryString
+      "http://localhost:8080/products?" + queryString
+      // "http://localhost:3004/Orders?" + queryString
     );
     const data = await response.json();
     console.log({ data });

@@ -59,12 +59,11 @@ const ProductDetails = () => {
 
   const handelCart = (e) => {
     e.preventDefault();
-    if (items.findIndex((item) => item.id === ProductById.id) < 0) {
-      setAddToCart("Added!");
-      const newItem = { ...ProductById, quantity: 1, user: user.id };
+    setAddToCart("Added!");
+    if (items.findIndex((item) => item.product.id === ProductById.id) < 0) {
+      const newItem = { product: ProductById.id, quantity: 1, user: user.id };
       delete newItem["id"];
-      dispatch(AddItemsAsync({ ...ProductById, quantity: 1, user: user.id }));
-
+      dispatch(AddItemsAsync(newItem));
       Success();
     } else {
       return toast.warn("Already added in cart", {

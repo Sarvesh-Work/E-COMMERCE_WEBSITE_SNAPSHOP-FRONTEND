@@ -39,7 +39,7 @@ const ProductFilter = ({ handleFilter }) => {
           FILTER
         </h2>
 
-        <div className=" p-1">
+        <div className="">
           {filters.map((section) => (
             <Disclosure
               as="div"
@@ -50,7 +50,7 @@ const ProductFilter = ({ handleFilter }) => {
               {({ open }) => (
                 <>
                   <h3
-                    className="p-1"
+                    className=""
                     // style={{ borderBottom: "1px solid  #D9DDE0" }}
                   >
                     <Disclosure.Button

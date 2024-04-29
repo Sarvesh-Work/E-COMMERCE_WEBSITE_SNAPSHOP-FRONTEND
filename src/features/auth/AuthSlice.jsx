@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { UpdateAddAddress, checkUser, createUser } from "./AuthAPI";
+ import {  checkUser, createUser } from "./AuthAPI";
 
 const initialState = {
   users: null,
@@ -29,16 +29,16 @@ export const checkUserAsync = createAsyncThunk(
   }
 );
 
-export const UpdateAddressAsync = createAsyncThunk(
-  "user/UpdateAddAddress",
-  async (update) => {
+// export const UpdateAddressAsync = createAsyncThunk(
+//   "user/UpdateAddAddress",
+//   async (update) => {
 
-      const response = await UpdateAddAddress(update);
+//       const response = await UpdateAddAddress(update);
 
-    return response.data;
+//     return response.data;
    
-  }
-);
+//   }
+// );
 
 export const authSlice = createSlice({
   name: "Auth",
@@ -70,13 +70,13 @@ export const authSlice = createSlice({
         state.status = "idle";
         state.error = action.payload;
       })
-      .addCase(UpdateAddressAsync.pending, (state) => {
-        state.status = "loading";
-      })
-      .addCase(UpdateAddressAsync.fulfilled, (state, action) => {
-        state.status = "idle";
-        state.users = action.payload;
-      });
+      // .addCase(UpdateAddressAsync.pending, (state) => {
+      //   state.status = "loading";
+      // })
+      // .addCase(UpdateAddressAsync.fulfilled, (state, action) => {
+      //   state.status = "idle";
+      //   state.users = action.payload;
+      // });
   },
 });
 

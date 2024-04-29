@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { PropTypes } from 'prop-types';
 import {
-  UpdateAddressAsync,
+  // UpdateAddressAsync,
 } from "../features/auth/AuthSlice";
-import { selectUserInfo } from "../features/user/userSlice";
+import { selectUserInfo, updateUserAsync } from "../features/user/userSlice";
 
 
 
@@ -29,9 +29,9 @@ const FormCheckOut = ({handelAddress,handelPaymentMethod,PaymentMethod}) => {
       <form
         noValidate
         onSubmit={handleSubmit((data) => {
-          console.log({ data });
+          
           dispatch(
-            UpdateAddressAsync({ ...user, address: [...user.address, data] })
+            updateUserAsync({ ...user, address: [...user.address, data] })
           );
           reset()
         })}
@@ -160,7 +160,7 @@ const FormCheckOut = ({handelAddress,handelPaymentMethod,PaymentMethod}) => {
             className=" col-12  p-2 w-100 d-flex justify-content-center align-items-center flex-column mb-3 "
             style={{ border: "1px solid #C0C0C0", borderRadius: "10px" }}
           >
-            {user.address==null?"No Address Found":user.address?.map((data,index) => (
+            {user.address==[]?"No Address Found":user.address?.map((data,index) => (
               <div
                 className="form-check row px-1 pt-0 mt-0 w-100  mb-2 d-flex flex-wrap align-items-center"
                 key={index}

@@ -33,8 +33,8 @@ export const fetchAllProductsByFilter = async (filter, sort, pagination) => {
     }
 
     const response = await fetch(
-      // "http://localhost:8080/products?" + queryString
-      "http://localhost:3004/products?" + queryString
+      "http://localhost:8080/products?" + queryString
+      // "http://localhost:3004/products?" + queryString
     );
     const data = await response.json();
     console.log({ data });
@@ -71,9 +71,8 @@ export const fetchAllCategories = async () => {
 
 export const fetchProductById = async (id) => {
   try {
-    const response = await fetch("http://localhost:3004/products/" + id);
+    const response = await fetch("http://localhost:8080/products/" + id);
     const data = await response.json();
-    console.log("new data", data);
     return { data };
   } catch (error) {
     console.error("Error fetching products:", error);

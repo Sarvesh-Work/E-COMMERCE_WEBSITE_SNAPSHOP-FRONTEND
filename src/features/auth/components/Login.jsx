@@ -81,7 +81,7 @@ export function Login() {
               <input
                 type="password"
                 {...register("password", {
-                  required: "required",
+                  required: "Password required",
                 })}
                 className="form-control"
                 id="exampleInputPassword1"
@@ -93,11 +93,7 @@ export function Login() {
               />
               {errors.password && (
                 <div className=" text-danger">
-                  <p>
-                    -Password at least 8 characters <br /> - must contain at
-                    least 1 uppercase letter <br /> -1 lowercase letter, and 1
-                    number <br />- Can contain special characters
-                  </p>
+                 {errors.password.message}
                 </div>
               )}
               {error && <div className=" text-danger mt-2">{error.error}</div>}

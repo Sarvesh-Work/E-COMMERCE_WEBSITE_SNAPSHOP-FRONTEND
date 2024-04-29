@@ -2,7 +2,7 @@ import { Link, Navigate } from "react-router-dom";
 import FormCheckOut from "./FormCheckOut";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  DeleteItemFromCartAsync,
+  
   SelectCartItems,
   UpdateItemAsync,
 } from "../features/cart/cartSlice";
@@ -25,11 +25,11 @@ const CheckOut = () => {
   const currentOrder = useSelector(selectCurrentOrder);
 
   const totalAmount = items.reduce(
-    // (amount, item) => discountPrice(item.product) * item.quantity + amount,
-    // 0
+    (amount, item) => discountPrice(item.product) * item.quantity + amount,
+    0
     
-      (amount, item) => discountPrice(item) * item.quantity + amount,
-      0
+      // (amount, item) => discountPrice(item) * item.quantity + amount,
+      // 0
   );
   const totalItems = items.reduce((total, item) => item.quantity + total, 0);
 
@@ -37,9 +37,7 @@ const CheckOut = () => {
     dispatch(UpdateItemAsync({id:items.id, quantity: +e.target.value }));
   };
 
-  const DeleteItem = (id) => {
-    dispatch(DeleteItemFromCartAsync(id));
-  };
+ 
 
   const handelAddress = (e) => {
     setSelectAddress(user.address[e.target.value]);
@@ -95,8 +93,8 @@ const CheckOut = () => {
                   Cart
                 </div>
                 <div className="col-12 p-1 ">
-                  {items.map((products) => (
-                    <div key={products.id} className=" container-fluid">
+                  {items.map((item) => (
+                    <div key={item.product.id} className=" container-fluid">
                       <div
                         style={{ borderBottom: "1px solid #CED3D8" }}
                         className="row gap-1 p-1"
@@ -112,8 +110,8 @@ const CheckOut = () => {
                           }}
                         >
                           <img
-                            // src={products.product.thumbnail}
-                            src={products.thumbnail}
+                            src={item.product.thumbnail}
+                            // src={item.thumbnail}
                             alt=""
                             className="w-100 h-100"
                           />
@@ -123,22 +121,22 @@ const CheckOut = () => {
                             className=""
                             style={{ fontSize: "20px", fontWeight: "500" }}
                           >
-                            {/* {products.product.title} */}
-                            {products.title} 
+                            {item.product.title}
+                            {/* {item.title}  */}
                           </div>
                           <div style={{ color: "gray" }}>
-                            {/* Rating: {products.product.rating} */}
-                            Rating: {products.rating}
+                            Rating: {item.product.rating}
+                            {/* Rating: {item.rating} */}
                           </div>
                           <div className="d-flex gap-1 mt-1">
                             <div>Qty</div>
                             <select
-                              name="Quntity"
+                              name="Quantity"
                               id=""
                               className="bg-dark text-white rounded-2"
-                              onChange={(e) => handelCart(e, products)}
-                              // value={products.product.quantity}
-                              value={products.quantity}
+                              onChange={(e) => handelCart(e, item)}
+                              value={item.quantity}
+                              // value={item.quantity}
                             >
                               <option value="1">1</option>
                               <option value="2">2</option>
@@ -146,16 +144,9 @@ const CheckOut = () => {
                           </div>
                         </div>
                         <div className="ms-auto col-lg-3 col-3  text-lg-end p-0 d-flex flex-column justify-content-between mt-1">
-                          {/* <div className="ms-auto">$ {discountPrice(products.product)}</div> */}
-                           <div className="ms-auto">$ {discountPrice(products)}</div> 
-                          <div
-                            className="cursor fw-bold  ms-auto mb-2 px-2"
-                            // onClick={() => DeleteItem(products.product.id)}
-                            onClick={() => DeleteItem(products.id)}
-                            style={{color:"#0066b2",border:"1px solid #0066b2",borderRadius:"5px"}}
-                          >
-                            Remove
-                          </div>
+                          <div className="ms-auto">$ {discountPrice(item.product)}</div>
+                           <div className="ms-auto">$ {discountPrice(item)}</div> 
+                         
                         </div>
                       </div>
                     </div>

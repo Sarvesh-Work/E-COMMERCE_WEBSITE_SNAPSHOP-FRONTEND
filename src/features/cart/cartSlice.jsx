@@ -38,8 +38,8 @@ export const UpdateItemAsync = createAsyncThunk(
 
 export const DeleteItemFromCartAsync = createAsyncThunk(
   "items/DeleteItem",
-  async (update) => {
-    const response = await DeleteItem(update);
+  async (itemId) => {
+    const response = await DeleteItem(itemId);
     return response.data;
   }
 );
@@ -88,8 +88,9 @@ export const CartSlice = createSlice({
       })
       .addCase(DeleteItemFromCartAsync.fulfilled, (state, action) => {
         state.status = "idle";
+        console.log(action.payload)
         const index = state.items.findIndex(
-          (item) => item.id === action.payload
+          (item) => item.id === action.payload.id
         );
         state.items.splice(index, 1);
       })

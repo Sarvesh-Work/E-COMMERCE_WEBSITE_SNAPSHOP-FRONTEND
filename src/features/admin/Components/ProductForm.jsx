@@ -11,6 +11,7 @@ import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { discountPrice } from "../../../app/constant";
+import { Bounce, toast } from "react-toastify";
 
 export default function ProductForm() {
   const brand = useSelector(SelectBrands);
@@ -20,10 +21,24 @@ export default function ProductForm() {
   const { register, handleSubmit, setValue, reset } = useForm();
   const params = useParams();
 
+  const Success=()=> toast.success("Product Deleted", {
+    position: "bottom-left",
+    autoClose: 5000,
+    hideProgressBar: true,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "light",
+    transition: Bounce,
+  });
+
   const handelDelete = () => {
     const product = { ...selectProduct };
     product.deleted = true;
     dispatch(updateProductsAsync(product));
+    Success()
+    
   };
 
   useEffect(() => {
@@ -293,15 +308,19 @@ export default function ProductForm() {
                   Save
                 </button>
                 {params.id && (
+                
                   <button
                     type="submit"
                     className="p-1  px-3 fs-6 fw-normal cursor rounded-3"
                     id="all-btn"
                     style={{ backgroundColor: "red" }}
-                    onClick={handelDelete()}
+                    onClick={()=>handelDelete()}
                   >
                     Delete Product
                   </button>
+                  
+
+                  
                 )}
               </div>
             </form>
