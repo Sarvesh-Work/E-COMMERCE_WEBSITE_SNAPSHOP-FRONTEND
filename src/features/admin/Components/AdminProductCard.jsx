@@ -38,7 +38,7 @@ const AdminProductCard = ({ products }) => {
               </div>
               <div className="card-body m-0 py-1 px-sm-3 px-2">
                 <h5 className="card-title">
-                  {data.title.slice(0, 15)}
+                  {data.title?.slice(0, 15)}
                   {data.title.length > 15 ? "..." : ""}
                 </h5>
                 <div className="card-text d-flex mb-2">
@@ -63,6 +63,12 @@ const AdminProductCard = ({ products }) => {
                           Product Deleted
                         </div>
                       )}
+                       {data.stock==0 && (
+                        <div className=" text-secondary text-danger">
+                          Out of stock
+                        </div>
+                      )}
+
                     </div>
                     <div className="text-center">
                       

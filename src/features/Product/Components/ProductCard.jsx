@@ -32,44 +32,52 @@ const ProductCard = ({ products }) => {
               </div>
               <div className="card-body m-0 py-1 px-sm-3 px-2">
                 <h5 className="card-title">
-                  {data.title.slice(0, 15)}
+                  {data.title?.slice(0, 15)}
                   {data.title.length > 15 ? "..." : ""}
                 </h5>
-                <div className="card-text d-flex mb-2">
-                  <div className=" d-flex w-100 justify-content-between">
-                    <div className="">
-                      <div>
-                        <i
-                          className="fa-solid fa-star "
-                          style={{ color: "#0066b2" }}
-                        ></i>
-                        <span className="mx-1 text-end">{data.rating}</span>
+                {data.stock == 0 ? (
+                  <div
+                    className="text-secondary text-danger text-center mt-4"
+                    style={{ fontSize: "20px" }}
+                  >
+                    Out of stock
+                  </div>
+                ) : (
+                  <div className="card-text d-flex mb-2">
+                    <div className=" d-flex w-100 justify-content-between">
+                      <div className="">
+                        <div>
+                          <i
+                            className="fa-solid fa-star "
+                            style={{ color: "#0066b2" }}
+                          ></i>
+                          <span className="mx-1 text-end">{data.rating}</span>
+                        </div>
+                        <div
+                          className=" w-100"
+                          style={{ fontWeight: "500", fontSize: "18px" }}
+                        >
+                          {data.brand.slice(0, 12)}
+                          {data.brand.length > 12 ? "..." : ""}
+                        </div>
                       </div>
-                      <div
-                        className=" w-100"
-                        style={{ fontWeight: "500", fontSize: "18px" }}
-                      >
-                        {data.brand.slice(0, 12)}
-                        {data.brand.length > 12 ? "..." : ""}
-                      </div>
-                    </div>
-                    <div className="text-center">
-                      <div
-                        className=""
-                        style={{ fontSize: "20px", fontWeight: "500" }}
-                      >
-                        $
-                        {discountPrice(data)}
-                      </div>
-                      <div
-                        className=" text-secondary"
-                        style={{ textDecoration: "line-through" }}
-                      >
-                        $ {data.price}
+                      <div className="text-center">
+                        <div
+                          className=""
+                          style={{ fontSize: "20px", fontWeight: "500" }}
+                        >
+                          ${discountPrice(data)}
+                        </div>
+                        <div
+                          className=" text-secondary"
+                          style={{ textDecoration: "line-through" }}
+                        >
+                          $ {data.price}
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
+                )}
               </div>
             </div>
           </Link>

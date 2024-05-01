@@ -1,6 +1,6 @@
 export const createProducts = async (product) => {
   try {
-    const response = await fetch("http://localhost:3004/products", {
+    const response = await fetch("http://localhost:8080/products", {
       method: "POST",
       body: JSON.stringify(product),
       headers: { "content-type": "application/json" },
@@ -13,7 +13,7 @@ export const createProducts = async (product) => {
   }
 };
 
-export const fetchAllProductsByFilter = async (filter, sort, pagination) => {
+export const fetchAllProductsByFilter = async (filter, sort, pagination,admin) => {
   try {
     let queryString = "";
     for (let key in filter) {
@@ -31,10 +31,13 @@ export const fetchAllProductsByFilter = async (filter, sort, pagination) => {
     for (let key in pagination) {
       queryString += `${key}=${pagination[key]}&`;
     }
+    if(admin){
+      queryString += `admin=true`;
+    } 
 
     const response = await fetch(
       "http://localhost:8080/products?" + queryString
-      // "http://localhost:3004/products?" + queryString
+     
     );
     const data = await response.json();
     console.log({ data });

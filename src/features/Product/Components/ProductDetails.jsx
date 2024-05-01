@@ -130,25 +130,33 @@ const ProductDetails = () => {
             <div className="col-md-7 p-0 col-12">
               <h1>{ProductById.title}</h1>
 
-              <h2 className="d-md-none d-block mt-3 text-decoration-line-through">
-                ${ProductById.price}
-              </h2>
-              <h2 className="d-md-none d-block mt-3">
-                ${discountPrice(ProductById)}
-              </h2>
+              {ProductById.stock == 0 ? null : (
+                <>
+                  <h2 className="d-md-block d-none text-decoration-line-through">
+                    ${ProductById.price}
+                  </h2>
+                  <h2 className="d-md-block d-none mt-3">
+                    ${discountPrice(ProductById)}
+                  </h2>
+                </>
+              )}
 
               <div className=" d-md-none d-block">
-                {[0, 1, 2, 3, 4].map((rating) => (
-                  <i
-                    key={rating}
-                    className={classNames(
-                      reviews.average > rating
-                        ? "fa-solid fa-star text-dark"
-                        : "fa-solid fa-star text-secondary"
-                    )}
-                    aria-hidden="true"
-                  ></i>
-                ))}
+                {ProductById.stock == 0 ? null : (
+                  <div>
+                    {[0, 1, 2, 3, 4].map((rating) => (
+                      <i
+                        key={rating}
+                        className={classNames(
+                          Math.round(ProductById.rating) > rating
+                            ? "fa-solid fa-star text-dark"
+                            : "fa-solid fa-star text-secondary"
+                        )}
+                        aria-hidden="true"
+                      ></i>
+                    ))}
+                  </div>
+                )}
               </div>
 
               <p className="mt-4" style={{ fontSize: "17px" }}>
@@ -178,25 +186,33 @@ const ProductDetails = () => {
             ></div>
 
             <div className="col-md-4 col-12 px-md-2 p-0 ">
-              <h2 className="d-md-block d-none text-decoration-line-through">
-                ${ProductById.price}
-              </h2>
-              <h2 className="d-md-block d-none mt-3">
-                ${discountPrice(ProductById)}
-              </h2>
+              {ProductById.stock == 0 ? null : (
+                <>
+                  <h2 className="d-md-block d-none text-decoration-line-through">
+                    ${ProductById.price}
+                  </h2>
+                  <h2 className="d-md-block d-none mt-3">
+                    ${discountPrice(ProductById)}
+                  </h2>
+                </>
+              )}
 
               <div className=" d-md-block d-none">
-                {[0, 1, 2, 3, 4].map((rating) => (
-                  <i
-                    key={rating}
-                    className={classNames(
-                      Math.round(ProductById.rating) > rating
-                        ? "fa-solid fa-star text-dark"
-                        : "fa-solid fa-star text-secondary"
-                    )}
-                    aria-hidden="true"
-                  ></i>
-                ))}
+                {ProductById.stock == 0 ? null : (
+                  <div>
+                    {[0, 1, 2, 3, 4].map((rating) => (
+                      <i
+                        key={rating}
+                        className={classNames(
+                          Math.round(ProductById.rating) > rating
+                            ? "fa-solid fa-star text-dark"
+                            : "fa-solid fa-star text-secondary"
+                        )}
+                        aria-hidden="true"
+                      ></i>
+                    ))}
+                  </div>
+                )}
               </div>
 
               {!user ? (
@@ -208,6 +224,13 @@ const ProductDetails = () => {
                     Please Login to Buy the Product
                   </div>
                 </Link>
+              ) : ProductById.stock == 0 ? (
+                <div
+                  className="text-secondary text-danger text-center mt-4"
+                  style={{ fontSize: "35px" }}
+                >
+                  Out of stock
+                </div>
               ) : (
                 <div
                   onClick={handelCart}

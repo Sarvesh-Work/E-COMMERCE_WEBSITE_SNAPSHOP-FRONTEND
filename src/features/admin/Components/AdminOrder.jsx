@@ -7,6 +7,7 @@ import {
   selectAllOrders,
 } from "../../order/OrderSlice";
 
+
 export default function AdminOrder() {
   const [page, setPage] = useState(1);
   const dispatch = useDispatch();
@@ -86,7 +87,7 @@ export default function AdminOrder() {
                       <div key={item.id} className="p-0 m-0 d-flex gap-2 mt-2 ">
                         <div className="">
                           <img
-                            src={item.thumbnail}
+                            src={item.product.thumbnail}
                             style={{
                               height: "50px",
                               width: "50px",
@@ -95,8 +96,8 @@ export default function AdminOrder() {
                           />
                         </div>
                         <div className="">
-                          {item.title}-Quantity:{item.quantity}-Price:$
-                          {discountPrice(item)}
+                          {item.product.title}-Quantity:{item.quantity}-Price:$
+                          {discountPrice(item.product)}
                         </div>
                       </div>
                     ))}
@@ -105,13 +106,13 @@ export default function AdminOrder() {
                     ${order.totalAmount}
                   </td>
                   <td className=" border-1 ">
-                    <div>Name: {order.SelectAddress.Name}</div>
-                    <div>Email: {order.SelectAddress.Email}</div>
-                    <div>Phone: {order.SelectAddress.Phone_number}</div>
-                    <div>Address: {order.SelectAddress.Address}</div>
-                    <div>City: {order.SelectAddress.City}</div>
-                    <div>State: {order.SelectAddress.State}</div>
-                    <div>Postal Code: {order.SelectAddress.Postal_Code}</div>
+                    <div>Name: {order.SelectedAddress.Name}</div>
+                    <div>Email: {order.SelectedAddress.Email}</div>
+                    <div>Phone: {order.SelectedAddress.Phone_number}</div>
+                    <div>Address: {order.SelectedAddress.Address}</div>
+                    <div>City: {order.SelectedAddress.City}</div>
+                    <div>State: {order.SelectedAddress.State}</div>
+                    <div>Postal Code: {order.SelectedAddress.Postal_Code}</div>
                   </td>
                   <td
                     className=" border-1 text-center "
@@ -150,6 +151,7 @@ export default function AdminOrder() {
           </table>
         </div>
       )}
+     
     </div>
   );
 }

@@ -1,7 +1,9 @@
 export const fetchOrdersByUserId = async (userId) => {
   try {
-    const response = await fetch("http://localhost:8080/order/?user="+userId);
+    
+    const response = await fetch("http://localhost:8080/order/user/"+userId);
     const data= await response.json();
+   
     return {data}
   } catch (error) {
     console.error("Error fetching products:", error);

@@ -21,30 +21,29 @@ export default function ProductForm() {
   const { register, handleSubmit, setValue, reset } = useForm();
   const params = useParams();
 
-  const Success=()=> toast.success("Product Deleted", {
-    position: "bottom-left",
-    autoClose: 3000,
-    hideProgressBar: true,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-    theme: "light",
-    transition: Bounce,
-  });
+  const Success = (message) =>
+    toast.success(message, {
+      position: "bottom-left",
+      autoClose: 3000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      transition: Bounce,
+    });
 
   const handelDelete = () => {
     const product = { ...selectProduct };
     product.deleted = true;
     dispatch(updateProductsAsync(product));
-    Success()
-    
+    Success("Product Removed Successfully");
   };
 
   useEffect(() => {
     if (params.id) {
       dispatch(fetchProductByIdAsync(params.id));
-      console.log({ selectProduct });
     }
   }, [params.id]);
 
@@ -80,15 +79,17 @@ export default function ProductForm() {
               noValidate
               onSubmit={handleSubmit((data) => {
                 const product = { ...data };
+                
                 product.image = [
-                  product.Image1,
-                  product.Image2,
-                  product.Image3,
-                  product.thumbnail,
+                  product.image1,
+                  product.image2,
+                  product.image3,
+                 
                 ];
-                delete product["Image1"];
-                delete product["Image2"];
-                delete product["Image3"];
+                delete product["image1"];
+                delete product["image2"];
+                delete product["image3"];
+                
                 product.price = +product.price;
                 product.stock = +product.stock;
                 product.discountPercentage = +product.discountPercentage;
@@ -97,9 +98,9 @@ export default function ProductForm() {
                 if (params.id) {
                   product.id = params.id;
                   product.rating = selectProduct.rating || 0;
-
+                  
                   dispatch(updateProductsAsync(product));
-                  reset;
+                  
                 } else {
                   dispatch(createProductsAsync(product));
                   reset;
@@ -280,7 +281,7 @@ export default function ProductForm() {
                     id="image2"
                     style={{ border: "1px solid #C0C0C0" }}
                     {...register("image2", {
-                      required: "Image2 is required",
+                      
                     })}
                   />
                 </div>
@@ -294,7 +295,7 @@ export default function ProductForm() {
                     id="image3"
                     style={{ border: "1px solid #C0C0C0" }}
                     {...register("image3", {
-                      required: "Image3 is required",
+                      
                     })}
                   />
                 </div>
@@ -302,25 +303,28 @@ export default function ProductForm() {
               <div className=" mt-2 d-flex justify-content-end gap-3 mb-3">
                 <button
                   type="submit"
+                  onClick={() => {
+                    const message = selectProduct
+                      ? selectProduct.title + " Product Updated Successfully"
+                      : "New Product Added Successfully";
+
+                    Success(message);
+                  }}
                   className="p-1  px-3 fs-6 fw-normal cursor rounded-3"
                   id="all-btn"
                 >
                   Save
                 </button>
                 {params.id && (
-                
                   <button
                     type="submit"
                     className="p-1  px-3 fs-6 fw-normal cursor rounded-3"
                     id="all-btn"
                     style={{ backgroundColor: "red" }}
-                    onClick={()=>handelDelete()}
+                    onClick={() => handelDelete()}
                   >
                     Delete Product
                   </button>
-                  
-
-                  
                 )}
               </div>
             </form>

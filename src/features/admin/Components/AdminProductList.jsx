@@ -64,7 +64,7 @@ const AdminProductList = () => {
 
   useEffect(() => {
     const pagination = { _page: page, _limit: ITEMS_PER_PAGE };
-    dispatch(fetchProductsByAsync({ filter, sort, pagination }));
+    dispatch(fetchProductsByAsync({ filter, sort, pagination,admin:true }));
   }, [dispatch, filter, sort, page]);
 
   useEffect(() => {
@@ -76,19 +76,16 @@ const AdminProductList = () => {
       <div className="row p-3 mt-1">
         <div
           className="col-12 text-center p-0 m-0"
-          style={{ fontSize: "50px", lineHeight: "1.2", fontWeight: "700" }}
+          style={{ fontSize: "40px", lineHeight: "1.2", fontWeight: "700" }}
         >
-          <div className="m-0 p-0">Your ultimate destination for online </div>
           <div className="m-0 p-0">
-            {" "}
+            Total Products: {totalItems} 
+          </div>
+          <div className="m-0 p-0">
             shopping <span style={{ color: "#0066b2" }}>delight! </span>
           </div>
         </div>
-        <div className="col-12 text-center mt-3">
-          Welcome to Snapshop. Every products on our platform is verified by our
-          team to <br />
-          ensure our highest quality standard
-        </div>
+        
       </div>
       <div
         className="row p-1 py-2 mt-5 "
