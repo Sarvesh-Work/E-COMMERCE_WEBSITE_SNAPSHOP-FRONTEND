@@ -83,7 +83,7 @@ export const fetchProductById = async (id) => {
 export const updateProduct = async (product) => {
   try {
     const response = await fetch(
-      "http://localhost:3004/products/" + product.id,
+      "http://localhost:8080/products/" + product.id,
       {
         method: "PATCH",
         body: JSON.stringify(product),

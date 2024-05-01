@@ -160,7 +160,7 @@ const FormCheckOut = ({handelAddress,handelPaymentMethod,PaymentMethod}) => {
             className=" col-12  p-2 w-100 d-flex justify-content-center align-items-center flex-column mb-3 "
             style={{ border: "1px solid #C0C0C0", borderRadius: "10px" }}
           >
-            {user.address==[]?"No Address Found":user.address?.map((data,index) => (
+            {!user.address[0]?("No Existing Addresses Found Please Add a Address!"):user.address?.map((data,index) => (
               <div
                 className="form-check row px-1 pt-0 mt-0 w-100  mb-2 d-flex flex-wrap align-items-center"
                 key={index}
@@ -171,7 +171,7 @@ const FormCheckOut = ({handelAddress,handelPaymentMethod,PaymentMethod}) => {
                     className="form-check-input m-0 mt-2"
                     type="radio"
                     name="flexRadioDefault"
-                    onClick={handelAddress}
+                    onClick={(e)=>handelAddress(e)}
                     value={index}
                     style={{ border: "1px solid black" }}
                   />

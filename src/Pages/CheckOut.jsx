@@ -20,7 +20,7 @@ const CheckOut = () => {
   console.log({items})
   const user = useSelector(selectUserInfo);
   const dispatch = useDispatch();
-  const [SelectAddress, setSelectAddress] = useState(null);
+  const [SelectedAddress, setSelectedAddress] = useState(null);
   const [PaymentMethod, selectPaymentMethod] = useState("Cash");
   const currentOrder = useSelector(selectCurrentOrder);
 
@@ -40,7 +40,7 @@ const CheckOut = () => {
  
 
   const handelAddress = (e) => {
-    setSelectAddress(user.address[e.target.value]);
+    setSelectedAddress(user.address[e.target.value]);
     console.log(user.address[e.target.value]);
   };
 
@@ -54,9 +54,9 @@ const CheckOut = () => {
       items,
       totalAmount,
       totalItems,
-      user,
-      selectPaymentMethod,
-      SelectAddress,
+      user:user.id,
+      PaymentMethod,
+      SelectedAddress,
       status: "pending",
     };
     dispatch(orderItemsAsync(order));
@@ -136,7 +136,7 @@ const CheckOut = () => {
                               className="bg-dark text-white rounded-2"
                               onChange={(e) => handelCart(e, item)}
                               value={item.quantity}
-                              // value={item.quantity}
+                          
                             >
                               <option value="1">1</option>
                               <option value="2">2</option>
@@ -145,7 +145,7 @@ const CheckOut = () => {
                         </div>
                         <div className="ms-auto col-lg-3 col-3  text-lg-end p-0 d-flex flex-column justify-content-between mt-1">
                           <div className="ms-auto">$ {discountPrice(item.product)}</div>
-                           <div className="ms-auto">$ {discountPrice(item)}</div> 
+                          
                          
                         </div>
                       </div>

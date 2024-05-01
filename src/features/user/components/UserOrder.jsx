@@ -9,15 +9,11 @@ import { discountPrice } from "../../../app/constant";
 
 const UserOrder = () => {
   const orders = useSelector(selectAllOrders);
-  console.log({ orders });
-  const user = useSelector(selectUserInfo);
-  console.log({ user }, "new");
+  const userInfo = useSelector(selectUserInfo);
   const dispatch = useDispatch();
-
   useEffect(() => {
-    dispatch(getAllOrdersAsync(user.id));
+    dispatch(getAllOrdersAsync(userInfo.id));
   });
-
   return (
     <>
       <div className=" container-lg  container-fluid mt-2 p-md-3">
@@ -34,15 +30,15 @@ const UserOrder = () => {
               style={{ border: "1.3px solid #D4D5D9", borderRadius: "5px" }}
             >
               <div className="d-md-flex">
-                <h4 className="mt-2 mb-2 ">Order: {order.id}</h4>
+                <h4 className="mt-2 mb-2 ">Order Id: {order.id}</h4>
                 <h5 className="ms-auto mt-2" style={{ color: "#0066b2" }}>
                   Order Status: Pending
                 </h5>
               </div>
-              {order?.items.map((product) => (
+              {order?.items.map((items) => (
                 <div
                   className="container-fluid "
-                  key={product.id}
+                  key={items.product.id}
                   style={{ backgroundColor: "#f5f5f5", borderRadius: "5px" }}
                 >
                   <div className="row mt-2 mb-2 p-1 d-flex justify-content-center align-items-center ">
@@ -57,7 +53,7 @@ const UserOrder = () => {
                       }}
                     >
                       <img
-                        src={product.thumbnail}
+                        src={items.product.thumbnail}
                         alt=""
                         className="w-100 h-100"
                       />
@@ -67,14 +63,14 @@ const UserOrder = () => {
                         className=""
                         style={{ fontSize: "20px", fontWeight: "500" }}
                       >
-                        {product.title}
+                        {items.product.title}
                       </div>
                       <div style={{ color: "gray" }}>
-                        Rating: {product.rating}
+                        Rating: {items.product.rating}
                       </div>
                       <div className="d-flex gap-1 mt-1 ">
-                        <div>Qty:{product.quantity}</div>
-                        <div className="ms-auto">Price: ${discountPrice(product)}</div>
+                        <div>Qty:{items.quantity}</div>
+                        <div className="ms-auto">Price: ${discountPrice(items.product)}</div>
                       </div>
                     </div>
                   </div>
@@ -95,17 +91,17 @@ const UserOrder = () => {
                       <div className=" w-100  d-sm-flex justify-content-center align-items-center">
                         <div className="">
                           <div style={{ fontSize: "16px", fontWeight: "500" }}>
-                            {order.SelectAddress.Name}
+                            {order.SelectedAddress?.Name}
                           </div>
                           <div className="fs-6 mb-1" >
-                            <div>City: {order.SelectAddress.City}</div>
-                            <div>Email: {order.SelectAddress.Email}</div>
+                            <div>City: {order.SelectedAddress.City}</div>
+                            <div>Email: {order.SelectedAddress.Email}</div>
                           </div>
                         </div>
                         <div className="ms-auto px-sm-3 text-md-end ">
-                          Phone: {order.SelectAddress.Phone_number}
-                          <div className="text-md-end">State: {order.SelectAddress.State}</div>
-                          <div className="text-md-end"> Postal-code: {order.SelectAddress.Postal_Code}</div>
+                          Phone: {order.SelectedAddress.Phone_number}
+                          <div className="text-md-end">State: {order.SelectedAddress.State}</div>
+                          <div className="text-md-end"> Postal-code: {order.SelectedAddress.Postal_Code}</div>
                         </div>
                         
                       </div>

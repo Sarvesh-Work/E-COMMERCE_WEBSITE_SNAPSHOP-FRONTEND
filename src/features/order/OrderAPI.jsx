@@ -1,6 +1,6 @@
 export const AddOrders = async (order) => {
   try {
-    const response = await fetch("http://localhost:3004/Orders", {
+    const response = await fetch("http://localhost:8080/order", {
       method: "POST",
       body: JSON.stringify(order),
       headers: { "content-type": "application/json" },

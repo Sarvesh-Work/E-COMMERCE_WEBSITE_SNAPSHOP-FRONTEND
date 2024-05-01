@@ -14,7 +14,7 @@ const PageNotFound = () => {
             ></i>
             <div style={{ fontSize: "45px", fontWeight: "600" }}>404</div>
             <p className="" style={{ fontSize: "30px", fontWeight: "600" }}>
-              Sorry! the page you are locking for is not found{" "}
+              Sorry! the page you are locking for is not found
             </p>
             <Link to="/" className=" text-decoration-none">
               <div

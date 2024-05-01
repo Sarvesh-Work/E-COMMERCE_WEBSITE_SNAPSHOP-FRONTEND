@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, Navigate, useParams } from "react-router-dom";
 import { ResetCartAsync } from "../features/cart/cartSlice";
 import { selectLoggedUser } from "../features/auth/AuthSlice";
-import { resetCurrentOrder } from "../features/order/orderSlice";
+import { resetCurrentOrder } from "../features/order/OrderSlice";
+
 
 const OrderSuccess = () => {
   const Params = useParams();

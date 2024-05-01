@@ -23,7 +23,7 @@ export default function ProductForm() {
 
   const Success=()=> toast.success("Product Deleted", {
     position: "bottom-left",
-    autoClose: 5000,
+    autoClose: 3000,
     hideProgressBar: true,
     closeOnClick: true,
     pauseOnHover: true,

@@ -1,8 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
- import {  checkUser, createUser } from "./AuthAPI";
+import { checkUser, createUser } from "./AuthAPI";
 
 const initialState = {
-  users: null,
+  userInfo: null,
   status: "idle",
   error: null,
 };
@@ -18,27 +18,16 @@ export const createUserAsync = createAsyncThunk(
 
 export const checkUserAsync = createAsyncThunk(
   "user/checkUser",
-  async (loginInfo,{rejectWithValue}) => {
-  try {
-    const response = await checkUser(loginInfo);
+  async (loginInfo, { rejectWithValue }) => {
+    try {
+      const response = await checkUser(loginInfo);
 
-    return response.data;
-  } catch (error) {
-    return rejectWithValue(error)
-  }
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
   }
 );
-
-// export const UpdateAddressAsync = createAsyncThunk(
-//   "user/UpdateAddAddress",
-//   async (update) => {
-
-//       const response = await UpdateAddAddress(update);
-
-//     return response.data;
-   
-//   }
-// );
 
 export const authSlice = createSlice({
   name: "Auth",
@@ -57,30 +46,23 @@ export const authSlice = createSlice({
       })
       .addCase(createUserAsync.fulfilled, (state, action) => {
         state.status = "idle";
-        state.users = action.payload;
+        state.userInfo = action.payload;
       })
       .addCase(checkUserAsync.pending, (state) => {
         state.status = "loading";
       })
       .addCase(checkUserAsync.fulfilled, (state, action) => {
         state.status = "idle";
-        state.users = action.payload;
+        state.userInfo = action.payload;
       })
       .addCase(checkUserAsync.rejected, (state, action) => {
         state.status = "idle";
         state.error = action.payload;
-      })
-      // .addCase(UpdateAddressAsync.pending, (state) => {
-      //   state.status = "loading";
-      // })
-      // .addCase(UpdateAddressAsync.fulfilled, (state, action) => {
-      //   state.status = "idle";
-      //   state.users = action.payload;
-      // });
+      });
   },
 });
 
-export const selectLoggedUser = (state) => state.auth.users;
+export const selectLoggedUser = (state) => state.auth.userInfo;
 export const selectError = (state) => state.auth.error;
 
 export default authSlice.reducer;

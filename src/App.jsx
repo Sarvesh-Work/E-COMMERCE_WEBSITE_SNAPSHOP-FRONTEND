@@ -17,7 +17,7 @@ import PageNotFound from "./Pages/PageNotFound";
 import OrderSuccess from "./Pages/OrderSuccess";
 import UserOrderPage from "./Pages/UserOrderPage";
 import { fetchLogInUserInfoAsync } from "./features/user/userSlice";
-import SignUpPage from "./Pages/SignUpPage";
+
 import ProductDetailPage from "./Pages/ProductDetailPage";
 import UserProfilePage from "./Pages/UserProfilePage";
 import ProtectedAdmin from "./features/auth/components/ProtectedAdmin";
@@ -28,6 +28,7 @@ import AdminOrderPage from "./Pages/AdminOrderpage";
 
 import {  ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import SignUpPage from "./Pages/SignupPage";
 
 const router = createBrowserRouter([
   {
