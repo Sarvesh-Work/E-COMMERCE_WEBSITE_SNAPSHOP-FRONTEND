@@ -5,7 +5,7 @@ import {
   UpdateOrderAsync,
   fetchAllOrderAsync,
   selectAllOrders,
-} from "../../order/OrderSlice";
+} from "../../order/orderSlice";
 
 
 export default function AdminOrder() {
@@ -43,7 +43,6 @@ export default function AdminOrder() {
         return "orange";
       case "cancel":
         return "red";
-
       default:
         return "green";
     }

@@ -6,7 +6,7 @@ import {
   SelectCategories,
   fetchBrandsByAsync,
   fetchCategoriesByAsync,
-} from "../../Product/ProductSlice";
+} from "../../Product/productSlice";
 import { useEffect } from "react";
 
 const AdminProductFilter = ({ handleFilter }) => {

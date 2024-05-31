@@ -1,27 +1,23 @@
-import { useSelector } from "react-redux"
+import { useSelector } from "react-redux";
 
-import { Navigate } from "react-router-dom"
-import { PropTypes } from 'prop-types';
+import { Navigate } from "react-router-dom";
+import { PropTypes } from "prop-types";
 import { selectUserInfo } from "../../user/userSlice";
 
+function ProtectedAdmin({ children }) {
+  const userInfo = useSelector(selectUserInfo);
 
-function  ProtectedAdmin({children}){
-
-  const user=useSelector(selectUserInfo)
-
-  if(!user){
-    return <Navigate to="/login" replace={true}/>
+  if (!userInfo) {
+    return <Navigate to="/login" replace={true} />;
   }
-  if(user && user.role!=="admin")
-  {
-    return <Navigate to="/" replace={true}/>
+  if (userInfo && userInfo.role !== "admin") {
+    return <Navigate to="/" replace={true} />;
   }
   return children;
- 
 }
 
-export default ProtectedAdmin
+export default ProtectedAdmin;
 
 ProtectedAdmin.propTypes = {
-    children:PropTypes.node.isRequired
-  }
+  children: PropTypes.node.isRequired,
+};

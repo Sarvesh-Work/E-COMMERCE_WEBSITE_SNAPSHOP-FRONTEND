@@ -1,25 +1,23 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { fetchLogInUser, fetchOrdersByUserId, updateUser } from "./userAPI";
+import { fetchLogInUser, fetchOrders, updateUser } from "./userAPI";
 
 const initialState = {
-
   status: "idle",
   userInfo: null,
 };
 
 export const getAllOrdersAsync = createAsyncThunk(
   "User/fetchOrdersByUserId",
-  async (amount) => {
-    const response = await fetchOrdersByUserId(amount);
-
+  async () => {
+    const response = await fetchOrders();
     return response.data;
   }
 );
 
 export const fetchLogInUserInfoAsync = createAsyncThunk(
   "User/fetchLogInUser",
-  async (amount) => {
-    const response = await fetchLogInUser(amount);
+  async () => {
+    const response = await fetchLogInUser();
 
     return response.data;
   }

@@ -1,7 +1,7 @@
 // API for adding Items or Products to cart!
 export const AddItemsToCart = async (items) => {
   try {
-    const response = await fetch("http://localhost:8080/cart/", {
+    const response = await fetch("http://localhost:8080/cart/add", {
       method: "POST",
       body: JSON.stringify(items),
       headers: { "content-type": "application/json" },
@@ -17,9 +17,9 @@ export const AddItemsToCart = async (items) => {
 
 // Api for fetching  the cart items using user Id
 
-export const FetchAllProductsByUserId = async (userId) => {
+export const FetchAllProducts = async () => {
   try {
-    const response = await fetch("http://localhost:8080/Cart/?user=" + userId);
+    const response = await fetch("http://localhost:8080/Cart/allProducts");
     const data = await response.json();
     console.log({ data });
     return { data };
@@ -34,11 +34,14 @@ export const FetchAllProductsByUserId = async (userId) => {
 // Api for updating product in cart
 export const UpdateItem = async (update) => {
   try {
-    const response = await fetch("http://localhost:8080/cart/updateInCart/" + update.id, {
-      method: "PATCH",
-      body: JSON.stringify(update),
-      headers: { "content-type": "application/json" },
-    });
+    const response = await fetch(
+      "http://localhost:8080/cart/updateInCart/" + update.id,
+      {
+        method: "PATCH",
+        body: JSON.stringify(update),
+        headers: { "content-type": "application/json" },
+      }
+    );
     const data = await response.json();
     return { data };
   } catch (error) {
@@ -51,11 +54,13 @@ export const UpdateItem = async (update) => {
 // Api for deleting the product from cart
 export const DeleteItem = async (itemId) => {
   try {
-    const response = await fetch("http://localhost:8080/cart/deleteFromCart/" + itemId, {
-      method: "DELETE",
-      
-      headers: { "content-type": "application/json" },
-    });
+    const response = await fetch(
+      "http://localhost:8080/cart/deleteFromCart/" + itemId,
+      {
+        method: "DELETE",
+        headers: { "content-type": "application/json" },
+      }
+    );
 
     return { data: { id: itemId } };
   } catch (error) {
@@ -65,9 +70,9 @@ export const DeleteItem = async (itemId) => {
 };
 // Api for deleting the product from cart
 
-export const ResetCart = async (userId) => {
+export const ResetCart = async () => {
   try {
-    const response = await FetchAllProductsByUserId(userId);
+    const response = await FetchAllProducts();
     const items = response.data;
     for (let item of items) {
       await DeleteItem(item.id);

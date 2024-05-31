@@ -11,7 +11,7 @@ import Protected from "./features/auth/components/Protected";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { FetchProductsByuserIdAsync } from "./features/cart/cartSlice";
-import { selectLoggedUser } from "./features/auth/AuthSlice";
+import { selectLoggedUser } from "./features/auth/authSlice";
 import EmptyCartPage from "./Pages/EmptyCartPage";
 import PageNotFound from "./Pages/PageNotFound";
 import OrderSuccess from "./Pages/OrderSuccess";
@@ -26,8 +26,8 @@ import AdminProductDetailPage from "./Pages/AdminProductDetailPage copy";
 import AdminProductForm from "./Pages/AdminProductForm";
 import AdminOrderPage from "./Pages/AdminOrderpage";
 
-import {  ToastContainer} from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import SignUpPage from "./Pages/SignupPage";
 
 const router = createBrowserRouter([
@@ -154,32 +154,27 @@ function App() {
 
   useEffect(() => {
     if (user) {
-      dispatch(FetchProductsByuserIdAsync(user?.id));
-      dispatch(fetchLogInUserInfoAsync(user?.id));
+      dispatch(FetchProductsByuserIdAsync());
+      dispatch(fetchLogInUserInfoAsync());
     }
   }, [dispatch, user]);
 
   return (
     <div className="Background  h-100">
-    
       <RouterProvider router={router} />
       <ToastContainer
-         position="bottom-left"
-         autoClose={3000}
-         hideProgressBar={false}
-         newestOnTop={false}
-         closeOnClick
-         rtl={false}
-         pauseOnFocusLoss
-         draggable
-         pauseOnHover
-         transition: Bounce
-         theme="light"
-         
-         
-       
-       />
-
+        position="bottom-left"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        transition:Bounce
+        theme="light"
+      />
     </div>
 
     //  ToDo ="Scroll Top karaycha aahe "

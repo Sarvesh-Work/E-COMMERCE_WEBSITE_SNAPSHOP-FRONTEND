@@ -1,22 +1,19 @@
-import { useSelector } from "react-redux"
-import { selectLoggedUser } from "../AuthSlice"
-import { Navigate } from "react-router-dom"
-import { PropTypes } from 'prop-types';
+import { useSelector } from "react-redux";
+import { selectLoggedUser } from "../authSlice";
+import { Navigate } from "react-router-dom";
+import { PropTypes } from "prop-types";
 
+function Protected({ children }) {
+  const user = useSelector(selectLoggedUser);
 
-function  Protected({children}){
-
-  const user=useSelector(selectLoggedUser)
-
-  if(!user){
-    return <Navigate to="/login" replace={true}/>
+  if (!user) {
+    return <Navigate to="/login" replace={true} />;
   }
   return children;
- 
 }
 
-export default Protected
+export default Protected;
 
 Protected.propTypes = {
-    children:PropTypes.node.isRequired
-  }
+  children: PropTypes.node.isRequired,
+};

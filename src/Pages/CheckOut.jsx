@@ -10,7 +10,7 @@ import { useState } from "react";
 import {
   orderItemsAsync,
   selectCurrentOrder,
-} from "../features/order/OrderSlice";
+} from "../features/order/orderSlice";
 import { selectUserInfo } from "../features/user/userSlice";
 import Navbar from "../features/Navbar/Navbar";
 import { discountPrice } from "../app/constant";

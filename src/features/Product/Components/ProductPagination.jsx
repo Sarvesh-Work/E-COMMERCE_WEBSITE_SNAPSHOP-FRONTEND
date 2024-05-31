@@ -7,6 +7,8 @@ const ProductPagination = ({
   handlPage,
   totalPage,
 }) => {
+
+  
   return (
     <div
       className="w-100  d-sm-flex justify-content-sm-between mt-3 "

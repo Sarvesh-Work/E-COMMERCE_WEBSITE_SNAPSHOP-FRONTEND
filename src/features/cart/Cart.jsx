@@ -12,6 +12,7 @@ import { useState } from "react";
 
 export function Cart() {
   const items = useSelector(SelectCartItems);
+  console.log(items)
   const dispatch = useDispatch();
   const cartStatus = useSelector(SelectCartStatus);
   const [Id, setId] = useState("");

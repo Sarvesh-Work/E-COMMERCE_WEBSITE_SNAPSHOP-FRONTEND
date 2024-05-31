@@ -1,39 +1,42 @@
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 
-import { PropTypes } from 'prop-types';
-import {
-  // UpdateAddressAsync,
-} from "../features/auth/AuthSlice";
+import { PropTypes } from "prop-types";
+import // UpdateAddressAsync,
+"../features/auth/authSlice";
 import { selectUserInfo, updateUserAsync } from "../features/user/userSlice";
 
-
-
-const FormCheckOut = ({handelAddress,handelPaymentMethod,PaymentMethod}) => {
+const FormCheckOut = ({
+  handelAddress,
+  handelPaymentMethod,
+  PaymentMethod,
+}) => {
   const user = useSelector(selectUserInfo);
 
 
-  const { register, handleSubmit ,reset} = useForm();
+  const { register, handleSubmit, reset } = useForm();
 
   const dispatch = useDispatch();
 
-
-
   return (
-    <div className="row box p-2 mx-lg-2 mb-3 " style={{border:"1px solid #cccc", borderRadius:"5px"}}>
-      <div className="col-12 mb-0 p-2" style={{borderBottom:"1px solid #cccc"}}>
-      <h3 className="col m-0">Personal Information</h3>
-      <span>Use a permanent address </span>
-
+    <div
+      className="row box p-2 mx-lg-2 mb-3 "
+      style={{ border: "1px solid #cccc", borderRadius: "5px" }}
+    >
+      <div
+        className="col-12 mb-0 p-2"
+        style={{ borderBottom: "1px solid #cccc" }}
+      >
+        <h3 className="col m-0">Personal Information</h3>
+        <span>Use a permanent address </span>
       </div>
       <form
         noValidate
         onSubmit={handleSubmit((data) => {
-          
           dispatch(
             updateUserAsync({ ...user, address: [...user.address, data] })
           );
-          reset()
+          reset();
         })}
         className="mt-2"
       >
@@ -140,7 +143,6 @@ const FormCheckOut = ({handelAddress,handelPaymentMethod,PaymentMethod}) => {
           </div>
         </div>
         <div className=" mt-4 d-flex justify-content-end gap-3">
-         
           <button
             type="submit"
             className="p-1  px-3 fs-6 fw-normal cursor rounded-3"
@@ -160,39 +162,44 @@ const FormCheckOut = ({handelAddress,handelPaymentMethod,PaymentMethod}) => {
             className=" col-12  p-2 w-100 d-flex justify-content-center align-items-center flex-column mb-3 "
             style={{ border: "1px solid #C0C0C0", borderRadius: "10px" }}
           >
-            {!user.address[0]?("No Existing Addresses Found Please Add a Address!"):user.address?.map((data,index) => (
-              <div
-                className="form-check row px-1 pt-0 mt-0 w-100  mb-2 d-flex flex-wrap align-items-center"
-                key={index}
-                style={{ border: "1px solid #C0C0C0", borderRadius: "10px" }}
-              >
-                <div className="px-3 col-1">
-                  <input
-                    className="form-check-input m-0 mt-2"
-                    type="radio"
-                    name="flexRadioDefault"
-                    onClick={(e)=>handelAddress(e)}
-                    value={index}
-                    style={{ border: "1px solid black" }}
-                  />
-                </div>
-                <div className=" col-11  my-2  d-sm-flex justify-content-center align-items-center">
-                  <div className=" mt-3">
-                    <div style={{ fontSize: "16px", fontWeight: "500" }}>
-                      {data.Name}
+            {user.address[null]
+              ? "No Existing Addresses Found Please Add a Address!"
+              : user.address?.map((data, index) => (
+                  <div
+                    className="form-check row px-1 pt-0 mt-0 w-100  mb-2 d-flex flex-wrap align-items-center"
+                    key={index}
+                    style={{
+                      border: "1px solid #C0C0C0",
+                      borderRadius: "10px",
+                    }}
+                  >
+                    <div className="px-3 col-1">
+                      <input
+                        className="form-check-input m-0 mt-2"
+                        type="radio"
+                        name="flexRadioDefault"
+                        onClick={(e) => handelAddress(e)}
+                        value={index}
+                        style={{ border: "1px solid black" }}
+                      />
                     </div>
-                    <div className="fs-6 mb-1" style={{ color: "gray" }}>
-                      <div>City: {data.City}</div>
-                      <div>Email: {data.Email}</div>
+                    <div className=" col-11  my-2  d-sm-flex justify-content-center align-items-center">
+                      <div className=" mt-3">
+                        <div style={{ fontSize: "16px", fontWeight: "500" }}>
+                          {data.Name}
+                        </div>
+                        <div className="fs-6 mb-1" style={{ color: "gray" }}>
+                          <div>City: {data.City}</div>
+                          <div>Email: {data.Email}</div>
+                        </div>
+                      </div>
+                      <div className="ms-auto px-sm-3 text-md-end ">
+                        Phone: {data.Phone_number}
+                        <div className="text-md-end">{data.State}</div>
+                      </div>
                     </div>
                   </div>
-                  <div className="ms-auto px-sm-3 text-md-end ">
-                    Phone: {data.Phone_number}
-                    <div className="text-md-end">{data.State}</div>
-                  </div>
-                </div>
-              </div>
-            ))}
+                ))}
           </div>
           <h5 className="col-12 ">Payment Method</h5>
           <h6 className="col fs-6 " style={{ color: "gray" }}>
@@ -207,7 +214,7 @@ const FormCheckOut = ({handelAddress,handelPaymentMethod,PaymentMethod}) => {
                 id="Cash"
                 style={{ border: "1px solid black" }}
                 onClick={handelPaymentMethod}
-                checked={PaymentMethod==="Cash"}
+                checked={PaymentMethod === "Cash"}
                 value="Cash"
               />
               <label className="form-check-label" htmlFor="Cash">
@@ -223,7 +230,7 @@ const FormCheckOut = ({handelAddress,handelPaymentMethod,PaymentMethod}) => {
                 onClick={handelPaymentMethod}
                 style={{ border: "1px solid black" }}
                 value="Card"
-                checked={PaymentMethod==="Card"}
+                checked={PaymentMethod === "Card"}
               />
               <label className="form-check-label" htmlFor="Card">
                 Card
@@ -239,7 +246,7 @@ const FormCheckOut = ({handelAddress,handelPaymentMethod,PaymentMethod}) => {
 export default FormCheckOut;
 
 FormCheckOut.propTypes = {
-  handelAddress:PropTypes.func,
-  handelPaymentMethod:PropTypes.func,
-  PaymentMethod:PropTypes.string
-}
+  handelAddress: PropTypes.func,
+  handelPaymentMethod: PropTypes.func,
+  PaymentMethod: PropTypes.string,
+};

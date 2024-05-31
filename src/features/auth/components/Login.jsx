@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { Link, Navigate } from "react-router-dom";
-import { checkUserAsync, selectError, selectLoggedUser } from "../AuthSlice";
+import { checkUserAsync, selectError, selectLoggedUser } from "../authSlice";
 
 export function Login() {
   const dispatch = useDispatch();

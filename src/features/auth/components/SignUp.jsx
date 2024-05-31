@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { useForm } from "react-hook-form";
 import { Link, Navigate } from "react-router-dom";
-import { createUserAsync, selectLoggedUser } from "../AuthSlice";
+import { createUserAsync, selectLoggedUser } from "../authSlice";
 
 export function SignUp() {
   const user = useSelector(selectLoggedUser);
@@ -131,6 +131,8 @@ export function SignUp() {
             >
               SignUp
             </button>
+
+            {/* after signup we have to redirect to login page */}
 
             <div
               id="emailHelp"

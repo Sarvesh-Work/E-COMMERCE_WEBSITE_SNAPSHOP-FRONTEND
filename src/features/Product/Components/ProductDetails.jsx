@@ -5,17 +5,17 @@ import {
   SelectProductById,
   SelectProductListStatus,
   fetchProductByIdAsync,
-} from "../ProductSlice";
+} from "../productSlice";
 import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 // import { AddItemsAsync, SelectCartItems } from "../../cart/cartSlice";
 import { AddItemsAsync, SelectCartItems } from "../../cart/cartSlice";
-import { selectLoggedUser } from "../../auth/AuthSlice";
+import { selectLoggedUser } from "../../auth/authSlice";
 import Loading from "../../../Pages/loading";
 import { discountPrice } from "../../../app/constant";
 
 const ProductDetails = () => {
-  const reviews = { href: "#", average: 4, totalCount: 117 };
+  // const reviews = { href: "#", average: 4, totalCount: 117 };
   const [addToCart, setAddToCart] = useState("Add to cart");
 
   function classNames(...classes) {
@@ -61,7 +61,7 @@ const ProductDetails = () => {
     e.preventDefault();
     setAddToCart("Added!");
     if (items.findIndex((item) => item.product.id === ProductById.id) < 0) {
-      const newItem = { product: ProductById.id, quantity: 1, user: user.id };
+      const newItem = { product: ProductById.id, quantity: 1 };
       delete newItem["id"];
       dispatch(AddItemsAsync(newItem));
       Success();

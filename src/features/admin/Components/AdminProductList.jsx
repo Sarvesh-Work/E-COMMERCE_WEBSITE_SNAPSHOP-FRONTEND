@@ -3,7 +3,7 @@ import {
   SelectAllProduct,
   SelectTotalItems,
   fetchProductsByAsync,
-} from "../../Product/ProductSlice";
+} from "../../Product/productSlice";
 import AdminProductCard from "./AdminProductCard";
 import AdminProductFilter from "./AdminProductFilter";
 import { useEffect, useState } from "react";

@@ -1,18 +1,13 @@
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getAllOrdersAsync,
-  selectAllOrders,
-  selectUserInfo,
-} from "../userSlice";
+import { getAllOrdersAsync, selectAllOrders } from "../userSlice";
 import { useEffect } from "react";
 import { discountPrice } from "../../../app/constant";
 
 const UserOrder = () => {
   const orders = useSelector(selectAllOrders);
-  const userInfo = useSelector(selectUserInfo);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getAllOrdersAsync(userInfo.id));
+    dispatch(getAllOrdersAsync());
   });
   return (
     <>
@@ -70,7 +65,9 @@ const UserOrder = () => {
                       </div>
                       <div className="d-flex gap-1 mt-1 ">
                         <div>Qty:{items.quantity}</div>
-                        <div className="ms-auto">Price: ${discountPrice(items.product)}</div>
+                        <div className="ms-auto">
+                          Price: ${discountPrice(items.product)}
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -85,28 +82,30 @@ const UserOrder = () => {
                     backgroundColor: "#f5f5f5",
                   }}
                 >
-               
-                    <>
-                      <div>SHIPPING ADDRESS:</div>
-                      <div className=" w-100  d-sm-flex justify-content-center align-items-center">
-                        <div className="">
-                          <div style={{ fontSize: "16px", fontWeight: "500" }}>
-                            {order.SelectedAddress?.Name}
-                          </div>
-                          <div className="fs-6 mb-1" >
-                            <div>City: {order.SelectedAddress.City}</div>
-                            <div>Email: {order.SelectedAddress.Email}</div>
-                          </div>
+                  <>
+                    <div>SHIPPING ADDRESS:</div>
+                    <div className=" w-100  d-sm-flex justify-content-center align-items-center">
+                      <div className="">
+                        <div style={{ fontSize: "16px", fontWeight: "500" }}>
+                          {order.SelectedAddress?.Name}
                         </div>
-                        <div className="ms-auto px-sm-3 text-md-end ">
-                          Phone: {order.SelectedAddress.Phone_number}
-                          <div className="text-md-end">State: {order.SelectedAddress.State}</div>
-                          <div className="text-md-end"> Postal-code: {order.SelectedAddress.Postal_Code}</div>
+                        <div className="fs-6 mb-1">
+                          <div>City: {order.SelectedAddress.City}</div>
+                          <div>Email: {order.SelectedAddress.Email}</div>
                         </div>
-                        
                       </div>
-                    </>
-             
+                      <div className="ms-auto px-sm-3 text-md-end ">
+                        Phone: {order.SelectedAddress.Phone_number}
+                        <div className="text-md-end">
+                          State: {order.SelectedAddress.State}
+                        </div>
+                        <div className="text-md-end">
+                          {" "}
+                          Postal-code: {order.SelectedAddress.Postal_Code}
+                        </div>
+                      </div>
+                    </div>
+                  </>
                 </div>
               </div>
             </div>

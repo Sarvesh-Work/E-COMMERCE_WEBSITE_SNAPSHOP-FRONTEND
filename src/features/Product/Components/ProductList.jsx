@@ -4,7 +4,7 @@ import {
   SelectProductListStatus,
   SelectTotalItems,
   fetchProductsByAsync,
-} from "../ProductSlice";
+} from "../productSlice";
 import ProductCard from "./ProductCard";
 import ProductFilter from "./ProductFilter";
 import { useEffect, useState } from "react";
