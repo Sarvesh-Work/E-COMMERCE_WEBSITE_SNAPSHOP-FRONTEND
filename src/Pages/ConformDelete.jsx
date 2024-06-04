@@ -19,10 +19,7 @@ export default function ConformDelete({
     <div className="modal-content">
       <div className="modal-header">
         <h1 className="modal-title fs-5" id="staticBackdropLabel">
-          {id ? (product.title):(
-            "ARE YOU SHURE YOU WANT TO DELETE THIS ADDRESS"
-          )}
-
+          {id ? product.title : "ARE YOU SHURE YOU WANT TO DELETE THIS ADDRESS"}
         </h1>
       </div>
       <div className="modal-body d-flex mx-3">

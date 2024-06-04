@@ -33,7 +33,7 @@ const ProductCard = ({ products }) => {
               <div className="card-body m-0 py-1 px-sm-3 px-2">
                 <h5 className="card-title">
                   {data.title?.slice(0, 15)}
-                  {data.title.length > 15 ? "..." : ""}
+                  {data.title?.length > 15 ? "..." : ""}
                 </h5>
                 {data.stock == 0 ? (
                   <div

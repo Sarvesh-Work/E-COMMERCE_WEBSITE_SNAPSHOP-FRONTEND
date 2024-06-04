@@ -1,12 +1,8 @@
 import { Link, Navigate } from "react-router-dom";
 import FormCheckOut from "./FormCheckOut";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  
-  SelectCartItems,
-  UpdateItemAsync,
-} from "../features/cart/cartSlice";
 import { useState } from "react";
+import { selectCartItems, UpdateItemAsync } from "../features/cart/cartSlice";
 import {
   orderItemsAsync,
   selectCurrentOrder,
@@ -16,8 +12,8 @@ import Navbar from "../features/Navbar/Navbar";
 import { discountPrice } from "../app/constant";
 
 const CheckOut = () => {
-  const items = useSelector(SelectCartItems);
-  console.log({items})
+  const items = useSelector(selectCartItems);
+  console.log({ items });
   const user = useSelector(selectUserInfo);
   const dispatch = useDispatch();
   const [SelectedAddress, setSelectedAddress] = useState(null);
@@ -27,17 +23,15 @@ const CheckOut = () => {
   const totalAmount = items.reduce(
     (amount, item) => discountPrice(item.product) * item.quantity + amount,
     0
-    
-      // (amount, item) => discountPrice(item) * item.quantity + amount,
-      // 0
+
+    // (amount, item) => discountPrice(item) * item.quantity + amount,
+    // 0
   );
   const totalItems = items.reduce((total, item) => item.quantity + total, 0);
 
   const handelCart = (e, items) => {
-    dispatch(UpdateItemAsync({id:items.id, quantity: +e.target.value }));
+    dispatch(UpdateItemAsync({ id: items.id, quantity: +e.target.value }));
   };
-
- 
 
   const handelAddress = (e) => {
     setSelectedAddress(user.address[e.target.value]);
@@ -54,7 +48,7 @@ const CheckOut = () => {
       items,
       totalAmount,
       totalItems,
-      user:user.id,
+      user: user.id,
       PaymentMethod,
       SelectedAddress,
       status: "pending",
@@ -64,9 +58,14 @@ const CheckOut = () => {
 
   return (
     <>
-    <Navbar/>
+      <Navbar />
       {items.length <= 0 && <Navigate to="/EmptyCart" replace={true} />}
-      {currentOrder && <Navigate to={`/order-success/${currentOrder.id}`} />}
+      {currentOrder && currentOrder.PaymentMethod == "Cash" && (
+        <Navigate to={`/order-success/${currentOrder.id}`} />
+      )}
+      {currentOrder && currentOrder.PaymentMethod == "Card" && (
+        <Navigate to={`/stripe-cardCheckout`} />
+      )}
       <div className="container-lg container-fluid mt-3 p-lg-0 ">
         <div className="row  d-flex justify-content-center p-1 px-3 ">
           <div className="col-lg-7 p-md-0 p-2 mt-3">
@@ -76,10 +75,10 @@ const CheckOut = () => {
               handelPaymentMethod={handelPaymentMethod}
             />
           </div>
-          <div className="col-lg-4 mt-lg-0 mt-3 z-0 mb-4" >
+          <div className="col-lg-4 mt-lg-0 mt-3 z-0 mb-4">
             <div
               className="row box  ms-lg-auto sticky-lg-top"
-              style={{top:"90px"}}
+              style={{ top: "90px" }}
             >
               <div className="p-2 col-12 ">
                 <div
@@ -136,17 +135,17 @@ const CheckOut = () => {
                               className="bg-dark text-white rounded-2"
                               onChange={(e) => handelCart(e, item)}
                               value={item.quantity}
-                          
                             >
                               <option value="1">1</option>
                               <option value="2">2</option>
+                              <option value="2">3</option>
                             </select>
                           </div>
                         </div>
                         <div className="ms-auto col-lg-3 col-3  text-lg-end p-0 d-flex flex-column justify-content-between mt-1">
-                          <div className="ms-auto">$ {discountPrice(item.product)}</div>
-                          
-                         
+                          <div className="ms-auto">
+                            $ {discountPrice(item.product)}
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -167,7 +166,7 @@ const CheckOut = () => {
                       Order Now
                     </div>
                   </div>
-                  <div style={{ color: "gray" }} className="text-center mt-3">
+                  <div style={{ color: "gray" }} className="text-center mt-2">
                     or
                     <Link to="/" style={{ textDecoration: "none" }}>
                       <span
@@ -175,7 +174,6 @@ const CheckOut = () => {
                         style={{ fontWeight: "500" }}
                       >
                         Continue Shopping
-                        <i className="fa-solid fa-arrow-right "></i>
                       </span>
                     </Link>
                   </div>

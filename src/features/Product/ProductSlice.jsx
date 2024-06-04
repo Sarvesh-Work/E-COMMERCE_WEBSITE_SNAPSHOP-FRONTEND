@@ -38,8 +38,13 @@ export const updateProductsAsync = createAsyncThunk(
 
 export const fetchProductsByAsync = createAsyncThunk(
   "product/fetchAllProductsByFilter",
-  async ({ filter, sort, pagination,admin }) => {
-    const response = await fetchAllProductsByFilter(filter, sort, pagination,admin);
+  async ({ filter, sort, pagination, admin }) => {
+    const response = await fetchAllProductsByFilter(
+      filter,
+      sort,
+      pagination,
+      admin
+    );
 
     return response.data;
   }
@@ -129,11 +134,11 @@ export const productSlice = createSlice({
   },
 });
 
-export const SelectAllProduct = (state) => state.product.product;
-export const SelectTotalItems = (state) => state.product.totalItems;
-export const SelectBrands = (state) => state.product.brands;
-export const SelectCategories = (state) => state.product.categories;
-export const SelectProductById = (state) => state.product.selectedProduct;
-export const SelectProductListStatus = (state) => state.product.status;
+export const selectAllProduct = (state) => state.product.product;
+export const selectTotalItems = (state) => state.product.totalItems;
+export const selectBrands = (state) => state.product.brands;
+export const selectCategories = (state) => state.product.categories;
+export const selectProductById = (state) => state.product.selectedProduct;
+export const selectProductListStatus = (state) => state.product.status;
 
 export default productSlice.reducer;

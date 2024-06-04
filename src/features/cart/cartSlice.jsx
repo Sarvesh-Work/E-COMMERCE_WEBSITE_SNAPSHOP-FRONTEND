@@ -4,12 +4,13 @@ import {
   AddItemsToCart,
   DeleteItem,
   ResetCart,
-  FetchAllProducts,
+  FetchCartsAllProducts,
 } from "./cartAPI";
 
 const initialState = {
   items: [],
   status: "idle",
+  checkCart: false,
 };
 
 export const AddItemsAsync = createAsyncThunk(
@@ -20,10 +21,10 @@ export const AddItemsAsync = createAsyncThunk(
   }
 );
 
-export const FetchProductsByuserIdAsync = createAsyncThunk(
+export const FetchCartProductsAsync = createAsyncThunk(
   "items/fetchAllProductsByUserId",
   async () => {
-    const response = await FetchAllProducts();
+    const response = await FetchCartsAllProducts();
     return response.data;
   }
 );
@@ -63,12 +64,16 @@ export const CartSlice = createSlice({
         state.status = "idle";
         state.items.push(action.payload);
       })
-      .addCase(FetchProductsByuserIdAsync.pending, (state) => {
+      .addCase(FetchCartProductsAsync.pending, (state) => {
         state.status = "loading";
       })
-      .addCase(FetchProductsByuserIdAsync.fulfilled, (state, action) => {
+      .addCase(FetchCartProductsAsync.fulfilled, (state, action) => {
         state.status = "idle";
         state.items = action.payload;
+        state.checkCart = true;
+      })
+      .addCase(FetchCartProductsAsync.rejected, (state) => {
+        state.checkCart = true;
       })
       .addCase(UpdateItemAsync.pending, (state) => {
         state.status = "loading";
@@ -101,6 +106,8 @@ export const CartSlice = createSlice({
   },
 });
 
-export const SelectCartItems = (state) => state.cart.items;
-export const SelectCartStatus = (state) => state.status;
+export const selectCartItems = (state) => state.cart.items;
+export const selectCartStatus = (state) => state.cart.status;
+export const selectCheckCart = (state) => state.cart.checkCart;
+
 export default CartSlice.reducer;

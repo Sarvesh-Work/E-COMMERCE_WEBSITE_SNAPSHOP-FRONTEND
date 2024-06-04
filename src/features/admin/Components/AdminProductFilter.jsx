@@ -2,16 +2,16 @@ import { Disclosure } from "@headlessui/react";
 import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  SelectBrands,
-  SelectCategories,
+  selectBrands,
+  selectCategories,
   fetchBrandsByAsync,
   fetchCategoriesByAsync,
 } from "../../Product/productSlice";
 import { useEffect } from "react";
 
 const AdminProductFilter = ({ handleFilter }) => {
-  const categories = useSelector(SelectCategories);
-  const brands = useSelector(SelectBrands);
+  const categories = useSelector(selectCategories);
+  const brands = useSelector(selectBrands);
   const dispatch = useDispatch();
 
   const filters = [

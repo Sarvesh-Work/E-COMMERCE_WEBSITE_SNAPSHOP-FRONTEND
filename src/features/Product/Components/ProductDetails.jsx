@@ -2,14 +2,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { Bounce, toast } from "react-toastify";
 
 import {
-  SelectProductById,
-  SelectProductListStatus,
+  selectProductById,
+  selectProductListStatus,
   fetchProductByIdAsync,
 } from "../productSlice";
 import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 // import { AddItemsAsync, SelectCartItems } from "../../cart/cartSlice";
-import { AddItemsAsync, SelectCartItems } from "../../cart/cartSlice";
+import { AddItemsAsync, selectCartItems } from "../../cart/cartSlice";
 import { selectLoggedUser } from "../../auth/authSlice";
 import Loading from "../../../Pages/loading";
 import { discountPrice } from "../../../app/constant";
@@ -22,12 +22,12 @@ const ProductDetails = () => {
     return classes.filter(Boolean).join(" ");
   }
 
-  const items = useSelector(SelectCartItems);
+  const items = useSelector(selectCartItems);
 
-  const ProductById = useSelector(SelectProductById);
+  const ProductById = useSelector(selectProductById);
 
   const user = useSelector(selectLoggedUser);
-  const status = useSelector(SelectProductListStatus);
+  const status = useSelector(selectProductListStatus);
   // const items=useSelector(SelectCartItems)
 
   const dispatch = useDispatch();

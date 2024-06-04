@@ -17,7 +17,7 @@ export const AddItemsToCart = async (items) => {
 
 // Api for fetching  the cart items using user Id
 
-export const FetchAllProducts = async () => {
+export const FetchCartsAllProducts = async () => {
   try {
     const response = await fetch("http://localhost:8080/Cart/allProducts");
     const data = await response.json();
@@ -72,7 +72,7 @@ export const DeleteItem = async (itemId) => {
 
 export const ResetCart = async () => {
   try {
-    const response = await FetchAllProducts();
+    const response = await FetchCartsAllProducts();
     const items = response.data;
     for (let item of items) {
       await DeleteItem(item.id);

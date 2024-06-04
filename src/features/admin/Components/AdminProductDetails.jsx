@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import {
-  SelectProductById,
-  SelectProductListStatus,
+  selectProductById,
+  selectProductListStatus,
   fetchProductByIdAsync,
 } from "../../Product/productSlice";
 import { Link, useParams } from "react-router-dom";
@@ -17,9 +17,9 @@ const AdminProductDetails = () => {
   function classNames(...classes) {
     return classes.filter(Boolean).join(" ");
   }
-  const ProductById = useSelector(SelectProductById);
+  const ProductById = useSelector(selectProductById);
   const user = useSelector(selectLoggedUser);
-  const status = useSelector(SelectProductListStatus);
+  const status = useSelector(selectProductListStatus);
   const dispatch = useDispatch();
   const Params = useParams();
   const handelCart = (e) => {

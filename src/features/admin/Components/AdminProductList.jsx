@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import {
-  SelectAllProduct,
-  SelectTotalItems,
+  selectAllProduct,
+  selectTotalItems,
   fetchProductsByAsync,
 } from "../../Product/productSlice";
 import AdminProductCard from "./AdminProductCard";
@@ -15,10 +15,8 @@ const AdminProductList = () => {
   const [filter, setFilter] = useState({});
   const [sort, setSort] = useState({});
   const [page, setPage] = useState(1);
-
-  const products = useSelector(SelectAllProduct);
-
-  const totalItems = useSelector(SelectTotalItems);
+  const products = useSelector(selectAllProduct);
+  const totalItems = useSelector(selectTotalItems);
   const totalPage = Math.ceil(totalItems / ITEMS_PER_PAGE);
 
   const sortOptions = [
@@ -64,7 +62,7 @@ const AdminProductList = () => {
 
   useEffect(() => {
     const pagination = { _page: page, _limit: ITEMS_PER_PAGE };
-    dispatch(fetchProductsByAsync({ filter, sort, pagination,admin:true }));
+    dispatch(fetchProductsByAsync({ filter, sort, pagination, admin: true }));
   }, [dispatch, filter, sort, page]);
 
   useEffect(() => {
@@ -78,14 +76,11 @@ const AdminProductList = () => {
           className="col-12 text-center p-0 m-0"
           style={{ fontSize: "40px", lineHeight: "1.2", fontWeight: "700" }}
         >
-          <div className="m-0 p-0">
-            Total Products: {totalItems} 
-          </div>
+          <div className="m-0 p-0">Total Products: {totalItems}</div>
           <div className="m-0 p-0">
             shopping <span style={{ color: "#0066b2" }}>delight! </span>
           </div>
         </div>
-        
       </div>
       <div
         className="row p-1 py-2 mt-5 "

@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
 import {
-  SelectBrands,
-  SelectCategories,
-  SelectProductById,
+  selectBrands,
+  selectCategories,
+  selectProductById,
   createProductsAsync,
   fetchProductByIdAsync,
   updateProductsAsync,
@@ -14,9 +14,9 @@ import { discountPrice } from "../../../app/constant";
 import { Bounce, toast } from "react-toastify";
 
 export default function ProductForm() {
-  const brand = useSelector(SelectBrands);
-  const categories = useSelector(SelectCategories);
-  const selectProduct = useSelector(SelectProductById);
+  const brand = useSelector(selectBrands);
+  const categories = useSelector(selectCategories);
+  const selectProduct = useSelector(selectProductById);
   const dispatch = useDispatch();
   const { register, handleSubmit, setValue, reset } = useForm();
   const params = useParams();
@@ -79,17 +79,16 @@ export default function ProductForm() {
               noValidate
               onSubmit={handleSubmit((data) => {
                 const product = { ...data };
-                
+
                 product.image = [
                   product.image1,
                   product.image2,
                   product.image3,
-                 
                 ];
                 delete product["image1"];
                 delete product["image2"];
                 delete product["image3"];
-                
+
                 product.price = +product.price;
                 product.stock = +product.stock;
                 product.discountPercentage = +product.discountPercentage;
@@ -98,9 +97,8 @@ export default function ProductForm() {
                 if (params.id) {
                   product.id = params.id;
                   product.rating = selectProduct.rating || 0;
-                  
+
                   dispatch(updateProductsAsync(product));
-                  
                 } else {
                   dispatch(createProductsAsync(product));
                   reset;
@@ -280,9 +278,7 @@ export default function ProductForm() {
                     className="form-control shadow-none "
                     id="image2"
                     style={{ border: "1px solid #C0C0C0" }}
-                    {...register("image2", {
-                      
-                    })}
+                    {...register("image2", {})}
                   />
                 </div>
                 <div className="mb-3 w-75 mx-auto">
@@ -294,9 +290,7 @@ export default function ProductForm() {
                     className="form-control shadow-none "
                     id="image3"
                     style={{ border: "1px solid #C0C0C0" }}
-                    {...register("image3", {
-                      
-                    })}
+                    {...register("image3", {})}
                   />
                 </div>
               </div>

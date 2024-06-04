@@ -1,11 +1,11 @@
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { SelectCartItems } from "../cart/cartSlice";
+import { selectCartItems } from "../cart/cartSlice";
 import { selectUserInfo } from "../user/userSlice";
 
 const Navbar = ({ children }) => {
-  const CartProduct = useSelector(SelectCartItems);
+  const CartProduct = useSelector(selectCartItems);
   const Navigate = [
     { data: "Admin", link: "/admin", admin: true },
     { data: "Order", link: "/admin/order", admin: true },
@@ -21,12 +21,12 @@ const Navbar = ({ children }) => {
           style={{ backgroundColor: "#FFFFFF" }}
         >
           <div
-            className="container-lg container-fluid px-1 "
+            className="container-lg container-fluid px-1 py-lg-0 py-1"
             style={{ borderBottom: "1px solid #CCCCCC" }}
           >
             <Link to="/" className=" text-decoration-none">
               <div
-                className="navbar-brand fs-4 fw-bold px-1 p-0 m-0"
+                className="navbar-brand fs-4 fw-bold px-1 py-0 m-0"
                 href="#"
                 style={{
                   color: "#0066b2",
@@ -170,7 +170,7 @@ const Navbar = ({ children }) => {
                       </Link>
                     ) : (
                       <Link
-                        to="/login"
+                        to="/logout"
                         className="drop dropdown-item rounded-3 cursor"
                         href="#"
                       >

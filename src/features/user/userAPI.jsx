@@ -1,8 +1,9 @@
 export const fetchOrders = async () => {
   try {
-    const response = await fetch("http://localhost:8080/order/user/");
+    const response = await fetch("http://localhost:8080/order/user");
     const data= await response.json();
-    return {data}
+    console.log(data)
+    return ({data})
   } catch (error) {
     console.error("Error fetching products:", error);
     throw error;
@@ -48,3 +49,20 @@ export const updateUser = async (userData) => {
     throw error;
   }
 };
+
+export function deleteUserInfo() {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const response = await fetch("/user/delete");
+      if (response.ok) {
+        resolve({ data: "success" });
+      } else {
+        const error = await response.text();
+        reject(error);
+      }
+    } catch (error) {
+      console.log(error);
+      reject(error);
+    }
+  });
+}

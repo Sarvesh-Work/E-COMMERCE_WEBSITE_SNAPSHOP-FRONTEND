@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
 import {
-  SelectAllProduct,
-  SelectProductListStatus,
-  SelectTotalItems,
+  selectAllProduct,
+  selectProductListStatus,
+  selectTotalItems,
   fetchProductsByAsync,
 } from "../productSlice";
 import ProductCard from "./ProductCard";
@@ -18,10 +18,10 @@ const ProductList = () => {
   const [sort, setSort] = useState({});
   const [page, setPage] = useState(1);
 
-  const products = useSelector(SelectAllProduct);
-  const totalItems = useSelector(SelectTotalItems);
+  const products = useSelector(selectAllProduct);
+  const totalItems = useSelector(selectTotalItems);
   const totalPage = Math.ceil(totalItems / ITEMS_PER_PAGE);
-  const status = useSelector(SelectProductListStatus);
+  const status = useSelector(selectProductListStatus);
 
   const sortOptions = [
     { name: "Best Rating", sort: "rating", order: "desc", current: false },
