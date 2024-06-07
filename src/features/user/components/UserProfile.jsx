@@ -451,6 +451,9 @@ const UserProfile = () => {
                                 <div className="text-md-end">
                                   Postal-code: {data.Postal_Code}
                                 </div>
+                                <div className="text-md-end">
+                                  Address: {data.Address}
+                                </div>
                               </div>
                             </div>
                             <div className="mt-2 d-flex gap-2">

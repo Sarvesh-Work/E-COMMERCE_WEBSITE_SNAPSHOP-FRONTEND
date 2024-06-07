@@ -9,7 +9,7 @@ export function Login() {
   const dispatch = useDispatch();
   const error = useSelector(selectError);
   const user = useSelector(selectLoggedUser);
-  console.log(user)
+  console.log(user);
   const [loading, setLoading] = useState(true);
 
   setTimeout(() => {
@@ -32,7 +32,7 @@ export function Login() {
           <div className="d-flex justify-content-center align-items-center h-100 py-2">
             <div className="box px-sm-4 px-3 py-2">
               <form
-                className="mb-1 p-2"
+                className=" p-2"
                 noValidate
                 onSubmit={handleSubmit((data) => {
                   dispatch(
@@ -85,7 +85,7 @@ export function Login() {
                     <p className=" text-danger">{errors.email.message}</p>
                   )}
                 </div>
-                <div className="mb-3 mt-2">
+                <div className=" mt-2">
                   <label
                     htmlFor="exampleInputPassword1"
                     className="form-label"
@@ -117,11 +117,11 @@ export function Login() {
                     </div>
                   )}
                 </div>
+                <Link to="/forgotPassword" className="mb-2">Forgot Password?</Link>
 
                 <button
                   type="submit"
-                  id="all-btn"
-                  className="btn w-100 rounded-3 mt-3"
+                  className="all-btn btn w-100 rounded-3 mt-3"
                 >
                   Login
                 </button>

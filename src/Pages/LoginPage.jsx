@@ -1,5 +1,6 @@
-import Navbar from "../features/Navbar/Navbar";
+import Navbar from "./Navbar";
 import { Login } from "../features/auth/components/Login";
+import Footer from "./Footer";
 
 const LoginPage = () => {
   return (
@@ -8,6 +9,7 @@ const LoginPage = () => {
       <div className="h-100 mt-5">
         <Login />
       </div>
+      <Footer />
     </>
   );
 };

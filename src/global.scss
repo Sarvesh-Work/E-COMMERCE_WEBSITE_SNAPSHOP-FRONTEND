@@ -3,6 +3,7 @@
   /* border: 1px solid red; */
   height: 100vh;
 }
+
 .Font-Weight {
   font-weight: 500px;
 }
@@ -83,17 +84,18 @@
 
 /* top:"65px",backgroundColor:"#e2eaf1",zIndex:"1" */
 
-#all-btn {
+.all-btn {
   background-color: #0066b2;
   color: white;
-  font-size: 20px;
-  font-weight: 500;
+  font-size: 18px;
+  font-weight: 600;
   border-radius: 5px;
   border: none;
 }
 
-#all-btn:hover {
+.all-btn:hover {
   background-color: #318ce7;
+  color: white;
 }
 
 .sort-button {
@@ -146,14 +148,6 @@
   }
 }
 
-.card:hover {
-  /* box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
-       */
-
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
-    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-}
-
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -179,3 +173,24 @@
   border-radius: 7px;
 }
 
+.image {
+  overflow: hidden;
+  position: relative;
+  height: 230px;
+  width: 100%;
+
+  &:hover {
+    .img-2 {
+      z-index: 2;
+    }
+  }
+  img {
+    height: 230px;
+    height: 100%;
+    position: absolute;
+  }
+
+  .img {
+    z-index: 1;
+  }
+}

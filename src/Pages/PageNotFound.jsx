@@ -1,44 +1,47 @@
 import { Link } from "react-router-dom";
-import Navbar from "../features/Navbar/Navbar";
+import Navbar from "./Navbar";
+import Footer from "./Footer";
 
 const PageNotFound = () => {
   return (
     <>
       <Navbar />
-      <div className="container">
-        <div className="row pt-5 text-center d-flex justify-content-center align-items-center">
-          <div className="col-12 p-2 ">
-            <i
-              className="fa-solid fa-face-rolling-eyes"
-              style={{ fontSize: "150px" }}
-            ></i>
-            <div style={{ fontSize: "45px", fontWeight: "600" }}>404</div>
-            <p className="" style={{ fontSize: "30px", fontWeight: "600" }}>
+      <div className="container p-3">
+        <div className="row d-flex flex-column justify-content-center align-items-center">
+          <div className="col-8 col-md-5 col-lg-3  pt-5">
+            <img
+              src="/public/images/error.png"
+              alt=""
+              className="w-100 h-100"
+            />
+          </div>
+          <div className="col-11 mt-2 text-center">
+            <p
+              className="m-1"
+              style={{ color: "#424553", fontSize: "18px", fontWeight: "600" }}
+            >
               Sorry! the page you are locking for is not found
             </p>
-            <Link to="/" className=" text-decoration-none">
-              <div
-                id="all-btn"
-                className="w-25 mx-auto cursor mt-3"
-                style={{
-                  fontSize: "25px",
-                  fontWeight: "500",
-                  letterSpacing: "0.4px",
-                }}
-              >
-                SH
-                <i
-                  className="fa-solid fa-face-grin-wide "
-                  style={{ fontSize: "22px" }}
-                ></i>
-                P MORE
-              </div>
-            </Link>
           </div>
+          <Link
+            to="/"
+            className="mt-4 col-lg-2 col-3 text-center p-1 text-decoration-none"
+            id="all-btn"
+            style={{ fontSize: "20px", letterSpacing: "0.3px" }}
+          >
+            SH
+            <i
+              className="fa-solid fa-face-grin-wide "
+              style={{ fontSize: "17px" }}
+            ></i>
+            P MORE
+          </Link>
         </div>
       </div>
+      <Footer />
     </>
   );
 };
 
 export default PageNotFound;
+

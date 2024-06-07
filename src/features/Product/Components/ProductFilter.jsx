@@ -35,9 +35,9 @@ const ProductFilter = ({ handleFilter }) => {
   return (
     <>
       <div className="row  py-1" style={{ borderRight: "1px solid #cccc" }}>
-        <h2 className="p-1" style={{ borderBottom: "1px solid #D9DDE0" }}>
+        <h4 className="p-1" style={{ borderBottom: "1px solid #D9DDE0" }}>
           FILTER
-        </h2>
+        </h4>
 
         <div className="">
           {filters.map((section) => (

@@ -1,5 +1,6 @@
-import Navbar from "../features/Navbar/Navbar"
+import Navbar from "./Navbar"
 import ProductDetails from './../features/Product/Components/ProductDetails';
+import Footer from "./Footer";
 
 
 const ProductDetailPage = () => {
@@ -7,6 +8,7 @@ const ProductDetailPage = () => {
     <>
       <Navbar/>
       <ProductDetails/>
+      <Footer/>
     </>
   )
 }

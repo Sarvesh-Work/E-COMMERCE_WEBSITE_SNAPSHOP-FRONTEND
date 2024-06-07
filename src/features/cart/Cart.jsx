@@ -30,27 +30,27 @@ export function Cart() {
   return (
     <>
       {/* Todo: adding customize page for cart  */}
+      {loading == true ? (
+        <Loading />
+      ) : (
+        <>
+          {items.length <= 0 && CheckCart && (
+            <Navigate to="/EmptyCart" replace={true} />
+          )}
 
-      {items.length <= 0 && CheckCart && (
-        <Navigate to="/EmptyCart" replace={true} />
-      )}
+          <div className="row box p-3 mx-lg-5  h-100 mt-3">
+            <div className="p-2 col-12 ">
+              <div
+                className="fs-3"
+                style={{
+                  fontSize: "20px",
+                  fontWeight: "500",
+                  borderBottom: "1px solid #CED3D8",
+                }}
+              >
+                Cart
+              </div>
 
-      <div className="row box p-3 mx-lg-5  h-100 mt-4">
-        <div className="p-2 col-12 ">
-          <div
-            className="fs-3"
-            style={{
-              fontSize: "20px",
-              fontWeight: "500",
-              borderBottom: "1px solid #CED3D8",
-            }}
-          >
-            Cart
-          </div>
-          {loading == true ? (
-            <Loading />
-          ) : (
-            <>
               <div className="col-12 p-1">
                 {items.map((item) => (
                   <div key={item.product.id} className=" container-fluid">
@@ -121,12 +121,13 @@ export function Cart() {
                           data-bs-target={`#staticBackdrop${item.product.id}`}
                           onClick={() => setId(item.product.id)}
                           style={{
-                            color: "#0066b2",
-                            border: "1px solid #0066b2",
+                            color: "#CF352E",
+                            border: "1px solid #CF352E",
                             borderRadius: "5px",
+                            fontSize:"17px"
                           }}
                         >
-                          Remove
+                          <i className="fa-solid fa-trash"></i>
                         </div>
 
                         <div
@@ -182,10 +183,10 @@ export function Cart() {
                   </Link>
                 </div>
               </div>
-            </>
-          )}
-        </div>
-      </div>
+            </div>
+          </div>
+        </>
+      )}
     </>
   );
 }

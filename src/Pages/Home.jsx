@@ -1,23 +1,15 @@
-import Navbar from "../features/Navbar/Navbar"
-import ProductList from './../features/Product/Components/ProductList';
-
-
-
-
+import Navbar from "./Navbar";
+import ProductList from "./../features/Product/Components/ProductList";
+import Footer from "./Footer";
 
 const Home = () => {
   return (
-    <div>
-        <Navbar>
-           <ProductList>
-            
-           </ProductList>
-        </Navbar>
-        <div>user bbb</div>
- 
+    <>
+      <Navbar />
+      <ProductList/>
+      <Footer />
+    </>
+  );
+};
 
-    </div>
-  )
-}
-
-export default Home
+export default Home;

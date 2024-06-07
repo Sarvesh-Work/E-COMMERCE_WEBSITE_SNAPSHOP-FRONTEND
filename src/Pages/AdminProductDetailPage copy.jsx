@@ -1,5 +1,6 @@
-import Navbar from "../features/Navbar/Navbar"
+import Navbar from "./Navbar"
 import AdminProductDetails from "../features/admin/Components/AdminProductDetails";
+import Footer from "./Footer";
 
 
 const AdminProductDetailPage = () => {
@@ -7,6 +8,7 @@ const AdminProductDetailPage = () => {
     <>
       <Navbar/>
       <AdminProductDetails/>
+      <Footer/>
     </>
   )
 }

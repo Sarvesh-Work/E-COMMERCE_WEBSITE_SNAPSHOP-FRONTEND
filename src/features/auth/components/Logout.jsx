@@ -3,6 +3,8 @@ import { selectLoggedUser, signOutAsync } from "../authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 import { deleteUserInfoAsync, selectUserInfo } from "../../user/userSlice";
+import { signOutCartAsync } from "../../cart/cartSlice";
+
 
 function Logout() {
   const dispatch = useDispatch();
@@ -12,6 +14,8 @@ function Logout() {
   useEffect(() => {
     dispatch(signOutAsync());
     dispatch(deleteUserInfoAsync())
+    dispatch(signOutCartAsync())
+
   });
 
 

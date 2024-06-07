@@ -3,20 +3,23 @@ import { useDispatch } from "react-redux";
 import { Link, Navigate, useParams } from "react-router-dom";
 import { ResetCartAsync } from "../features/cart/cartSlice";
 import { resetCurrentOrder } from "../features/order/orderSlice";
+import Footer from "./Footer";
+import Navbar from "./Navbar";
 
 
 const OrderSuccess = () => {
   const Params = useParams();
-  const dispatch=useDispatch()
+  const dispatch = useDispatch()
 
-  useEffect(()=>{
+  useEffect(() => {
     dispatch(ResetCartAsync())
     dispatch(resetCurrentOrder())
   })
 
   return (
     <>
-     {!Params.id && <Navigate to="/" replace={true}/>}
+      <Navbar />
+      {!Params.id && <Navigate to="/" replace={true} />}
       <div className=" container h-100 d-flex justify-content-center align-items-center">
         <div className="row ">
           <div className="col-12 text-center">
@@ -39,6 +42,7 @@ const OrderSuccess = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 };

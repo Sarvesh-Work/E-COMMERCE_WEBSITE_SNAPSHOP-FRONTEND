@@ -8,7 +8,9 @@ import {
 
 const initialState = {
   status: "idle",
+  checkOrder: true,
   userInfo: null,
+  UserOrders: null,
 };
 
 export const getAllOrdersAsync = createAsyncThunk(
@@ -58,7 +60,11 @@ export const userSlice = createSlice({
       })
       .addCase(getAllOrdersAsync.fulfilled, (state, action) => {
         state.status = "idle";
-        state.userInfo.orders = action.payload;
+        state.UserOrders = action.payload;
+        state.checkOrder = true;
+      })
+      .addCase(getAllOrdersAsync.rejected, (state) => {
+        state.checkOrder = true;
       })
       .addCase(fetchLogInUserInfoAsync.pending, (state) => {
         state.status = "loading";
@@ -84,8 +90,9 @@ export const userSlice = createSlice({
   },
 });
 
-export const selectAllOrders = (state) => state.user.userInfo.orders;
+export const selectAllOrdersUser = (state) => state.user.UserOrders;
 export const selectUserInfo = (state) => state.user.userInfo;
 export const selectUserInfoStatus = (state) => state.user.status;
+export const selectCheckOrder = (state) => state.user.checkOrder;
 
 export default userSlice.reducer;

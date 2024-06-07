@@ -2,7 +2,7 @@ import Home from "./Pages/Home";
 import LoginPage from "./Pages/LoginPage";
 import CartPage from "./Pages/CartPage";
 import CheckOut from "./Pages/CheckOut";
-import "./global.css";
+import "./global.scss";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Protected from "./features/auth/components/Protected";
 import { useEffect } from "react";
@@ -30,6 +30,9 @@ import "react-toastify/dist/ReactToastify.css";
 import SignUpPage from "./Pages/SignupPage";
 import StripCheckoutPage from "./Pages/StripeCheckoutPage";
 import Logout from "./features/auth/components/Logout";
+import ForgotPasswordPage from "./Pages/ForgotPasswordPage";
+import ResetPassword from "./features/auth/components/ResetPassword";
+
 
 const router = createBrowserRouter([
   {
@@ -55,6 +58,10 @@ const router = createBrowserRouter([
         <AdminProductDetailPage />
       </ProtectedAdmin>
     ),
+  },
+  {
+    path: "/reset-password",
+    element: <ResetPassword />,
   },
   {
     path: "/admin/productForm",
@@ -158,6 +165,10 @@ const router = createBrowserRouter([
       </Protected>
     ),
   },
+  {
+    path: "/forgotPassword",
+    element: <ForgotPasswordPage />,
+  },
 
   {
     path: "*",
@@ -185,6 +196,7 @@ function App() {
     <div className="Background  h-100">
       {checkUser && (
         <>
+
           <RouterProvider router={router} />
           <ToastContainer
             position="bottom-left"

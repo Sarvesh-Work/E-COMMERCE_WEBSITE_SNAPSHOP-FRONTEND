@@ -98,20 +98,29 @@ const ProductList = () => {
         id="AllProducts-media"
       >
         <h1
-          className="col-lg-4 col-sm-7 col-12 px-1"
-          style={{ fontSize: "40px", fontWeight: "700" }}
+          className="col-lg-4 col-sm-7 col-12 px-3"
+          style={{ fontSize: "20px", fontWeight: "700" }}
         >
-          All <span>product</span>
+          All Product For You!
         </h1>
         <div
-          className="dropdown mt-sm-0 mt-1 px-1 col-lg-1 col-xl-1  col-sm-4 col-12 ms-auto d-flex justify-content-sm-end gap-4 justify-content-between p-sm-0 p-1 align-items-center "
+          className="dropdown mt-sm-0 mt-1  col-lg-1 col-xl-2  col-sm-4 col-12 ms-auto d-flex justify-content-sm-end gap-4 justify-content-between p-sm-0 p-1 align-items-center "
           style={{ fontSize: "25px", fontWeight: "550" }}
         >
+          <div
+            className="all-btn text-center  px-3  cursor"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasRight"
+            aria-controls="offcanvasRight"
+          >
+            <i className="fa-solid fa-filter"></i>
+          </div>
+
           <div
             id="all-btn"
             data-bs-toggle="dropdown"
             aria-expanded="false"
-            className="text-center p-1 px-3  cursor d-inline"
+            className="all-btn text-center mx-3 px-3  cursor d-inline"
           >
             Sort
           </div>
@@ -121,7 +130,7 @@ const ProductList = () => {
             style={{
               backgroundColor: "#2F3940",
               borderRadius: "7px",
-              zIndex: "1",
+              
             }}
           >
             {sortOptions.map((option) => (
@@ -135,24 +144,14 @@ const ProductList = () => {
               </li>
             ))}
           </ul>
-
-          <div
-            id="all-btn"
-            className="text-center p-1 px-3  cursor d-lg-none d-inline"
-            data-bs-toggle="offcanvas"
-            data-bs-target="#offcanvasRight"
-            aria-controls="offcanvasRight"
-          >
-            <i className="fa-solid fa-filter"></i>
-          </div>
         </div>
       </div>
 
       <div className="row  d-flex justify-content-between">
-        <div className="col-3 d-lg-inline d-none">
+        {/* <div className="col-3 d-lg-inline d-none">
           <ProductFilter handleFilter={handleFilter} />
-        </div>
-        <div className="col-lg-9 col-12 px-lg-3">
+        </div> */}
+        <div className=" col-12 px-lg-3">
           {status == "loading" ? (
             <Loading />
           ) : (
@@ -174,7 +173,7 @@ const ProductList = () => {
       {/* mobile and tablet filter */}
 
       <div
-        className="offcanvas offcanvas-end d-lg-none"
+        className="offcanvas offcanvas-end"
         tabIndex="-1"
         id="offcanvasRight"
         aria-labelledby="offcanvasRightLabel"

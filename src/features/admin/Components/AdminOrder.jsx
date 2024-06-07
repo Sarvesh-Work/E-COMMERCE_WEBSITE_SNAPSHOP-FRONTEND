@@ -4,14 +4,14 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   UpdateOrderAsync,
   fetchAllOrderAsync,
-  selectAllOrders,
+  selectAllOrdersAdmin,
 } from "../../order/orderSlice";
-
 
 export default function AdminOrder() {
   const [page, setPage] = useState(1);
   const dispatch = useDispatch();
-  const Orders = useSelector(selectAllOrders);
+  const Orders = useSelector(selectAllOrdersAdmin);
+  console.log(Orders);
 
   useEffect(() => {
     const pagination = { _page: page, _limit: ITEMS_PER_PAGE };
@@ -33,6 +33,16 @@ export default function AdminOrder() {
     dispatch(UpdateOrderAsync(newOrder));
     setOrderItemId(-1);
   };
+
+  const adminAllOrderTable = [
+    "ORDERS",
+    "ITEMS",
+    "TOTAL AMOUNT",
+    "SHIPPING ADDRESS",
+    "STATUS",
+    "PAYMENT METHOD",
+    "ACTION",
+  ];
 
   const color = (color) => {
     switch (color) {
@@ -57,24 +67,11 @@ export default function AdminOrder() {
           <table className="table border-1">
             <thead>
               <tr className="text-center">
-                <th scope="col" className="border-1">
-                  ORDERS
-                </th>
-                <th scope="col" className="border-1">
-                  ITEMS
-                </th>
-                <th scope="col" className="border-1">
-                  TOTAL AMOUNT
-                </th>
-                <th scope="col" className="border-1">
-                  SHIPPING ADDRESS
-                </th>
-                <th scope="col" className="border-1">
-                  STATUS
-                </th>
-                <th scope="col" className="border-1">
-                  ACTION
-                </th>
+                {adminAllOrderTable.map((data, index) => (
+                  <th scope="col" className="border-1" key={index}>
+                    {data}
+                  </th>
+                ))}
               </tr>
             </thead>
             {Orders.map((order) => (
@@ -113,6 +110,7 @@ export default function AdminOrder() {
                     <div>State: {order.SelectedAddress.State}</div>
                     <div>Postal Code: {order.SelectedAddress.Postal_Code}</div>
                   </td>
+
                   <td
                     className=" border-1 text-center "
                     style={{ color: `${color(order.status)}` }}
@@ -127,6 +125,9 @@ export default function AdminOrder() {
                     ) : (
                       <div>{order.status.toUpperCase()}</div>
                     )}
+                  </td>
+                  <td className=" border-1 text-center ">
+                    {order.PaymentMethod}
                   </td>
                   <td className=" border-1 ">
                     <div className="gap-2 d-flex justify-content-center">
@@ -150,7 +151,6 @@ export default function AdminOrder() {
           </table>
         </div>
       )}
-     
     </div>
   );
 }

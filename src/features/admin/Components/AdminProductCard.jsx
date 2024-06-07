@@ -26,7 +26,7 @@ const AdminProductCard = ({ products }) => {
               <div className="">
                 <img
                   src={data.thumbnail}
-                  className="card-img-top   w-100"
+                  className="card-img-top rounded-2  w-100"
                   style={{
                     height: "180px",
 
@@ -44,13 +44,6 @@ const AdminProductCard = ({ products }) => {
                 <div className="card-text d-flex mb-2">
                   <div className=" d-flex w-100 justify-content-between">
                     <div className="">
-                      <div>
-                        <i
-                          className="fa-solid fa-star "
-                          style={{ color: "#0066b2" }}
-                        ></i>
-                        <span className="mx-1 text-end">{data.rating}</span>
-                      </div>
                       <div
                         className=" w-100"
                         style={{ fontWeight: "500", fontSize: "18px" }}
@@ -63,18 +56,16 @@ const AdminProductCard = ({ products }) => {
                           Product Deleted
                         </div>
                       )}
-                       {data.stock==0 && (
+                      {data.stock == 0 && (
                         <div className=" text-secondary text-danger">
                           Out of stock
                         </div>
                       )}
-
                     </div>
                     <div className="text-center">
-                      
                       <div
                         className=" text-secondary"
-                        style={{ textDecoration: "line-through"}}
+                        style={{ textDecoration: "line-through" }}
                       >
                         $ {data.price}
                       </div>
@@ -82,8 +73,7 @@ const AdminProductCard = ({ products }) => {
                         className=""
                         style={{ fontSize: "20px", fontWeight: "500" }}
                       >
-                        $
-                        {discountPrice(data)}
+                        ${discountPrice(data)}
                       </div>
                     </div>
                   </div>

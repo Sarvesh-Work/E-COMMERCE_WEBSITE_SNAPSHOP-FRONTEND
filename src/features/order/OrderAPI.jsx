@@ -1,6 +1,6 @@
 export const AddOrders = async (order) => {
   try {
-    const response = await fetch("http://localhost:8080/order", {
+    const response = await fetch("http://localhost:8080/order/", {
       method: "POST",
       body: JSON.stringify(order),
       headers: { "content-type": "application/json" },
@@ -13,14 +13,16 @@ export const AddOrders = async (order) => {
   }
 };
 
-
 export const UpdateOrder = async (order) => {
   try {
-    const response = await fetch("http://localhost:8080/order/UpdateOrder/"+order.id, {
-      method: "PATCH",
-      body: JSON.stringify(order),
-      headers: { "content-type": "application/json" },
-    });
+    const response = await fetch(
+      "http://localhost:8080/order/UpdateOrder/" + order.id,
+      {
+        method: "PATCH",
+        body: JSON.stringify(order),
+        headers: { "content-type": "application/json" },
+      }
+    );
     const data = await response.json();
     return { data };
   } catch (error) {
@@ -29,7 +31,7 @@ export const UpdateOrder = async (order) => {
   }
 };
 
-export const fetchAllOrder = async ( pagination) => {
+export const fetchAllOrder = async (pagination) => {
   try {
     let queryString = "";
 
@@ -37,10 +39,7 @@ export const fetchAllOrder = async ( pagination) => {
       queryString += `${key}=${pagination[key]}&`;
     }
 
-    const response = await fetch(
-      "http://localhost:8080/order/?" + queryString
-      
-    );
+    const response = await fetch("http://localhost:8080/order/?" + queryString);
     const data = await response.json();
     console.log({ data });
     const totalOrder = await response.headers.get("x-Total-Count");

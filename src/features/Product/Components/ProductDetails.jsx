@@ -17,21 +17,14 @@ import { discountPrice } from "../../../app/constant";
 const ProductDetails = () => {
   // const reviews = { href: "#", average: 4, totalCount: 117 };
   const [addToCart, setAddToCart] = useState("Add to cart");
-
   function classNames(...classes) {
     return classes.filter(Boolean).join(" ");
   }
-
   const items = useSelector(selectCartItems);
-
   const ProductById = useSelector(selectProductById);
-
   const user = useSelector(selectLoggedUser);
   const status = useSelector(selectProductListStatus);
-  // const items=useSelector(SelectCartItems)
-
   const dispatch = useDispatch();
-
   const Params = useParams();
 
   // const handelCart = (e) => {

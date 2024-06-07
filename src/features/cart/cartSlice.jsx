@@ -5,6 +5,7 @@ import {
   DeleteItem,
   ResetCart,
   FetchCartsAllProducts,
+  signOutCart,
 } from "./cartAPI";
 
 const initialState = {
@@ -47,6 +48,11 @@ export const DeleteItemFromCartAsync = createAsyncThunk(
 
 export const ResetCartAsync = createAsyncThunk("items/ResetCart", async () => {
   const response = await ResetCart();
+  return response.data;
+});
+
+export const signOutCartAsync = createAsyncThunk("items/signOut", async () => {
+  const response = await signOutCart();
   return response.data;
 });
 
@@ -100,6 +106,13 @@ export const CartSlice = createSlice({
         state.status = "loading";
       })
       .addCase(ResetCartAsync.fulfilled, (state) => {
+        state.status = "idle";
+        state.items = [];
+      })
+      .addCase(signOutCartAsync.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(signOutCartAsync.fulfilled, (state) => {
         state.status = "idle";
         state.items = [];
       });

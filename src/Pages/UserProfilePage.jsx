@@ -1,5 +1,6 @@
-import Navbar from "../features/Navbar/Navbar"
+import Navbar from "./Navbar"
 import UserProfile from "../features/user/components/UserProfile"
+import Footer from "./Footer"
 
 
 const UserProfilePage = () => {
@@ -7,6 +8,7 @@ const UserProfilePage = () => {
     <>
       <Navbar/>
       <UserProfile/>
+      <Footer/>
     </>
   )
 }

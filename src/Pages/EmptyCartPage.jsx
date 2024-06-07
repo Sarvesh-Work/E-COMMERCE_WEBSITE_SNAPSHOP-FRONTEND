@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import Navbar from "../features/Navbar/Navbar";
+import Navbar from "./Navbar";
+import Footer from "./Footer";
 
 const EmptyCartPage = () => {
   return (
@@ -36,6 +37,7 @@ const EmptyCartPage = () => {
           </Link>
         </div>
       </div>
+      <Footer/>
     </>
   );
 };

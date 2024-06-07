@@ -1,23 +1,14 @@
-import Navbar from "../features/Navbar/Navbar"
+import Navbar from "./Navbar"
 import UserOrder from "../features/user/components/UserOrder"
-
-
-
-
-
-
+import Footer from "./Footer"
 
 const UserOrderPage = () => {
   return (
-    <div>
-        <Navbar>
-           <UserOrder>
-            
-           </UserOrder>
-        </Navbar>
- 
-
-    </div>
+    <>
+      <Navbar />
+      <UserOrder />
+      <Footer />
+    </>
   )
 }
 

@@ -22,19 +22,33 @@ export function SignUp() {
             noValidate
             className="mb-1 p-3"
             onSubmit={handleSubmit((data) => {
-             
               dispatch(
-                createUserAsync({ email: data.email, password: data.password,address:[],role:'user' })
+                createUserAsync({
+                  email: data.email,
+                  password: data.password,
+                  address: [],
+                  role: "user",
+                })
               );
-              return <Navigate to="/login"/>
+              return <Navigate to="/login" />;
             })}
           >
-                <div
+            <div
               className="navbar-brand fs-4 fw-bold text-center  p-0 mx-auto"
               href="#"
-              style={{   color: "#0066b2",letterSpacing:"0.4px",border:"1px solid", width:"143px" }}
+              style={{
+                color: "#0066b2",
+                letterSpacing: "0.4px",
+                border: "1px solid",
+                width: "143px",
+              }}
             >
-              SNAPSH<i className="fa-solid fa-face-grin-wink " style={{fontSize:"21px"}}></i>P
+              SNAPSH
+              <i
+                className="fa-solid fa-face-grin-wink "
+                style={{ fontSize: "21px" }}
+              ></i>
+              P
             </div>
             <div className="mb-3 mt-3" style={{ width: "290px" }}>
               <label
@@ -80,7 +94,6 @@ export function SignUp() {
                   pattern: {
                     value:
                       /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/gm,
-                    message: `- at least 8 characters `,
                   },
                 })}
                 className="form-control"
@@ -92,7 +105,12 @@ export function SignUp() {
                 }}
               />
               {errors.password && (
-                <div className=" text-danger">{errors.password.message}</div>
+                <div className=" text-danger">
+                  - at least 8 characters <br />
+                  - must contain at least 1 uppercase letter <br /> - 1
+                  lowercase letter and 1 number <br />- Can contain special
+                  characters
+                </div>
               )}
             </div>
 
