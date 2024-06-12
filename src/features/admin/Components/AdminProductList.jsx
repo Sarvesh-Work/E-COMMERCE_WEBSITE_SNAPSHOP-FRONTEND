@@ -9,7 +9,8 @@ import AdminProductFilter from "./AdminProductFilter";
 import { useEffect, useState } from "react";
 import { ITEMS_PER_PAGE } from "../../../app/constant";
 import AdminProductPagination from "./AdminProductPagination";
-import { selectAllOrdersAdmin } from "../../order/OrderSlice";
+
+
 
 const AdminProductList = () => {
   const dispatch = useDispatch();
@@ -19,14 +20,13 @@ const AdminProductList = () => {
   const products = useSelector(selectAllProduct);
   const totalItems = useSelector(selectTotalItems);
   const totalPage = Math.ceil(totalItems / ITEMS_PER_PAGE);
-  const Orders = useSelector(selectAllOrdersAdmin);
+ 
 
   const sortOptions = [
-    { name: "Best Rating", sort: "rating", order: "desc", current: false },
-    { name: "Price: Low to High", sort: "price", order: "asc", current: false },
+    { name: "Price: Low to High", sort: "discountPrice", order: "asc", current: false },
     {
       name: "Price: High to Low",
-      sort: "price",
+      sort: "discountPrice",
       order: "desc",
       current: false,
     },
@@ -79,7 +79,7 @@ const AdminProductList = () => {
           style={{ fontSize: "40px", lineHeight: "1.2", fontWeight: "700" }}
         >
           <div className="m-0 p-0">Total Products: {totalItems}</div>
-          <div className="m-0 p-0">Total Orders: {Orders?.length}</div>
+          
         </div>
       </div>
       <div

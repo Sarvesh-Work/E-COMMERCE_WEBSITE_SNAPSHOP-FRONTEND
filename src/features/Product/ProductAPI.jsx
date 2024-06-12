@@ -5,7 +5,6 @@ export const createProducts = async (product) => {
       body: JSON.stringify(product),
       headers: { "content-type": "application/json" },
     });
-    
     return await response.json();
   } catch (error) {
     console.error("Error fetching products:", error);
@@ -13,14 +12,14 @@ export const createProducts = async (product) => {
   }
 };
 
-export const fetchAllProductsByFilter = async (filter, sort, pagination,admin) => {
+export const fetchAllProductsByFilter = async (filter, sort, pagination, admin) => {
   try {
     let queryString = "";
     for (let key in filter) {
       const categoryValues = filter[key];
       if (categoryValues.length) {
-        const lastCategoryValue = categoryValues[categoryValues.length - 1];
-        queryString += `${key}=${lastCategoryValue}&`;
+
+        queryString += `${key}=${categoryValues}&`;
       }
     }
 
@@ -31,13 +30,13 @@ export const fetchAllProductsByFilter = async (filter, sort, pagination,admin) =
     for (let key in pagination) {
       queryString += `${key}=${pagination[key]}&`;
     }
-    if(admin){
+    if (admin) {
       queryString += `admin=true`;
-    } 
+    }
 
     const response = await fetch(
       "http://localhost:8080/products?" + queryString
-     
+
     );
     const data = await response.json();
     console.log({ data });
@@ -49,7 +48,24 @@ export const fetchAllProductsByFilter = async (filter, sort, pagination,admin) =
   }
 };
 
+
+
 export const fetchAllBrands = async () => {
+  try {
+    const response = await fetch("http://localhost:8080/Brands");
+    const data = await response.json();
+
+    return { data };
+  } catch (error) {
+    console.error("Error fetching products:", error);
+    throw error;
+  }
+};
+
+
+
+
+export const recentlyViewedProduct = async () => {
   try {
     const response = await fetch("http://localhost:8080/Brands");
     const data = await response.json();
@@ -99,4 +115,9 @@ export const updateProduct = async (product) => {
     console.error("Error in adding user", error);
     throw error;
   }
+};
+
+export const fetchRecentlyViewed = async () => {
+  return "done";
+
 };

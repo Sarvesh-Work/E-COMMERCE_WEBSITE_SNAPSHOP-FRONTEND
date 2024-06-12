@@ -1,22 +1,25 @@
 import { useEffect, useState } from "react";
-import { ITEMS_PER_PAGE, discountPrice } from "../../../app/constant";
+import { ITEMS_PER_PAGE } from "../../../app/constant";
 import { useDispatch, useSelector } from "react-redux";
 import {
   UpdateOrderAsync,
   fetchAllOrderAsync,
   selectAllOrdersAdmin,
+  selectTotalOrders,
 } from "../../order/orderSlice";
+import ProductPagination from "../../Product/Components/ProductPagination";
 
 export default function AdminOrder() {
   const [page, setPage] = useState(1);
   const dispatch = useDispatch();
   const Orders = useSelector(selectAllOrdersAdmin);
-  console.log(Orders);
+  const totalOrders = useSelector(selectTotalOrders);
 
-  useEffect(() => {
-    const pagination = { _page: page, _limit: ITEMS_PER_PAGE };
-    dispatch(fetchAllOrderAsync({ pagination }));
-  }, [dispatch, page]);
+
+  const handelPage = (page) => {
+    setPage(page)
+
+  }
 
   const [EditOrderItemId, setOrderItemId] = useState(-1);
 
@@ -58,10 +61,28 @@ export default function AdminOrder() {
     }
   };
 
+  useEffect(() => {
+    const pagination = { _page: page, _limit: ITEMS_PER_PAGE };
+    dispatch(fetchAllOrderAsync(pagination));
+  }, [dispatch, page]);
+
+  useEffect(() => {
+    setPage(1);
+  }, [totalOrders]);
+
   return (
     <div className=" container-lg container-fluid px-2 mt-md-2">
+
       {Orders == [] ? null : (
         <div className="row p-4 overflow-x-scroll ">
+          <div
+            className="col-12 text-center p-0 m-0"
+            style={{ fontSize: "40px", lineHeight: "1.2", fontWeight: "700" }}
+          >
+            <div className="col-12" >Total Orders:{totalOrders} </div>
+
+          </div>
+
           <h2 className="mb-3"> All Orders </h2>
 
           <table className="table border-1">
@@ -93,7 +114,7 @@ export default function AdminOrder() {
                         </div>
                         <div className="">
                           {item.product.title}-Quantity:{item.quantity}-Price:$
-                          {discountPrice(item.product)}
+                          {item.product.discountPrice}-Color:{item.color}
                         </div>
                       </div>
                     ))}
@@ -149,6 +170,13 @@ export default function AdminOrder() {
               </tbody>
             ))}
           </table>
+          <ProductPagination
+            page={page}
+            setPage={setPage}
+            handlPage={handelPage}
+            totalItems={totalOrders}
+
+          />
         </div>
       )}
     </div>

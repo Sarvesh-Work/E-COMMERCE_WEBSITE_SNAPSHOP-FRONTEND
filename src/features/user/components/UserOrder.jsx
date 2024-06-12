@@ -1,27 +1,14 @@
-import { useDispatch, useSelector } from "react-redux";
-import {
-  getAllOrdersAsync,
-  selectAllOrdersUser,
-  selectUserInfoStatus,
-} from "../userSlice";
-import { useEffect } from "react";
-import { discountPrice } from "../../../app/constant";
-import Loading from "../../../Pages/loading";
 
-const UserOrder = () => {
-  const orders = useSelector(selectAllOrdersUser);
-  const selectUserStatus = useSelector(selectUserInfoStatus);
-  const dispatch = useDispatch();
+import { PropTypes } from "prop-types";
 
-  useEffect(() => {
-    dispatch(getAllOrdersAsync());
-  }, [dispatch]);
+
+const UserOrder = ({ orders }) => {
+
+
 
   return (
     <>
-      {selectUserStatus == "loading" ? (
-        <Loading />
-      ) : orders ? (
+      {orders==null ? (
         <div className=" container-lg  container-fluid mt-2 p-md-3">
           <div className="row d-flex justify-content-center align-items-center">
             <h4 className="col-md-9 col-12">All orders</h4>
@@ -81,7 +68,7 @@ const UserOrder = () => {
                           <div className="d-flex gap-1 mt-1 ">
                             <div>Qty:{items.quantity}</div>
                             <div className="ms-auto">
-                              Total Price: ${discountPrice(items.product)}
+                              Total Price: ${items.product.discountPrice}
                             </div>
                           </div>
                         </div>
@@ -168,3 +155,7 @@ const UserOrder = () => {
 };
 
 export default UserOrder;
+UserOrder.propTypes = {
+  orders: PropTypes.array,
+  
+};

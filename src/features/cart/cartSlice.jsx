@@ -8,6 +8,8 @@ import {
   signOutCart,
 } from "./cartAPI";
 
+
+
 const initialState = {
   items: [],
   status: "idle",
@@ -19,6 +21,7 @@ export const AddItemsAsync = createAsyncThunk(
   async (items) => {
     const response = await AddItemsToCart(items);
     return response.data;
+
   }
 );
 

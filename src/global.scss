@@ -12,7 +12,7 @@
   color: white;
   font-size: 18px;
   font-weight: 500;
-  border-radius: 7px;
+  border-radius: 5px;
 }
 .drop:hover {
   color: white;
@@ -113,40 +113,40 @@
   cursor: not-allowed;
 }
 
-.card {
-  width: 15.8rem;
-  border: none;
-}
+// .card {
+//   width: 15.8rem;
+//   border: none;
+// }
 
-@media screen and (max-width: 1199px) {
-  .card {
-    width: 13rem;
-  }
-}
+// @media screen and (max-width: 1199px) {
+//   .card {
+//     width: 13rem;
+//   }
+// }
 
-@media screen and (max-width: 992px) {
-  .card {
-    width: 14rem;
-  }
-}
+// @media screen and (max-width: 992px) {
+//   .card {
+//     width: 14rem;
+//   }
+// }
 
-@media screen and (max-width: 748px) {
-  .card {
-    width: 18rem;
-  }
-}
+// @media screen and (max-width: 748px) {
+//   .card {
+//     width: 18rem;
+//   }
+// }
 
-@media screen and (max-width: 540px) {
-  .card {
-    width: 16rem;
-  }
-}
+// @media screen and (max-width: 540px) {
+//   .card {
+//     width: 19rem;
+//   }
+// }
 
-@media screen and (max-width: 496px) {
-  .card {
-    width: 187px;
-  }
-}
+// @media screen and (max-width: 496px) {
+//   .card {
+//     width: 200px;
+//   }
+// }
 
 ::-webkit-scrollbar {
   width: 8px;
@@ -193,4 +193,40 @@
   .img {
     z-index: 1;
   }
+}
+
+#banner1 {
+  background-image: url(/public/images/laptopBanner1.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 470px;
+}
+
+#banner2 {
+  background-image: url(/public/images/mobileBanner.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 470px;
+}
+
+#bannerMobile1 {
+  background-image: url(/public/images/laptopBanner2.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 300px;
+}
+
+#bannerMobile2 {
+  background-image: url(/public/images/mobilebanner2.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 300px;
+}
+
+.ProductNameFont {
+  font-size: 25px;
+  font-weight: 700;
 }

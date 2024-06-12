@@ -1,10 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Bounce, toast } from "react-toastify";
-
 import {
   selectProductById,
   selectProductListStatus,
   fetchProductByIdAsync,
+
 } from "../productSlice";
 import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -12,34 +12,28 @@ import { useEffect, useState } from "react";
 import { AddItemsAsync, selectCartItems } from "../../cart/cartSlice";
 import { selectLoggedUser } from "../../auth/authSlice";
 import Loading from "../../../Pages/loading";
-import { discountPrice } from "../../../app/constant";
+import { Swiper, SwiperSlide } from 'swiper/react';
+
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
+import { Autoplay, Pagination } from 'swiper/modules';
+
 
 const ProductDetails = () => {
   // const reviews = { href: "#", average: 4, totalCount: 117 };
   const [addToCart, setAddToCart] = useState("Add to cart");
-  function classNames(...classes) {
-    return classes.filter(Boolean).join(" ");
-  }
+  const [color, setColor] = useState(null)
   const items = useSelector(selectCartItems);
   const ProductById = useSelector(selectProductById);
   const user = useSelector(selectLoggedUser);
   const status = useSelector(selectProductListStatus);
   const dispatch = useDispatch();
   const Params = useParams();
-
-  // const handelCart = (e) => {
-  //   e.preventDefault();
-  //   setAddToCart("Added!");
-  //   if(items.findIndex((item)=>item.product.id=== ProductById.id)<0){
-  //   const newItem = {product:ProductById.id ,quantity: 1, user: user.id };
-  //   delete newItem["id"];
-  //   dispatch(AddItemsAsync(newItem));
-  //   }
-  // };
-
-  const Success = () =>
-    toast.success("Added to cart", {
-      position: "bottom-left",
+  const Success = (name) =>
+    toast.success(`${name} added to cart`, {
+      position: "top-center",
       autoClose: 5000,
       hideProgressBar: true,
       closeOnClick: true,
@@ -51,16 +45,38 @@ const ProductDetails = () => {
     });
 
   const handelCart = (e) => {
+
+    if (color == null) {
+      return toast.warn(`Please Select Color`, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
+    }
     e.preventDefault();
     setAddToCart("Added!");
+    // console.log(color)
+    // const newColor = []
+    // newColor[0] = color
+    // ProductById.color.map((data) => data != color ? newColor.push(data) : null)
+
+    // console.log(newColor)
+
     if (items.findIndex((item) => item.product.id === ProductById.id) < 0) {
-      const newItem = { product: ProductById.id, quantity: 1 };
+
+      const newItem = { product: ProductById.id, quantity: 1, color: color };
       delete newItem["id"];
       dispatch(AddItemsAsync(newItem));
-      Success();
+      Success(ProductById.title);
     } else {
       return toast.warn("Already added in cart", {
-        position: "bottom-left",
+        position: "top-center",
         autoClose: 3003,
         hideProgressBar: true,
         closeOnClick: true,
@@ -73,9 +89,24 @@ const ProductDetails = () => {
     }
   };
 
+  function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
+
   useEffect(() => {
     dispatch(fetchProductByIdAsync(Params.id));
+
   }, [Params.id]);
+
+  const feature = [
+    "100% Original Products",
+    "Pay on delivery might be available",
+    "Easy 14 days returns and exchanges",
+    "Online Support",
+    "Flexible Payment",
+    "Free Shipping"
+  ]
 
   return (
     <>
@@ -83,156 +114,136 @@ const ProductDetails = () => {
         <Loading />
       ) : (
         <div className=" container-lg container-fluid px-lg-3 mb-2">
-          <div className="row px-5 px-lg-1 mt-4 d-flex justify-content-between">
-            <div className="col-lg-4 h-100   col-5 p-0 box overflow-hidden d-md-inline d-none">
-              <img
-                src={ProductById.images[0]}
-                alt=""
-                className="h-100 w-100 overflow-hidden "
-              />
-            </div>
-            <div className="col-3 p-0 d-lg-inline d-none ">
-              <div
-                className="  box overflow-hidden"
-                style={{ height: "235px" }}
-              >
-                <img
-                  src={ProductById.images[1]}
-                  alt=""
-                  className="h-100 w-100 "
-                />
-              </div>
-              <div
-                className=" mt-3 box overflow-hidden"
-                style={{ height: "235px" }}
-              >
-                <img
-                  src={ProductById.images[2]}
-                  alt=""
-                  className="h-100 w-100"
-                />
-              </div>
-            </div>
-
-            <div className="col-lg-4 h-100 col-md-5 col-12 p-0 box overflow-hidden">
-              <img src={ProductById.images[3]} alt="" className="h-100 w-100" />
-            </div>
-          </div>
-
-          <div className="row p-lg-1 px-4 mt-2 mt-4 d-flex justify-content-between">
-            <div className="col-md-7 p-0 col-12">
-              <h1>{ProductById.title}</h1>
-
-              {ProductById.stock == 0 ? null : (
-                <>
-                  <h2 className="d-md-block d-none text-decoration-line-through">
-                    ${ProductById.price}
-                  </h2>
-                  <h2 className="d-md-block d-none mt-3">
-                    ${discountPrice(ProductById)}
-                  </h2>
-                </>
-              )}
-
-              <div className=" d-md-none d-block">
-                {ProductById.stock == 0 ? null : (
-                  <div>
-                    {[0, 1, 2, 3, 4].map((rating) => (
-                      <i
-                        key={rating}
-                        className={classNames(
-                          Math.round(ProductById.rating) > rating
-                            ? "fa-solid fa-star text-dark"
-                            : "fa-solid fa-star text-secondary"
-                        )}
-                        aria-hidden="true"
-                      ></i>
-                    ))}
+          <div className="row px-3 mt-3 ">
+            <div className="col-7  flex-wrap d-md-flex d-none" style={{ height: "500px" }}>
+              <div className="row "  >
+                {ProductById.images.map((image, index) => (
+                  <div className="col-6 p-1 mt-2" key={index} >
+                    <img src={image} alt="" className="h-100 w-100 " style={{ border: "1px solid 	#D3D3D3", borderRadius: "7px" }} />
                   </div>
-                )}
+                ))
+                }
               </div>
-
-              <p className="mt-4" style={{ fontSize: "17px" }}>
-                {ProductById.description}
-              </p>
-
-              <h1 className="mt-5">Highlights</h1>
-              <ul className=" text-secondary mt-2">
-                <li>Hand cut and sewn locally</li>
-                <li>Dyed with our proprietary colors</li>
-                <li>Pre-washed & pre-shrunk</li>
-                <li>Ultra-soft 100% cotton</li>
-              </ul>
-
-              <h1 className="mt-5">Details</h1>
-              <p className=" text-secondary mt-2">
-                The 6-Pack includes two black, two white, and two heather gray
-                Basic Tees. Sign up for our subscription service and be the
-                first to get new, exciting colors, like our upcoming limited
-                release.
-              </p>
             </div>
+            <div className="col-12 d-md-none d-block m-0 p-0" style={{ height: "300px" }}>
+              <Swiper
+                spaceBetween={30}
+                centeredSlides={true}
+                autoplay={{
+                  delay: 2500,
+                  disableOnInteraction: false,
+                }}
+                pagination={{
+                  clickable: true,
+                }}
 
-            <div
-              className=" d-md-inline d-none"
-              style={{ borderRight: "1px solid #B6B6B4", width: "1px" }}
-            ></div>
+                modules={[Autoplay, Pagination]}
+                className="mySwiper w-100 h-100 p-0"
+              >
+                {ProductById.images.map((image, index) => (
+                  <SwiperSlide key={{ index }}>
+                    <img src={image} alt="" className="h-100 w-100 " style={{ border: "1px solid 	#D3D3D3", borderRadius: "7px" }} />
+                  </SwiperSlide>
+                ))
+                }
 
-            <div className="col-md-4 col-12 px-md-2 p-0 ">
-              {ProductById.stock == 0 ? null : (
-                <>
-                  <h2 className="d-md-block d-none text-decoration-line-through">
-                    ${ProductById.price}
-                  </h2>
-                  <h2 className="d-md-block d-none mt-3">
-                    ${discountPrice(ProductById)}
-                  </h2>
-                </>
-              )}
+              </Swiper>
 
-              <div className=" d-md-block d-none">
-                {ProductById.stock == 0 ? null : (
-                  <div>
-                    {[0, 1, 2, 3, 4].map((rating) => (
-                      <i
-                        key={rating}
-                        className={classNames(
-                          Math.round(ProductById.rating) > rating
-                            ? "fa-solid fa-star text-dark"
-                            : "fa-solid fa-star text-secondary"
-                        )}
-                        aria-hidden="true"
-                      ></i>
-                    ))}
-                  </div>
-                )}
+            </div>
+            <div className="col-md-5 mt-2 px-md-4 p-0">
+              <div className="row mx-2">
+                <div className="col-12 p-0 ProductNameFont" >
+                  {ProductById.title}
+                </div>
               </div>
+              <div className="row  mx-2 mt-3" >
+                <div className="col-12 p-0 pb-2" style={{ color: "#777985", fontSize: "20px", borderBottom: "1px solid #777985" }} >
+                  {ProductById.description}
+                </div>
+              </div>
+              <div className="row  mx-2 mt-4" >
+                <div className="col-3 p-0 pb-2  " style={{ fontSize: "25px", fontWeight: "700" }} >
+                  ${ProductById.discountPrice}
+                </div>
+                <div className="col-3 p-0 pb-2 text-decoration-line-through" style={{ fontSize: "25px", color: "#777985", }} >
+                  ${ProductById.price}
+                </div>
 
-              {!user ? (
-                <Link to="/login" className=" text-decoration-none">
+              </div>
+              <div className="row  mx-2 mt-2" >
+                <div className="col-12 p-0 pb-2  text-success " style={{ fontSize: "15px", fontWeight: "700" }} >
+                  inclusive of all taxes
+                </div>
+              </div>
+              <div className="row  mx-2 mt-2" >
+                <div className="col-12 p-0 pb-2 " style={{ fontSize: "17px", fontWeight: "700", letterSpacing: "1px" }} >
+                  COLORS
+                </div>
+                <select className="col-7 p-2" style={{ backgroundColor: "#F5F5F6", borderRadius: "5px", fontSize: "15px" }} onChange={(e) => setColor(e.target.value)}>
+                  <option value="">--Chose color--</option>
+                  {ProductById.color.map((options, index) => (
+                    <option key={{ index }} style={{ borderRadius: "5px" }} >{options}</option>
+                  ))
+                  }
+                </select>
+
+              </div>
+              <div className="row  mx-2 mt-3" style={{ borderBottom: "1px solid #777985" }}>
+                {!user ? (
+                  <Link to="/login" className=" col-12  text-decoration-none">
+                    <div
+                      className="mt-5 p-2 rounded-3 text-center cursor"
+                      id="all-btn"
+                    >
+                      Please Login to Buy the Product
+                    </div>
+                  </Link>
+                ) : ProductById.stock == 0 ? (
                   <div
-                    className="mt-5 p-2 rounded-3 text-center cursor"
-                    id="all-btn"
+                    className="col-12  text-secondary text-danger text-center mt-4"
+                    style={{ fontSize: "25px" }}
                   >
-                    Please Login to Buy the Product
+                    Out of stock
                   </div>
-                </Link>
-              ) : ProductById.stock == 0 ? (
-                <div
-                  className="text-secondary text-danger text-center mt-4"
-                  style={{ fontSize: "35px" }}
-                >
-                  Out of stock
+                ) : (
+                  <div
+                    onClick={handelCart}
+                    className="all-btn col-12 p-1 mb-4 cursor text-center mt-4"
+
+                  >
+                    {addToCart}
+                  </div>)}
+              </div>
+              <div className="row  mx-2 mt-3 pt-3" >
+                <div className="col-12 p-0 " style={{ fontSize: "17px", fontWeight: "700", letterSpacing: "1px" }} >
+                  HIGHLIGHT
                 </div>
-              ) : (
-                <div
-                  onClick={handelCart}
-                  className="mt-5 p-2 rounded-3 text-center cursor"
-                  id="all-btn"
-                >
-                  {addToCart}
+                <ul className="col-12 p-0" >
+                  {ProductById.highlights.map((data, index) => (
+                    <div className=" mt-2 d-flex text-start" key={index}>
+
+                      <i className="bi bi-dot p-0" style={{ fontSize: "20px" }}></i>
+
+                      <div className="">{capitalizeFirstLetter(data)}</div>
+                    </div>
+                  ))
+                  }
+                </ul>
+              </div>
+              <div className="row  mx-2  pt-3 mb-3" >
+                <div className="col-12 p-0 " style={{ fontSize: "17px", fontWeight: "700", letterSpacing: "1px" }} >
+                  ADVANTAGES
                 </div>
-              )}
+                <div className="col-12 p-0" >
+                  {feature.map((data, index) => (
+                    <div className=" mt-2 d-flex text-start" key={index}>
+                      <i className="bi bi-dot p-0" style={{ fontSize: "20px" }}></i>
+                      {capitalizeFirstLetter(data)}
+                    </div>
+                  ))
+                  }
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -242,3 +253,5 @@ const ProductDetails = () => {
 };
 
 export default ProductDetails;
+
+

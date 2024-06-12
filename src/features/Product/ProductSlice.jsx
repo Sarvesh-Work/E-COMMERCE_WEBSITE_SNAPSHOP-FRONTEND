@@ -5,7 +5,9 @@ import {
   fetchAllBrands,
   fetchAllCategories,
   fetchAllProductsByFilter,
+
   fetchProductById,
+  fetchRecentlyViewed,
   updateProduct,
 } from "./productAPI";
 
@@ -22,16 +24,15 @@ export const createProductsAsync = createAsyncThunk(
   "product/create",
   async (product) => {
     const response = await createProducts(product);
-
     return response;
   }
 );
+
 
 export const updateProductsAsync = createAsyncThunk(
   "product/update",
   async (product) => {
     const response = await updateProduct(product);
-
     return response;
   }
 );
@@ -45,10 +46,11 @@ export const fetchProductsByAsync = createAsyncThunk(
       pagination,
       admin
     );
-
     return response.data;
   }
 );
+
+
 
 export const fetchBrandsByAsync = createAsyncThunk(
   "product/fetchAllBrands",
@@ -56,6 +58,14 @@ export const fetchBrandsByAsync = createAsyncThunk(
     const response = await fetchAllBrands();
 
     return response.data;
+  }
+);
+
+export const recentlyViewedAsync = createAsyncThunk(
+  "product/recentlyViewed",
+  async () => {
+    const response = await fetchRecentlyViewed()
+    return response;
   }
 );
 
@@ -77,11 +87,14 @@ export const fetchProductByIdAsync = createAsyncThunk(
   }
 );
 
+
+
 export const productSlice = createSlice({
   name: "product",
 
   initialState,
-  reducers: {},
+  reducers: {
+  },
 
   extraReducers: (builder) => {
     builder
@@ -130,7 +143,9 @@ export const productSlice = createSlice({
           (product) => product.id === action.payload.id
         );
         state.selectedProduct[index] = action.payload;
-      });
+      })
+
+
   },
 });
 
@@ -140,5 +155,5 @@ export const selectBrands = (state) => state.product.brands;
 export const selectCategories = (state) => state.product.categories;
 export const selectProductById = (state) => state.product.selectedProduct;
 export const selectProductListStatus = (state) => state.product.status;
-
+export const selectRecentlyViewed = (state) => state.product.RecentlyViewedProduct
 export default productSlice.reducer;

@@ -10,8 +10,8 @@ import {
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
-import { discountPrice } from "../../../app/constant";
 import { Bounce, toast } from "react-toastify";
+
 
 export default function ProductForm() {
   const brand = useSelector(selectBrands);
@@ -21,9 +21,9 @@ export default function ProductForm() {
   const { register, handleSubmit, setValue, reset } = useForm();
   const params = useParams();
 
-  const Success = (message) =>
-    toast.success(message, {
-      position: "bottom-left",
+  const Success = (name, message) =>
+    toast.success(name + " " + message, {
+      position: "top-center",
       autoClose: 3000,
       hideProgressBar: true,
       closeOnClick: true,
@@ -34,11 +34,32 @@ export default function ProductForm() {
       transition: Bounce,
     });
 
+  const colors = [
+    {
+      name: 'White',
+      class: 'bg-white',
+      selectedClass: 'ring-gray-400',
+      id: 'white',
+    },
+    {
+      name: 'Gray',
+      class: 'bg-gray-200',
+      selectedClass: 'ring-gray-400',
+      id: 'gray',
+    },
+    {
+      name: 'Black',
+      class: 'bg-gray-900',
+      selectedClass: 'ring-gray-900',
+      id: 'black',
+    },
+  ];
+
   const handelDelete = () => {
     const product = { ...selectProduct };
     product.deleted = true;
     dispatch(updateProductsAsync(product));
-    Success("Product Removed Successfully");
+    Success(product.title, "Product Removed Successfully");
   };
 
   useEffect(() => {
@@ -51,7 +72,7 @@ export default function ProductForm() {
     if (selectProduct && params.id) {
       setValue("title", selectProduct.title);
       setValue("description", selectProduct.description);
-      setValue("price", discountPrice(selectProduct));
+      setValue("price", selectProduct.discountPrice);
       setValue("discountPercentage", selectProduct.discountPercentage);
       setValue("category", selectProduct.category);
       setValue("brand", selectProduct.brand);
@@ -60,6 +81,10 @@ export default function ProductForm() {
       setValue("image1", selectProduct.images[0]);
       setValue("image2", selectProduct.images[1]);
       setValue("image3", selectProduct.images[2]);
+      setValue("highlight1", selectProduct.highlights[0]);
+      setValue("highlight2", selectProduct.highlights[1]);
+      setValue("highlight3", selectProduct.highlights[2]);
+      setValue("color", selectProduct.color);
     }
   }, [selectProduct, setValue]);
 
@@ -80,7 +105,7 @@ export default function ProductForm() {
               onSubmit={handleSubmit((data) => {
                 const product = { ...data };
 
-                product.image = [
+                product.images = [
                   product.image1,
                   product.image2,
                   product.image3,
@@ -88,19 +113,28 @@ export default function ProductForm() {
                 delete product["image1"];
                 delete product["image2"];
                 delete product["image3"];
+                product.highlights = [
+                  product.highlight1,
+                  product.highlight2,
+                  product.highlight3
+                ]
+                delete product["highlight1"];
+                delete product["highlight2"];
+                delete product["highlight3"];
 
                 product.price = +product.price;
                 product.stock = +product.stock;
                 product.discountPercentage = +product.discountPercentage;
                 product.rating = 0;
-
+                
+                 
                 if (params.id) {
                   product.id = params.id;
-                  product.rating = selectProduct.rating || 0;
-
                   dispatch(updateProductsAsync(product));
+                  Success(product.title, "Updated successfully")
                 } else {
                   dispatch(createProductsAsync(product));
+                  Success(product.title, "new product added successfully")
                   reset;
                 }
               })}
@@ -177,6 +211,7 @@ export default function ProductForm() {
                       type="number"
                       className="form-control shadow-none "
                       id="Discount"
+
                       style={{ border: "1px solid #C0C0C0" }}
                       {...register("discountPercentage", {
                         required: "Discount is required",
@@ -253,6 +288,28 @@ export default function ProductForm() {
                       </select>
                     </div>
                   </div>
+                  <div className="w-50">
+                    <label htmlFor="Brand" className="form-label">
+                      Color
+                    </label>
+                    <div className="">
+
+
+                      {colors.map((option, index) => (
+                        <>
+                          {option.name}
+                          < input type="checkbox" key={index} value={option.name}
+                            {...register("color", {
+
+                              min: 0,
+                            })}
+                          />
+                        </>
+
+                      ))}
+
+                    </div>
+                  </div>
                 </div>
                 <div className="mb-3 w-75 mx-auto">
                   <label htmlFor="address" className="form-label">
@@ -293,18 +350,48 @@ export default function ProductForm() {
                     {...register("image3", {})}
                   />
                 </div>
+
+                <div className="mb-3 w-75 mx-auto">
+                  <label htmlFor="address" className="form-label">
+                    highlight1
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control shadow-none "
+                    id="highlight1"
+                    style={{ border: "1px solid #C0C0C0" }}
+                    {...register("highlight1", {})}
+                  />
+                </div>
+                <div className="mb-3 w-75 mx-auto">
+                  <label htmlFor="address" className="form-label">
+                    highlight2
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control shadow-none "
+                    id="highlight2"
+                    style={{ border: "1px solid #C0C0C0" }}
+                    {...register("highlight2", {})}
+                  />
+                </div>
+                <div className="mb-3 w-75 mx-auto">
+                  <label htmlFor="address" className="form-label">
+                    highlight3
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control shadow-none "
+                    id="highlight3"
+                    style={{ border: "1px solid #C0C0C0" }}
+                    {...register("highlight3", {})}
+                  />
+                </div>
               </div>
               <div className=" mt-2 d-flex justify-content-end gap-3 mb-3">
                 <button
                   type="submit"
-                  onClick={() => {
-                    const message = selectProduct
-                      ? selectProduct.title + " Product Updated Successfully"
-                      : "New Product Added Successfully";
-
-                    Success(message);
-                  }}
-                  className="p-1  px-3 fs-6 fw-normal cursor rounded-3"
+                  className="all-btn  px-3  cursor"
                   id="all-btn"
                 >
                   Save
@@ -312,7 +399,7 @@ export default function ProductForm() {
                 {params.id && (
                   <button
                     type="submit"
-                    className="p-1  px-3 fs-6 fw-normal cursor rounded-3"
+                    className="all-btn   px-3  cursor"
                     id="all-btn"
                     style={{ backgroundColor: "red" }}
                     onClick={() => handelDelete()}

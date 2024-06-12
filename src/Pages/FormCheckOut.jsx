@@ -146,8 +146,8 @@ const FormCheckOut = ({
           <div className=" mt-4 d-flex justify-content-end gap-3">
             <button
               type="submit"
-              className="p-1  px-3 fs-6 fw-normal cursor rounded-3"
-              id="all-btn"
+              className="all-btn p-1  px-3 fs-6 fw-normal cursor rounded-3"
+
             >
               Add Address
             </button>

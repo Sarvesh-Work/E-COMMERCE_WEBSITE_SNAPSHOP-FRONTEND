@@ -1,4 +1,4 @@
-import Home from "./Pages/Home";
+import Home from "./Pages/HomePage";
 import LoginPage from "./Pages/LoginPage";
 import CartPage from "./Pages/CartPage";
 import CheckOut from "./Pages/CheckOut";
@@ -34,15 +34,10 @@ import ForgotPasswordPage from "./Pages/ForgotPasswordPage";
 import ResetPassword from "./features/auth/components/ResetPassword";
 
 
+
+
+
 const router = createBrowserRouter([
-  {
-    path: "/admin",
-    element: (
-      <ProtectedAdmin>
-        <AdminHome />
-      </ProtectedAdmin>
-    ),
-  },
   {
     path: "/admin",
     element: (
@@ -72,6 +67,14 @@ const router = createBrowserRouter([
     ),
   },
   {
+    path: "/admin/productForm",
+    element: (
+      <ProtectedAdmin>
+        <AdminProductForm />
+      </ProtectedAdmin>
+    ),
+  },
+  {
     path: "/admin/productForm/edit/:id",
     element: (
       <ProtectedAdmin>
@@ -79,6 +82,7 @@ const router = createBrowserRouter([
       </ProtectedAdmin>
     ),
   },
+
   {
     path: "/admin/order",
     element: (
@@ -192,6 +196,8 @@ function App() {
     }
   }, [dispatch, user]);
 
+
+
   return (
     <div className="Background  h-100">
       {checkUser && (
@@ -199,7 +205,7 @@ function App() {
 
           <RouterProvider router={router} />
           <ToastContainer
-            position="bottom-left"
+            position="top-center"
             autoClose={3000}
             hideProgressBar={false}
             newestOnTop={false}

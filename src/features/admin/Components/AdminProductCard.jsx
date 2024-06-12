@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { PropTypes } from "prop-types";
-import { discountPrice } from "../../../app/constant";
+
 
 const AdminProductCard = ({ products }) => {
   return (
@@ -13,14 +13,16 @@ const AdminProductCard = ({ products }) => {
         </Link>
       </div>
       <div className="col-12 m-0 px-sm-3 p-0 d-flex flex-wrap justify-content-between gap-sm-3 mt-sm-0  gap-3">
+        <div className="row">
         {products.map((data) => (
           <Link
             to={`/admin/productDetails/${data.id}`}
             key={data.id}
             style={{ textDecoration: "none" }}
+            className="col-lg-4 col-md-4 col-6  text-decoration-none text-black"
           >
             <div
-              className="card m-sm-0 mt-2  rounded-3 border-1 overflow-hidden "
+              className="card m-sm-0 mt-2  rounded-3  overflow-hidden "
               style={{ backgroundColor: "#FFFFFF" }}
             >
               <div className="">
@@ -73,7 +75,7 @@ const AdminProductCard = ({ products }) => {
                         className=""
                         style={{ fontSize: "20px", fontWeight: "500" }}
                       >
-                        ${discountPrice(data)}
+                        ${data.discountPrice}
                       </div>
                     </div>
                   </div>
@@ -91,6 +93,7 @@ const AdminProductCard = ({ products }) => {
             </div>
           </Link>
         ))}
+        </div>
       </div>
     </div>
   );

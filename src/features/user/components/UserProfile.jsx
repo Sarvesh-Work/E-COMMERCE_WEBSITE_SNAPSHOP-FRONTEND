@@ -24,7 +24,7 @@ const UserProfile = () => {
     dispatch(updateUserAsync(newUser));
 
     toast.success("Address Deleted", {
-      position: "bottom-left",
+      position: "top-center",
       autoClose: 3000,
       hideProgressBar: true,
       closeOnClick: true,
@@ -68,7 +68,7 @@ const UserProfile = () => {
       {userInfo == null ? (
         <Loading />
       ) : (
-        <div className=" container-lg container-fluid">
+        <div className=" container-lg container-fluid mb-5">
           <div className="row d-flex justify-content-center align-items-center mt-4">
             <h5
               className="col-md-9 col-12"

@@ -9,7 +9,6 @@ import {
 } from "../features/order/orderSlice";
 import { selectUserInfo } from "../features/user/userSlice";
 import Navbar from "./Navbar";
-import { discountPrice } from "../app/constant";
 import Footer from "./Footer";
 
 const CheckOut = () => {
@@ -22,11 +21,8 @@ const CheckOut = () => {
   const currentOrder = useSelector(selectCurrentOrder);
 
   const totalAmount = items.reduce(
-    (amount, item) => discountPrice(item.product) * item.quantity + amount,
+    (amount, item) => item.product.discountPrice * item.quantity + amount,
     0
-
-    // (amount, item) => discountPrice(item) * item.quantity + amount,
-    // 0
   );
   const totalItems = items.reduce((total, item) => item.quantity + total, 0);
 
@@ -123,7 +119,7 @@ const CheckOut = () => {
                             >
                               {item.product.title}
                             </div>
-                            <div style={{ color: "gray", fontSize:"15px" }} >
+                            <div style={{ color: "gray", fontSize: "15px" }} >
                               Rating: {item.product.rating}
                             </div>
 
@@ -151,7 +147,7 @@ const CheckOut = () => {
                           </div>
                           <div className="ms-auto col-lg-3 col-3  text-lg-end p-0 d-flex flex-column justify-content-between mt-1">
                             <div className="ms-auto fw-bold">
-                              $ {discountPrice(item.product)}
+                              $ {item.product.discountPrice}
                             </div>
                           </div>
                         </div>
@@ -173,7 +169,7 @@ const CheckOut = () => {
                     </div>
 
                     <div onClick={handelOrder}>
-                      <div id="all-btn" className="btn w-100 rounded-3 mt-4">
+                      <div  className="all-btn btn w-100 rounded-3 mt-4">
                         Order Now
                       </div>
                     </div>
@@ -195,7 +191,7 @@ const CheckOut = () => {
           </div>
         </div>
       )}
-      <Footer/>
+      <Footer />
     </>
   );
 };

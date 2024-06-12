@@ -7,7 +7,7 @@ import {
   fetchBrandsByAsync,
   fetchCategoriesByAsync,
 } from "../productSlice";
-import { useEffect} from "react";
+import { useEffect } from "react";
 
 const ProductFilter = ({ handleFilter }) => {
   const categories = useSelector(selectCategories);
@@ -47,11 +47,11 @@ const ProductFilter = ({ handleFilter }) => {
               className="mt-2 p-0"
               style={{ borderBottom: "1px solid  #CCCCCC" }}
             >
-              {({ open }) => (
+              {({ open="false" }) => (
                 <>
                   <h3
                     className=""
-                    // style={{ borderBottom: "1px solid  #D9DDE0" }}
+                  // style={{ borderBottom: "1px solid  #D9DDE0" }}
                   >
                     <Disclosure.Button
                       className="d-flex bg-white border-0  justify-content-between w-100 align-items-center"
@@ -70,38 +70,38 @@ const ProductFilter = ({ handleFilter }) => {
                   <Disclosure.Panel className="pt-6">
                     <div className="py-2 px-3  mx-2 mb-3">
                       {section.options.map((option, optionIdx) => {
-                        
+
                         return (
                           <>
-                            
-                              <div
-                                key={option.value}
-                                className="d-flex gap-2 mt-0"
-                                style={{ fontSize: "17px", fontWeight: "500" }}
+
+                            <div
+                              key={option.value}
+                              className="d-flex gap-2 mt-0"
+                              style={{ fontSize: "17px", fontWeight: "500" }}
+                            >
+                              <input
+                                id={`filter-mobile-${section.id}-${optionIdx}`}
+                                name={`${section.id}[]`}
+                                defaultValue={option.value}
+                                type="checkbox"
+                                defaultChecked={option.checked}
+                                onClick={(e) =>
+                                  handleFilter(e, section, option)
+                                }
+                                className="form-check-input border-1 border-secondary cursor"
+                              />
+                              <label
+                                htmlFor={`filter-mobile-${section.id}-${optionIdx}`}
+                                className=""
                               >
-                                <input
-                                  id={`filter-mobile-${section.id}-${optionIdx}`}
-                                  name={`${section.id}[]`}
-                                  defaultValue={option.value}
-                                  type="checkbox"
-                                  defaultChecked={option.checked}
-                                  onClick={(e) =>
-                                    handleFilter(e, section, option)
-                                  }
-                                  className="form-check-input border-1 border-secondary cursor"
-                                />
-                                <label
-                                  htmlFor={`filter-mobile-${section.id}-${optionIdx}`}
-                                  className=""
-                                >
-                                  {option.label}
-                                </label>
-                              </div>
-                          
+                                {option.label}
+                              </label>
+                            </div>
+
                           </>
                         );
                       })}
-                   
+
                     </div>
                   </Disclosure.Panel>
                 </>

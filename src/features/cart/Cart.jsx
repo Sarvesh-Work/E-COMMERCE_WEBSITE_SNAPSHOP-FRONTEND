@@ -1,27 +1,29 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Link, Navigate } from "react-router-dom";
 import { selectCartItems, selectCheckCart, UpdateItemAsync } from "./cartSlice";
-import { discountPrice } from "../../app/constant";
 import Loading from "../../Pages/loading";
 import ConformDelete from "../../Pages/ConformDelete";
 import { useState } from "react";
 
 export function Cart() {
   const items = useSelector(selectCartItems);
+
   const CheckCart = useSelector(selectCheckCart);
   const dispatch = useDispatch();
   const [Id, setId] = useState("");
   const [loading, setLoading] = useState(true);
 
   const totalAmount = items.reduce(
-    (amount, item) => discountPrice(item.product) * item.quantity + amount,
+    (amount, item) => item.product.discountPrice * item.quantity + amount,
     0
   );
   const totalItems = items.reduce((total, item) => item.quantity + total, 0);
 
-  const handelCart = (e, items) => {
+  const handelQuantity = (e, items) => {
     dispatch(UpdateItemAsync({ id: items.id, quantity: +e.target.value }));
   };
+
+
 
   setTimeout(() => {
     setLoading(false);
@@ -75,46 +77,42 @@ export function Cart() {
                           className="w-100 h-100"
                         />
                       </div>
-                      <div className="p-1 px-2 mb-1 col-lg-7 col-5 d-flex flex-column justify-content-center ">
+                      <div className=" px-2 mb-1 col-lg-7 col-5 d-flex flex-column justify-content-center ">
                         <div
                           className=""
                           style={{ fontSize: "20px", fontWeight: "500" }}
                         >
                           {item.product.title}
                         </div>
-                        <div style={{ color: "gray" }}>
-                          Rating: {item.product.rating}
+                        <div className="p-0" style={{ color: "gray" }}>
+                          AVAILABLE
                         </div>
-                        <div className="d-flex gap-1 mt-1 ">
-                          <div>Qty</div>
-                          <select
-                            name="Quantity"
-                            id=""
-                            className="bg-dark text-white rounded-2"
-                            onChange={(e) => handelCart(e, item)}
-                            value={item.quantity}
-                          >
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                          </select>
+                        <div className="d-flex">
+                          <div className="d-flex">
+                            <div className="">Qty</div>
+                            <select
+                              name="Quantity"
+                              id=""
+                              className="bg-dark text-white rounded-2 mx-1"
+                              onChange={(e) => {
+                                handelQuantity(e, item)
+                              }}
+                              value={item.quantity}
+                            >
+                              <option value="1">1</option>
+                              <option value="2">2</option>
+                              <option value="3">3</option>
+                            </select>
+                          </div>
+
                         </div>
+
                       </div>
                       <div className="ms-auto col-lg-1 col-3 text-end p-0 d-flex flex-column justify-content-between mt-1">
-                        <div className="ms-auto">
-                          $ {discountPrice(item.product)}
+                        <div className="ms-auto fw-bold">
+                          $ {item.product.discountPrice}
                         </div>
-                        {/* <div
-                        className="px-2 cursor fw-bold  ms-auto mb-2"
-                        onClick={() => DeleteItem(item.product.id)}
-                        style={{
-                          color: "#0066b2",
-                          border: "1px solid #0066b2",
-                          borderRadius: "5px",
-                        }}
-                      >
-                        Remove
-                      </div> */}
+
                         <div
                           className="px-2 cursor fw-bold  ms-auto mb-2"
                           data-bs-toggle="modal"
@@ -124,7 +122,7 @@ export function Cart() {
                             color: "#CF352E",
                             border: "1px solid #CF352E",
                             borderRadius: "5px",
-                            fontSize:"17px"
+                            fontSize: "17px"
                           }}
                         >
                           <i className="fa-solid fa-trash"></i>
@@ -159,12 +157,12 @@ export function Cart() {
                   <div style={{ fontWeight: "500" }}>Subtotal</div>
                   <div style={{ fontWeight: "500" }}>Total items in cart</div>
                 </div>
-                <div className="col-lg-5 col-4 ">
+                <div className="col-lg-5 col-4 " style={{ fontWeight: "600" }}>
                   <div className=" text-end ms-auto">$ {totalAmount}</div>
                   <div className="text-end ms-auto">{totalItems} Items</div>
                 </div>
-                <Link to="/checkOut">
-                  <div id="all-btn" className="btn w-100 rounded-3 mt-4">
+                <Link to="/checkOut" className="text-decoration-none">
+                  <div className="all-btn text-center p-1 w-100  mt-4">
                     Checkout
                   </div>
                 </Link>

@@ -1,5 +1,6 @@
 import { useDispatch } from "react-redux";
 import { DeleteItemFromCartAsync } from "../features/cart/cartSlice";
+import { PropTypes } from "prop-types";
 
 export default function ConformDelete({
   product,
@@ -81,3 +82,11 @@ export default function ConformDelete({
     </div>
   );
 }
+
+ConformDelete.propTypes = {
+  product: PropTypes.object,
+  handelRemove: PropTypes.func,
+  index: PropTypes.number,
+  data: PropTypes.Object,
+  id: PropTypes.number,
+};
