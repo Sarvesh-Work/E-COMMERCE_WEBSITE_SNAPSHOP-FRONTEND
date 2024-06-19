@@ -12,7 +12,7 @@ import {
   checkAuthAsync,
   selectCheckedUser,
   selectLoggedUser,
-} from "./features/auth/authSlice";
+} from "./features/auth/authSlice.js";
 import EmptyCartPage from "./Pages/EmptyCartPage";
 import PageNotFound from "./Pages/PageNotFound";
 import OrderSuccess from "./Pages/OrderSuccess";
