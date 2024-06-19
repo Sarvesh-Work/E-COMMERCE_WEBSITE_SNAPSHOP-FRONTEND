@@ -3,7 +3,7 @@ import {
   selectProductById,
   selectProductListStatus,
   fetchProductByIdAsync,
-} from "../../Product/product.jsx";
+} from "../../Product/productSlice.jsx";
 import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { AddItemsAsync } from "../../cart/cartSlice.jsx";

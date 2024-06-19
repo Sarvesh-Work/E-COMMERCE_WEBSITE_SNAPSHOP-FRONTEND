@@ -2,18 +2,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { Link, Navigate } from "react-router-dom";
 import { loginUserAsync, selectError, selectLoggedUser } from "../authSlice.jsx";
-import { useState } from "react";
-import Loading from "../../../Pages/loading";
+// import { useState } from "react";
+// import Loading from "../../../Pages/loading";
 
 export function Login() {
   const dispatch = useDispatch();
   const error = useSelector(selectError);
   const user = useSelector(selectLoggedUser);
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
 
-  setTimeout(() => {
-    setLoading(false);
-  }, 1000);
+  // setTimeout(() => {
+  //   setLoading(false);
+  // }, 1000);
 
   const {
     register,
@@ -23,9 +23,9 @@ export function Login() {
 
   return (
     <>
-      {loading == true ? (
+      {/* {loading == true ? (
         <Loading />
-      ) : (
+      ) : ( */}
         <>
           {user && <Navigate to="/" replace={true} />}
           <div className="d-flex justify-content-center align-items-center h-100 py-2">
@@ -143,7 +143,7 @@ export function Login() {
             </div>
           </div>
         </>
-      )}
+      {/* )} */}
     </>
   );
 }
