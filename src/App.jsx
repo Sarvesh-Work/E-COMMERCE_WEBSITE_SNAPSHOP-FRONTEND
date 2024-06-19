@@ -7,7 +7,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Protected from "./features/auth/components/Protected";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { FetchCartProductsAsync } from "./features/cart/cartSlice.js";
+import { FetchCartProductsAsync } from "./features/cart/cartSlice.jsx";
 import {
   checkAuthAsync,
   selectCheckedUser,
