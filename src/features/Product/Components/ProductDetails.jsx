@@ -5,12 +5,12 @@ import {
   selectProductListStatus,
   fetchProductByIdAsync,
 
-} from "../productSlice.js";
+} from "../productSlice.jsx";
 import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 // import { AddItemsAsync, SelectCartItems } from "../../cart/cartSlice";
-import { AddItemsAsync, selectCartItems } from "../../cart/cartSlice.js";
-import { selectLoggedUser } from "../../auth/authSlice.js";
+import { AddItemsAsync, selectCartItems } from "../../cart/cartSlice.jsx";
+import { selectLoggedUser } from "../../auth/authSlice.jsx";
 import Loading from "../../../Pages/loading";
 import { Swiper, SwiperSlide } from 'swiper/react';
 

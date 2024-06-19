@@ -5,7 +5,7 @@ export const createProducts = async (product) => {
       body: JSON.stringify(product),
       headers: { "content-type": "application/json" },
     });
-    return await response.json();
+    return await response.jsxon();
   } catch (error) {
     console.error("Error fetching products:", error);
     throw error;
@@ -38,7 +38,7 @@ export const fetchAllProductsByFilter = async (filter, sort, pagination, admin) 
       "https://snapshop-backend.vercel.app/products?" + queryString
 
     );
-    const data = await response.json();
+    const data = await response.jsxon();
     const totalItems = await response.headers.get("x-Total-Count");
     return { data: { products: data, totalItems: +totalItems } };
   } catch (error) {
@@ -52,7 +52,7 @@ export const fetchAllProductsByFilter = async (filter, sort, pagination, admin) 
 export const fetchAllBrands = async () => {
   try {
     const response = await fetch("https://snapshop-backend.vercel.app/Brands");
-    const data = await response.json();
+    const data = await response.jsxon();
 
     return { data };
   } catch (error) {
@@ -67,7 +67,7 @@ export const fetchAllBrands = async () => {
 export const recentlyViewedProduct = async () => {
   try {
     const response = await fetch("https://snapshop-backend.vercel.app/Brands");
-    const data = await response.json();
+    const data = await response.jsxon();
 
     return { data };
   } catch (error) {
@@ -79,7 +79,7 @@ export const recentlyViewedProduct = async () => {
 export const fetchAllCategories = async () => {
   try {
     const response = await fetch(" https://snapshop-backend.vercel.app/Categories");
-    const data = await response.json();
+    const data = await response.jsxon();
     return { data };
   } catch (error) {
     console.error("Error fetching products:", error);
@@ -90,7 +90,7 @@ export const fetchAllCategories = async () => {
 export const fetchProductById = async (id) => {
   try {
     const response = await fetch("https://snapshop-backend.vercel.app/products/" + id);
-    const data = await response.json();
+    const data = await response.jsxon();
     return { data };
   } catch (error) {
     console.error("Error fetching products:", error);
@@ -108,7 +108,7 @@ export const updateProduct = async (product) => {
         headers: { "content-type": "application/json" },
       }
     );
-    const data = await response.json();
+    const data = await response.jsxon();
     return { data };
   } catch (error) {
     console.error("Error in adding user", error);

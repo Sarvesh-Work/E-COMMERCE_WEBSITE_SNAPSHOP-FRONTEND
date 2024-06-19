@@ -12,12 +12,12 @@ import {
   checkAuthAsync,
   selectCheckedUser,
   selectLoggedUser,
-} from "./features/auth/authSlice.js";
+} from "./features/auth/authSlice.jsx";
 import EmptyCartPage from "./Pages/EmptyCartPage";
 import PageNotFound from "./Pages/PageNotFound";
 import OrderSuccess from "./Pages/OrderSuccess";
 import UserOrderPage from "./Pages/UserOrderPage";
-import { fetchLogInUserInfoAsync } from "./features/user/userSlice.js";
+import { fetchLogInUserInfoAsync } from "./features/user/userSlice.jsx";
 import ProductDetailPage from "./Pages/ProductDetailPage";
 import UserProfilePage from "./Pages/UserProfilePage";
 import ProtectedAdmin from "./features/auth/components/ProtectedAdmin";

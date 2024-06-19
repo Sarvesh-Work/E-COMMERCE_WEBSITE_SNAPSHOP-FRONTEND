@@ -1,9 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-import productReducer from "../features/Product/productSlice.js"
-import userReducer from "../features/auth/authSlice.js";
-import  AddToCartReducer from "../features/cart/cartSlice.js";
-import orderReducer from "../features/order/orderSlice.js";
-import userProfileReducer from "../features/user/userSlice.js";
+import productReducer from "../features/Product/productSlice.jsx"
+import userReducer from "../features/auth/authSlice.jsx";
+import  AddToCartReducer from "../features/cart/cartSlice.jsx";
+import orderReducer from "../features/order/orderSlice.jsx";
+import userProfileReducer from "../features/user/userSlice.jsx";
 
 export const store=configureStore({
     reducer:{

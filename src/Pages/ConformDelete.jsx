@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { DeleteItemFromCartAsync } from "../features/cart/cartSlice.js";
+import { DeleteItemFromCartAsync } from "../features/cart/cartSlice.jsx";
 import { PropTypes } from "prop-types";
 
 export default function ConformDelete({

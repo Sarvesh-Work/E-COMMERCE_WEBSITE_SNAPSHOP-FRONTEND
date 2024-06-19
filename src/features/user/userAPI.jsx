@@ -1,7 +1,7 @@
 export const fetchOrders = async () => {
   try {
     const response = await fetch("https://snapshop-backend.vercel.app/order/user");
-    const data= await response.json();
+    const data= await response.jsxon();
     return ({data})
   } catch (error) {
     console.error("Error fetching products:", error);
@@ -13,7 +13,7 @@ export const fetchOrders = async () => {
 export const fetchLogInUser  = async () => {
   try {
     const response = await fetch("https://snapshop-backend.vercel.app/user/info");
-    const data= await response.json();
+    const data= await response.jsxon();
     return {data}
   } catch (error) {
     console.error("Error fetching products:", error);
@@ -25,7 +25,7 @@ export const fetchLogInUser  = async () => {
 // export const fetchLogInUser  = async (userId) => {
 //   try {
 //     const response = await fetch("http://localhost:3004/User/"+userId);
-//     const data= await response.json();
+//     const data= await response.jsxon();
 //     return {data}
 //   } catch (error) {
 //     console.error("Error fetching products:", error);
@@ -40,7 +40,7 @@ export const updateUser = async (userData) => {
       body: JSON.stringify(userData),
       headers: { "content-type": "application/json" },
     });
-    const data = await response.json();
+    const data = await response.jsxon();
     return { data };
   } catch (error) {
     console.error("Error in adding user", error);

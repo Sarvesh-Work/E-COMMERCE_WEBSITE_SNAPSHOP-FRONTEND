@@ -5,7 +5,7 @@ export const createUser = async (userData) => {
       body: JSON.stringify(userData),
       headers: { "content-type": "application/json" },
     });
-    const data = await response.json();
+    const data = await response.jsxon();
     return { data };
   } catch (error) {
     console.error("Error in adding user", error);
@@ -23,7 +23,7 @@ export function loginUser(loginInfo) {
       });
 
       if (response.ok) {
-        const data = await response.json();
+        const data = await response.jsxon();
         resolve({ data });
       } else {
         const error = await response.text();
@@ -42,7 +42,7 @@ export function loginUser(loginInfo) {
 //       body: JSON.stringify(update),
 //       headers: { "content-type": "application/json" },
 //     });
-//     const data = await response.json();
+//     const data = await response.jsxon();
 //     return { data };
 //   } catch (error) {
 //     console.error("Error in adding user", error);
@@ -56,7 +56,7 @@ export function checkAuth() {
       const response = await fetch("https://snapshop-backend.vercel.app/auth/check");
 
       if (response.ok) {
-        const data = await response.json();
+        const data = await response.jsxon();
         resolve({ data });
       } else {
         const error = await response.text();
@@ -97,7 +97,7 @@ export function resetPasswordRequest(email) {
         }
       );
       if (response.ok) {
-        const data = await response.json();
+        const data = await response.jsxon();
         resolve({ data });
       } else {
         const error = await response.text();
@@ -122,7 +122,7 @@ export function resetPassword(data) {
         }
       );
       if (response.ok) {
-        const data = await response.json();
+        const data = await response.jsxon();
         resolve({ data });
       } else {
         const error = await response.text();

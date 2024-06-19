@@ -3,7 +3,7 @@ import {
   selectUserInfo,
   selectUserInfoStatus,
   updateUserAsync,
-} from "../userSlice.js";
+} from "../userSlice.jsx";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { Bounce, toast } from "react-toastify";

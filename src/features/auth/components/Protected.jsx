@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { selectLoggedUser } from "../auth.js";
+import { selectLoggedUser } from "../auth.jsx";
 import { Navigate } from "react-router-dom";
 import { PropTypes } from "prop-types";
 

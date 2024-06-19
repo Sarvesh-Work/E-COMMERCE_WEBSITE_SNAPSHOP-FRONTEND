@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Link, Navigate } from "react-router-dom";
-import { selectCartItems, selectCheckCart, UpdateItemAsync } from "./cartSlice.js";
+import { selectCartItems, selectCheckCart, UpdateItemAsync } from "./cartSlice.jsx";
 import Loading from "../../Pages/loading";
 import ConformDelete from "../../Pages/ConformDelete";
 import { useState } from "react";

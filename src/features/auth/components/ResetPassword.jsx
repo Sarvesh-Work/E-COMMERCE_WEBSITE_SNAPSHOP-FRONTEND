@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-import { resetPasswordAsync, selectPasswordReset } from "../authSlice.js";
+import { resetPasswordAsync, selectPasswordReset } from "../authSlice.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import PageNotFound from "../../../Pages/PageNotFound";
 
