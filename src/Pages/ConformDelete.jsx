@@ -38,10 +38,10 @@ export default function ConformDelete({
         ) : (
           <>
             <div>
-              <div>Name:{data.Name}</div>
-              <div>Email:{data.Email}</div>
-              <div>Phone:{data.Phone_number}</div>
-              <div>State:{data.tate}</div>
+              <div>Name: {data.Name}</div>
+              <div>Email: {data.Email}</div>
+              <div>Phone: {data.Phone_number}</div>
+              <div>State: {data.State}</div>
               <div>Postal-code: {data.Postal_Code}</div>
             </div>
           </>

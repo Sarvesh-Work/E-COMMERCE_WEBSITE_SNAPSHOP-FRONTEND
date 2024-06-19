@@ -23,9 +23,6 @@ export default function AdminOrder() {
 
   const [EditOrderItemId, setOrderItemId] = useState(-1);
 
-  const handelShow = () => {
-    console.log("show");
-  };
 
   const handelEdit = (e, order) => {
     setOrderItemId(order.id);
@@ -152,12 +149,6 @@ export default function AdminOrder() {
                   </td>
                   <td className=" border-1 ">
                     <div className="gap-2 d-flex justify-content-center">
-                      <div className=" cursor">
-                        <i
-                          className="fa-regular fa-eye"
-                          onClick={(e) => handelShow(e, order)}
-                        ></i>
-                      </div>
                       <div className=" cursor">
                         <i
                           className="fa-solid fa-pencil"

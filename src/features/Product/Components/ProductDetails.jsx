@@ -61,12 +61,6 @@ const ProductDetails = () => {
     }
     e.preventDefault();
     setAddToCart("Added!");
-    // console.log(color)
-    // const newColor = []
-    // newColor[0] = color
-    // ProductById.color.map((data) => data != color ? newColor.push(data) : null)
-
-    // console.log(newColor)
 
     if (items.findIndex((item) => item.product.id === ProductById.id) < 0) {
 
@@ -193,7 +187,7 @@ const ProductDetails = () => {
                   <Link to="/login" className=" col-12  text-decoration-none">
                     <div
                       className="mt-5 p-2 rounded-3 text-center cursor"
-                      id="all-btn"
+                     
                     >
                       Please Login to Buy the Product
                     </div>

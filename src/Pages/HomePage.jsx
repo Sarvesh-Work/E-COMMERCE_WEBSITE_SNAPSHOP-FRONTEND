@@ -8,10 +8,11 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 
 
+
 const Home = () => {
   const features = [
     { name: "Free Shipping", detail: "shipping for order above $200 ", icon: <i className='bi bi-truck'></i> },
-    { name: "Mony Guarantee", detail: "Within 30 days for an exchange", icon: <i className="bi bi-coin"></i> },
+    { name: "Money Guarantee", detail: "Within 30 days for an exchange", icon: <i className="bi bi-coin"></i> },
     { name: "Online Support", detail: "24 hours a day, 7 days a weak", icon: <i className="bi bi-headset"></i> },
     { name: "Flexible Payment", detail: "Pay with multiple credit card", icon: <i className="bi bi-credit-card"></i> },
   ]

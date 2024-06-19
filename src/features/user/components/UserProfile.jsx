@@ -122,7 +122,6 @@ const UserProfile = () => {
                     <form
                       noValidate
                       onSubmit={handleSubmit((data) => {
-                        console.log({ data });
                         handelAdd(data);
                         reset();
                       })}
@@ -130,7 +129,7 @@ const UserProfile = () => {
                     >
                       <div>
                         <div className="mb-3 d-flex gap-4">
-                          <div className="w-75">
+                          <div className="w-100">
                             <label htmlFor="firstName" className="form-label">
                               Full Name
                             </label>
@@ -146,7 +145,7 @@ const UserProfile = () => {
                             />
                           </div>
                         </div>
-                        <div className="mb-3 w-75">
+                        <div className="mb-3 w-100">
                           <label htmlFor="email" className="form-label">
                             Email address
                           </label>
@@ -161,7 +160,7 @@ const UserProfile = () => {
                             })}
                           />
                         </div>
-                        <div className="mb-2 w-75">
+                        <div className="mb-2 w-100">
                           <label htmlFor="State" className="form-label">
                             Phone number
                           </label>
@@ -253,8 +252,7 @@ const UserProfile = () => {
                         </div>
                         <button
                           type="submit"
-                          className="p-1  px-3 fs-6 fw-normal cursor "
-                          id="all-btn"
+                          className="p-1 all-btn px-3 fs-6 fw-normal cursor "
                         >
                           Add Address
                         </button>
@@ -279,7 +277,7 @@ const UserProfile = () => {
                           <form
                             noValidate
                             onSubmit={handleSubmit((data) => {
-                              console.log({ data });
+            
                               handelEdit(data, index);
                               reset();
                             })}
@@ -287,7 +285,7 @@ const UserProfile = () => {
                           >
                             <div>
                               <div className="mb-3 d-flex gap-4">
-                                <div className="w-75">
+                                <div className="w-100">
                                   <label
                                     htmlFor="firstName"
                                     className="form-label"
@@ -306,7 +304,7 @@ const UserProfile = () => {
                                   />
                                 </div>
                               </div>
-                              <div className="mb-3 w-75">
+                              <div className="mb-3 w-100">
                                 <label htmlFor="email" className="form-label">
                                   Email address
                                 </label>
@@ -321,7 +319,7 @@ const UserProfile = () => {
                                   })}
                                 />
                               </div>
-                              <div className="mb-2 w-75">
+                              <div className="mb-2 w-100">
                                 <label htmlFor="State" className="form-label">
                                   Phone number
                                 </label>
@@ -413,8 +411,8 @@ const UserProfile = () => {
                               </div>
                               <button
                                 type="submit"
-                                className="p-1  px-3 fs-6 fw-normal cursor "
-                                id="all-btn"
+                                className="p-1 all-btn px-3 fs-6 fw-normal cursor "
+                                
                               >
                                 Edit Address
                               </button>
@@ -430,7 +428,7 @@ const UserProfile = () => {
                           style={{ backgroundColor: "#F5F5F5" }}
                         >
                           <>
-                            <div className=" w-100  d-sm-flex justify-content-center align-items-center">
+                            <div className=" w-100 px-2 d-sm-flex justify-content-center align-items-center">
                               <div className="">
                                 <div
                                   style={{
@@ -444,7 +442,7 @@ const UserProfile = () => {
                                   Phone: {data.Phone_number}
                                 </div>
                               </div>
-                              <div className="ms-auto px-sm-3 text-md-end ">
+                              <div className="ms-auto  text-md-end ">
                                 <div className="text-md-end">
                                   State: {data.State}
                                 </div>
@@ -456,10 +454,9 @@ const UserProfile = () => {
                                 </div>
                               </div>
                             </div>
-                            <div className="mt-2 d-flex gap-2">
+                            <div className="mt-2 py-2 d-flex gap-2" style={{borderTop:"1px solid #D6D6D6"}}>
                               <div
-                                id="all-btn"
-                                className="text-center px-3 cursor"
+                                className="text-center all-btn px-3 cursor"
                                 onClick={() => {
                                   handelEditForm(index);
                                 }}
@@ -467,10 +464,9 @@ const UserProfile = () => {
                                 Edit
                               </div>
                               <div
-                                id="all-btn"
                                 data-bs-toggle="modal"
                                 data-bs-target={`#staticBackdrop${index}`}
-                                className="text-center px-3 ms-auto cursor"
+                                className="text-center all-btn px-3 ms-auto cursor"
                               >
                                 Remove
                               </div>

@@ -63,7 +63,7 @@ export default function CheckoutForm() {
     
     });
 
-    console.log(error)
+
 
     if (error.type === "card_error" || error.type === "validation_error") {
       setMessage(error.message);

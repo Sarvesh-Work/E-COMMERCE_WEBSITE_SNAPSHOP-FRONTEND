@@ -1,7 +1,7 @@
-// API for adding Items or Products to cart!
+
 export const AddItemsToCart = async (items) => {
   try {
-    const response = await fetch("http://localhost:8080/cart/add", {
+    const response = await fetch("https://snapshop-backend.vercel.app/cart/add", {
       method: "POST",
       body: JSON.stringify(items),
       headers: { "content-type": "application/json" },
@@ -13,15 +13,12 @@ export const AddItemsToCart = async (items) => {
     throw error;
   }
 };
-// API for adding Items or Products to cart!
 
-// Api for fetching  the cart items using user Id
 
 export const FetchCartsAllProducts = async () => {
   try {
-    const response = await fetch("http://localhost:8080/Cart/allProducts");
+    const response = await fetch("https://snapshop-backend.vercel.app/Cart/allProducts");
     const data = await response.json();
-    console.log({ data });
     return { data };
   } catch (error) {
     console.error("Error fetching products:", error);
@@ -29,13 +26,11 @@ export const FetchCartsAllProducts = async () => {
   }
 };
 
-// Api for fetching  the cart items using user Id
 
-// Api for updating product in cart
 export const UpdateItem = async (update) => {
   try {
     const response = await fetch(
-      "http://localhost:8080/cart/updateInCart/" + update.id,
+      "https://snapshop-backend.vercel.app/cart/updateInCart/" + update.id,
       {
         method: "PATCH",
         body: JSON.stringify(update),
@@ -49,13 +44,11 @@ export const UpdateItem = async (update) => {
     throw error;
   }
 };
-// Api for updating product in  cart
 
-// Api for deleting the product from cart
 export const DeleteItem = async (itemId) => {
   try {
     const response = await fetch(
-      "http://localhost:8080/cart/deleteFromCart/" + itemId,
+      "https://snapshop-backend.vercel.app/cart/deleteFromCart/" + itemId,
       {
         method: "DELETE",
         headers: { "content-type": "application/json" },
@@ -68,7 +61,7 @@ export const DeleteItem = async (itemId) => {
     throw error;
   }
 };
-// Api for deleting the product from cart
+
 
 export const ResetCart = async () => {
   try {

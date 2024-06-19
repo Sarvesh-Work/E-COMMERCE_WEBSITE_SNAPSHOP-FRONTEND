@@ -1,6 +1,6 @@
 export const createUser = async (userData) => {
   try {
-    const response = await fetch("http://localhost:8080/auth/signup", {
+    const response = await fetch("https://snapshop-backend.vercel.app/auth/signup", {
       method: "POST",
       body: JSON.stringify(userData),
       headers: { "content-type": "application/json" },
@@ -16,7 +16,7 @@ export const createUser = async (userData) => {
 export function loginUser(loginInfo) {
   return new Promise(async (resolve, reject) => {
     try {
-      const response = await fetch("http://localhost:8080/auth/login", {
+      const response = await fetch("https://snapshop-backend.vercel.app/auth/login", {
         method: "POST",
         body: JSON.stringify(loginInfo),
         headers: { "content-type": "application/json" },
@@ -53,7 +53,7 @@ export function loginUser(loginInfo) {
 export function checkAuth() {
   return new Promise(async (resolve, reject) => {
     try {
-      const response = await fetch("http://localhost:8080/auth/check");
+      const response = await fetch("https://snapshop-backend.vercel.app/auth/check");
 
       if (response.ok) {
         const data = await response.json();
@@ -80,7 +80,6 @@ export function signOut() {
         reject(error);
       }
     } catch (error) {
-      console.log(error);
       reject(error);
     }
   });
@@ -90,7 +89,7 @@ export function resetPasswordRequest(email) {
   return new Promise(async (resolve, reject) => {
     try {
       const response = await fetch(
-        "http://localhost:8080/auth/reset-password-request",
+        "https://snapshop-backend.vercel.app/auth/reset-password-request",
         {
           method: "POST",
           body: JSON.stringify({ email }),
@@ -115,7 +114,7 @@ export function resetPassword(data) {
   return new Promise(async (resolve, reject) => {
     try {
       const response = await fetch(
-        "http://localhost:8080/auth/reset-password",
+        "https://snapshop-backend.vercel.app/auth/reset-password",
         {
           method: "POST",
           body: JSON.stringify(data),

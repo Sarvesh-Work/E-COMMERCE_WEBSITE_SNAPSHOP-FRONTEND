@@ -392,7 +392,7 @@ export default function ProductForm() {
                 <button
                   type="submit"
                   className="all-btn  px-3  cursor"
-                  id="all-btn"
+                  
                 >
                   Save
                 </button>
@@ -400,7 +400,7 @@ export default function ProductForm() {
                   <button
                     type="submit"
                     className="all-btn   px-3  cursor"
-                    id="all-btn"
+                   
                     style={{ backgroundColor: "red" }}
                     onClick={() => handelDelete()}
                   >

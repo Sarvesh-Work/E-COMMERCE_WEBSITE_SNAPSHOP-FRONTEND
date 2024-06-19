@@ -42,7 +42,6 @@ const AdminProductList = () => {
   };
 
   const handleFilter = (e, section, option) => {
-    console.log(e.target.checked);
     const newFilter = { ...filter };
     // TODO : on server it will support multiple categories
     if (e.target.checked) {
@@ -57,7 +56,6 @@ const AdminProductList = () => {
       );
       newFilter[section.id].splice(index, 1);
     }
-    console.log({ newFilter });
 
     setFilter(newFilter);
   };
@@ -126,8 +124,8 @@ const AdminProductList = () => {
           </ul>
 
           <div
-            id="all-btn"
-            className="text-center p-1 px-3  cursor d-lg-none d-inline"
+            
+            className="text-center p-1 px-3 all-btn  cursor d-lg-none d-inline"
             data-bs-toggle="offcanvas"
             data-bs-target="#offcanvasRight"
             aria-controls="offcanvasRight"

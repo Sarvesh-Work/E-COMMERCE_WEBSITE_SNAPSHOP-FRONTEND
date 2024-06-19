@@ -3,12 +3,40 @@ import { PropTypes } from "prop-types";
 
 
 const UserOrder = ({ orders }) => {
-
+  console.log(orders)
 
 
   return (
     <>
-      {orders==null ? (
+      {orders && <> {orders.length === 0 ? (
+        <>
+          <div className="container mt-5">
+            <div className="row d-flex justify-content-center ">
+              <div className="col-6 mt-4 ">
+                <div className="d-flex justify-content-center">
+                  <img
+                    src="/public/images/empty-box.png"
+                    alt=""
+                    style={{ height: "240px", width: "240px" }}
+                  />
+                </div>
+                <div
+                  className="mt-2 text-center"
+                  style={{ fontSize: "18px", fontWeight: "600" }}
+                >
+                  {"You haven't placed any order yet!"}
+                </div>
+                <div className="text-center" style={{ fontSize: "15px" }}>
+                  Order section is empty. After placing order, You can track
+                  them from here!
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </>
+      ) : (
+
         <div className=" container-lg  container-fluid mt-2 p-md-3">
           <div className="row d-flex justify-content-center align-items-center">
             <h4 className="col-md-9 col-12">All orders</h4>
@@ -24,8 +52,8 @@ const UserOrder = ({ orders }) => {
                   style={{ border: "1.3px solid #D4D5D9", borderRadius: "5px" }}
                 >
                   <div className="d-md-flex">
-                    <h4 className="mt-2 mb-2 ">Order Id: {order.id}</h4>
-                    <h5 className="ms-auto mt-2" style={{ color: "#0066b2" }}>
+                    <h4 className="mt-2 mb-2 " style={{fontSize:"20px",fontWeight:"600"}}>Order Id: {order._id}</h4>
+                    <h5 className="ms-auto mt-2" style={{ color: "#0066b2",fontSize:"20px",fontWeight:"600" }}>
                       Order Status: Pending
                     </h5>
                   </div>
@@ -57,17 +85,18 @@ const UserOrder = ({ orders }) => {
                         </div>
                         <div className="p-1 px-2 mb-1 col-md-10 col-sm-9 col-8 d-flex flex-column justify-content-center ">
                           <div
-                            className=""
-                            style={{ fontSize: "20px", fontWeight: "500" }}
+                            className="d-flex justify-content-between"
+                            style={{ fontSize: "15px", fontWeight: "500" }}
                           >
-                            {items.product.title}
+                            <div>{items.product.title}</div>
+                            <div>Payment Method: {order.PaymentMethod}</div>
                           </div>
                           <div style={{ color: "gray" }}>
-                            Rating: {items.product.rating}
+                            AVAILABLE
                           </div>
                           <div className="d-flex gap-1 mt-1 ">
                             <div>Qty:{items.quantity}</div>
-                            <div className="ms-auto">
+                            <div className="ms-auto" style={{fontWeight:"600"}}>
                               Total Price: ${items.product.discountPrice}
                             </div>
                           </div>
@@ -77,7 +106,7 @@ const UserOrder = ({ orders }) => {
                   ))}
                   <div className="row mb-2  d-flex justify-content-center align-items-center">
                     <div
-                      className="col-lg-11 col-md-12 col-11 c mb-2 mt-3"
+                      className="col-11  col-11 c mb-2 mt-3"
                       style={{
                         border: "1px solid #D4D5D9",
                         borderRadius: "5px",
@@ -121,35 +150,7 @@ const UserOrder = ({ orders }) => {
               </div>
             ))}
         </div>
-      ) : (
-        <>
-          {orders && (
-            <div className="container mt-5">
-              <div className="row d-flex justify-content-center ">
-                <div className="col-6 mt-4 ">
-                  <div className="d-flex justify-content-center">
-                    <img
-                      src="/public/images/empty-box.png"
-                      alt=""
-                      style={{ height: "240px", width: "240px" }}
-                    />
-                  </div>
-                  <div
-                    className="mt-2 text-center"
-                    style={{ fontSize: "18px", fontWeight: "600" }}
-                  >
-                    {"You haven't placed any order yet!"}
-                  </div>
-                  <div className="text-center" style={{ fontSize: "15px" }}>
-                    Order section is empty. After placing order, You can track
-                    them from here!
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
-        </>
-      )}
+      )}</>}
     </>
   );
 };
@@ -157,5 +158,5 @@ const UserOrder = ({ orders }) => {
 export default UserOrder;
 UserOrder.propTypes = {
   orders: PropTypes.array,
-  
+
 };

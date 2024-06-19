@@ -25,8 +25,8 @@ const PageNotFound = () => {
           </div>
           <Link
             to="/"
-            className="mt-4 col-lg-2 col-3 text-center p-1 text-decoration-none"
-            id="all-btn"
+            className="mt-4 all-btn col-lg-2 col-3 text-center p-1 text-decoration-none"
+
             style={{ fontSize: "20px", letterSpacing: "0.3px" }}
           >
             SH

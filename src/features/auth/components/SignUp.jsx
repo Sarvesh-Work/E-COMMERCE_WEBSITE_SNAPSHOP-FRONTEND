@@ -143,14 +143,12 @@ export function SignUp() {
             </div>
 
             <button
-              id="all-btn"
-              className="btn w-100 rounded-3 mt-3"
+             
+              className="all-btn btn w-100 rounded-3 mt-3"
               type="submit"
             >
               SignUp
             </button>
-
-            {/* after signup we have to redirect to login page */}
 
             <div
               id="emailHelp"

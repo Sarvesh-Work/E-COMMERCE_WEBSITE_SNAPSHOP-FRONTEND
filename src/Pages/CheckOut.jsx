@@ -10,10 +10,11 @@ import {
 import { selectUserInfo } from "../features/user/userSlice";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
+import { Bounce, toast } from "react-toastify";
 
 const CheckOut = () => {
   const items = useSelector(selectCartItems);
-  console.log({ items });
+
   const user = useSelector(selectUserInfo);
   const dispatch = useDispatch();
   const [SelectedAddress, setSelectedAddress] = useState(null);
@@ -32,25 +33,38 @@ const CheckOut = () => {
 
   const handelAddress = (e) => {
     setSelectedAddress(user.address[e.target.value]);
-    console.log(user.address[e.target.value]);
   };
 
   const handelPaymentMethod = (e) => {
     selectPaymentMethod(e.target.value);
-    console.log(e.target.value);
   };
 
   const handelOrder = () => {
-    const order = {
-      items,
-      totalAmount,
-      totalItems,
-      user: user.id,
-      PaymentMethod,
-      SelectedAddress,
-      status: "pending",
-    };
-    dispatch(orderItemsAsync(order));
+    if(SelectedAddress==null){
+       toast.warn("Address Selection is required", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
+    }else{
+      const order = {
+        items,
+        totalAmount,
+        totalItems,
+        user: user.id,
+        PaymentMethod,
+        SelectedAddress,
+        status: "pending",
+      };
+      dispatch(orderItemsAsync(order));
+    }
+   
   };
 
   return (

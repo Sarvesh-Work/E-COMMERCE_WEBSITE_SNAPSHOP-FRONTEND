@@ -29,15 +29,15 @@ const EmptyCartPage = () => {
           </div>
           <Link
             to="/"
-            className="mt-4 col-lg-2 col-3 text-center p-1 text-decoration-none"
-            id="all-btn"
+            className="mt-4 all-btn col-lg-2 col-3 text-center p-1 text-decoration-none"
+
             style={{ fontSize: "15px" }}
           >
             ADD NOW
           </Link>
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
 };

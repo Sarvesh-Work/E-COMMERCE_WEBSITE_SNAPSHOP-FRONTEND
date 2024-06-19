@@ -23,7 +23,6 @@ const ProductHome = () => {
 
   const products = useSelector(selectAllProduct);
   const totalItems = useSelector(selectTotalItems);
-  const totalPage = Math.ceil(totalItems / ITEMS_PER_PAGE);
   const status = useSelector(selectProductListStatus);
 
   const sortOptions = [
@@ -81,7 +80,7 @@ const ProductHome = () => {
 
   return (
     <>
-      {products &&
+     
         <div className=" container-lg container-fluid px-md-4">
 
           <div
@@ -109,7 +108,7 @@ const ProductHome = () => {
               </div>
 
               <div
-                id="all-btn"
+              
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
                 className="all-btn text-center mx-3 px-3  cursor d-inline"
@@ -179,7 +178,7 @@ const ProductHome = () => {
               <ProductFilter handleFilter={handleFilter} />
             </div>
           </div>
-        </div>}
+        </div>
     </>
   );
 };

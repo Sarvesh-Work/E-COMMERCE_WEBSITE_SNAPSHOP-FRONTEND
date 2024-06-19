@@ -14,10 +14,10 @@ const stripePromise = loadStripe(
 export default function StripCheckoutPage() {
   const [clientSecret, setClientSecret] = useState("");
   const currentOrder = useSelector(selectCurrentOrder);
-  console.log(currentOrder);
+
 
   useEffect(() => {
-    fetch("http://localhost:8080/create-payment-intent", {
+    fetch("https://snapshop-backend.vercel.app/create-payment-intent", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ totalAmount: currentOrder.totalAmount }),
@@ -28,7 +28,7 @@ export default function StripCheckoutPage() {
       .then((res) => res.json())
       .then((data) => {
         setClientSecret(data.clientSecret);
-        console.log(data.clientSecret);
+       
       });
   }, []);
 

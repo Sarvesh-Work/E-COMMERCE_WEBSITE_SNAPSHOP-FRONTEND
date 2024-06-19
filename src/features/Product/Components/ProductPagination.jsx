@@ -4,7 +4,6 @@ import { ITEMS_PER_PAGE } from "../../../app/constant";
 const ProductPagination = ({
   page,
   handlPage,
-  setPage,
   totalItems,
 }) => {
 

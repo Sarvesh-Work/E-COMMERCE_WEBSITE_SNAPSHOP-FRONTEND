@@ -170,7 +170,7 @@ const AdminProductDetails = () => {
                 <Link to="/login" className=" text-decoration-none">
                   <div
                     className="mt-5 p-2 rounded-3 text-center cursor"
-                    id="all-btn"
+                    
                   >
                     Please Login to Buy the Product
                   </div>
@@ -185,8 +185,8 @@ const AdminProductDetails = () => {
               ) : (
                 <div
                   onClick={handelCart}
-                  className="mt-5 p-2 rounded-3 text-center cursor"
-                  id="all-btn"
+                  className="mt-5 all-btn p-2 rounded-3 text-center cursor"
+              
                 >
                   {addToCart}
                 </div>

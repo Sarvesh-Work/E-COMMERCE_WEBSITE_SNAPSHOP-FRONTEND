@@ -14,7 +14,7 @@ const FormCheckOut = ({
   const user = useSelector(selectUserInfo);
   const { register, handleSubmit, reset } = useForm();
   const dispatch = useDispatch();
-  console.log(user);
+
 
   return (
     <>
@@ -32,7 +32,6 @@ const FormCheckOut = ({
         <form
           noValidate
           onSubmit={handleSubmit((data) => {
-            console.log(data);
             dispatch(
               updateUserAsync({ ...user, address: [...user.address, data] })
             );

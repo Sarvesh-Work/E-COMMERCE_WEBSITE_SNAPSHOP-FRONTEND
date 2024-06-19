@@ -9,7 +9,6 @@ export function Login() {
   const dispatch = useDispatch();
   const error = useSelector(selectError);
   const user = useSelector(selectLoggedUser);
-  console.log(user);
   const [loading, setLoading] = useState(true);
 
   setTimeout(() => {
