@@ -5,7 +5,7 @@ import { Elements } from "@stripe/react-stripe-js";
 import CheckoutForm from "./StripeCheckoutForm";
 import "../Stripe.scss";
 import { useSelector } from "react-redux";
-import { selectCurrentOrder } from "../features/order/orderSlice";
+import { selectCurrentOrder } from "../features/order/orderSlice.js";
 
 const stripePromise = loadStripe(
   "pk_test_51PNUwR2MQ7RY2ENMub3uhZB9yHn9Nl4yDSHdT2u5PtGuG2qdFY1TsgrwCIuBSlh3nCM6aLkoHCrXy3uFp6DT0KNj00cXoBTB1d"

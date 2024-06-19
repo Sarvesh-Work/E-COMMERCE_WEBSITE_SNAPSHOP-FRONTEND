@@ -2,12 +2,12 @@ import { Link, Navigate } from "react-router-dom";
 import FormCheckOut from "./FormCheckOut";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
-import { selectCartItems, UpdateItemAsync } from "../features/cart/cartSlice";
+import { selectCartItems, UpdateItemAsync } from "../features/cart/cartSlice.js";
 import {
   orderItemsAsync,
   selectCurrentOrder,
-} from "../features/order/orderSlice";
-import { selectUserInfo } from "../features/user/userSlice";
+} from "../features/order/orderSlice.js";
+import { selectUserInfo } from "../features/user/userSlice.js";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import { Bounce, toast } from "react-toastify";

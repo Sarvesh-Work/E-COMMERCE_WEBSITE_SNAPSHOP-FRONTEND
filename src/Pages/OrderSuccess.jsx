@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, Navigate, useParams } from "react-router-dom";
-import { ResetCartAsync } from "../features/cart/cartSlice";
-import { resetCurrentOrder } from "../features/order/orderSlice";
+import { ResetCartAsync } from "../features/cart/cartSlice.js";
+import { resetCurrentOrder } from "../features/order/orderSlice.js";
 
 import Navbar from "./Navbar";
 import Loading from "./loading";

@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { PropTypes } from "prop-types";
 import // UpdateAddressAsync,
-  "../features/auth/authSlice";
-import { selectUserInfo, updateUserAsync } from "../features/user/userSlice";
+  "../features/auth/authSlice.js";
+import { selectUserInfo, updateUserAsync } from "../features/user/userSlice.js";
 
 const FormCheckOut = ({
   handelAddress,

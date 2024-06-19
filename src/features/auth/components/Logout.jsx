@@ -1,9 +1,9 @@
 import { useEffect } from "react";
-import { selectLoggedUser, signOutAsync } from "../authSlice";
+import { selectLoggedUser, signOutAsync } from "../authSlice.js";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
-import { deleteUserInfoAsync, selectUserInfo } from "../../user/userSlice";
-import { signOutCartAsync } from "../../cart/cartSlice";
+import { deleteUserInfoAsync, selectUserInfo } from "../../user/userSlice.js";
+import { signOutCartAsync } from "../../cart/cartSlice.js";
 
 
 function Logout() {

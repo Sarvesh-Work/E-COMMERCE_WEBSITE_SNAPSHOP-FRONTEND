@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 
 import { Navigate } from "react-router-dom";
 import { PropTypes } from "prop-types";
-import { selectUserInfo } from "../../user/userSlice";
+import { selectUserInfo } from "../../user/userSlice.js";
 
 function ProtectedAdmin({ children }) {
   const userInfo = useSelector(selectUserInfo);

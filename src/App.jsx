@@ -7,7 +7,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Protected from "./features/auth/components/Protected";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { FetchCartProductsAsync } from "./features/cart/cartSlice";
+import { FetchCartProductsAsync } from "./features/cart/cartSlice.js";
 import {
   checkAuthAsync,
   selectCheckedUser,
@@ -17,7 +17,7 @@ import EmptyCartPage from "./Pages/EmptyCartPage";
 import PageNotFound from "./Pages/PageNotFound";
 import OrderSuccess from "./Pages/OrderSuccess";
 import UserOrderPage from "./Pages/UserOrderPage";
-import { fetchLogInUserInfoAsync } from "./features/user/userSlice";
+import { fetchLogInUserInfoAsync } from "./features/user/userSlice.js";
 import ProductDetailPage from "./Pages/ProductDetailPage";
 import UserProfilePage from "./Pages/UserProfilePage";
 import ProtectedAdmin from "./features/auth/components/ProtectedAdmin";

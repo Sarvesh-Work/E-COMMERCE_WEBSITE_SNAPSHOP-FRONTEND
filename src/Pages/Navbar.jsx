@@ -1,8 +1,8 @@
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { selectCartItems } from "../features/cart/cartSlice";
-import { selectUserInfo } from "../features/user/userSlice";
+import { selectCartItems } from "../features/cart/cartSlice.js";
+import { selectUserInfo } from "../features/user/userSlice.js";
 
 
 const Navbar = ({ children }) => {

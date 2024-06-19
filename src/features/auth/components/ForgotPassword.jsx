@@ -4,7 +4,7 @@ import {
   resetPasswordRequestAsync,
   selectLoggedUser,
   selectMailSent,
-} from "../authSlice";
+} from "../authSlice.js";
 import { Navigate } from "react-router-dom";
 
 const ForgetPassword = () => {

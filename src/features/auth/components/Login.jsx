@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { Link, Navigate } from "react-router-dom";
-import { loginUserAsync, selectError, selectLoggedUser } from "../authSlice";
+import { loginUserAsync, selectError, selectLoggedUser } from "../authSlice.js";
 import { useState } from "react";
 import Loading from "../../../Pages/loading";
 

@@ -6,7 +6,7 @@ import {
   createProductsAsync,
   fetchProductByIdAsync,
   updateProductsAsync,
-} from "../../Product/productSlice";
+} from "../../Product/productSlice.js";
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";

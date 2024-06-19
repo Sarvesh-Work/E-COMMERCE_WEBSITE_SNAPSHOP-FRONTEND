@@ -1,6 +1,6 @@
 import Navbar from "./Navbar"
 import UserOrder from "../features/user/components/UserOrder"
-import { getAllOrdersAsync, selectAllOrdersUser, selectUserInfoStatus } from "../features/user/userSlice";
+import { getAllOrdersAsync, selectAllOrdersUser, selectUserInfoStatus } from "../features/user/userSlice.js";
 import { useDispatch, useSelector } from "react-redux";
 import Loading from "./loading";
 import { useEffect } from "react";

@@ -3,13 +3,13 @@ import {
   selectProductById,
   selectProductListStatus,
   fetchProductByIdAsync,
-} from "../../Product/productSlice";
+} from "../../Product/product.js";
 import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { AddItemsAsync } from "../../cart/cartSlice";
+import { AddItemsAsync } from "../../cart/cartSlice.js";
 
 import Loading from "../../../Pages/loading";
-import { selectLoggedUser } from "../../auth/authSlice";
+import { selectLoggedUser } from "../../auth/authSlice.js";
 
 const AdminProductDetails = () => {
   // const reviews = { href: "#", average: 4, totalCount: 117 };

@@ -5,7 +5,7 @@ import {
   useElements,
 } from "@stripe/react-stripe-js";
 import { useSelector } from "react-redux";
-import { selectCurrentOrder } from "../features/order/orderSlice";
+import { selectCurrentOrder } from "../features/order/orderSlice.js";
 
 export default function CheckoutForm() {
   const stripe = useStripe();

@@ -6,7 +6,7 @@ import {
   fetchAllOrderAsync,
   selectAllOrdersAdmin,
   selectTotalOrders,
-} from "../../order/orderSlice";
+} from "../../order/orderSlice.js";
 import ProductPagination from "../../Product/Components/ProductPagination";
 
 export default function AdminOrder() {
