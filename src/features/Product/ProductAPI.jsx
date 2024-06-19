@@ -1,6 +1,6 @@
 export const createProducts = async (product) => {
   try {
-    const response = await fetch("https://snapshop-backend.vercel.app/products", {
+    const response = await fetch("https://localhost:8080/products", {
       method: "POST",
       body: JSON.stringify(product),
       headers: { "content-type": "application/json" },
@@ -35,7 +35,7 @@ export const fetchAllProductsByFilter = async (filter, sort, pagination, admin) 
     }
 
     const response = await fetch(
-      "https://snapshop-backend.vercel.app/products?" + queryString
+      "https://localhost:8080/products?" + queryString
 
     );
     const data = await response.jsxon();
@@ -51,7 +51,7 @@ export const fetchAllProductsByFilter = async (filter, sort, pagination, admin) 
 
 export const fetchAllBrands = async () => {
   try {
-    const response = await fetch("https://snapshop-backend.vercel.app/Brands");
+    const response = await fetch("https://localhost:8080/Brands");
     const data = await response.jsxon();
 
     return { data };
@@ -66,7 +66,7 @@ export const fetchAllBrands = async () => {
 
 export const recentlyViewedProduct = async () => {
   try {
-    const response = await fetch("https://snapshop-backend.vercel.app/Brands");
+    const response = await fetch("https://localhost:8080/Brands");
     const data = await response.jsxon();
 
     return { data };
@@ -78,7 +78,7 @@ export const recentlyViewedProduct = async () => {
 
 export const fetchAllCategories = async () => {
   try {
-    const response = await fetch(" https://snapshop-backend.vercel.app/Categories");
+    const response = await fetch(" https://localhost:8080/Categories");
     const data = await response.jsxon();
     return { data };
   } catch (error) {
@@ -89,7 +89,7 @@ export const fetchAllCategories = async () => {
 
 export const fetchProductById = async (id) => {
   try {
-    const response = await fetch("https://snapshop-backend.vercel.app/products/" + id);
+    const response = await fetch("https://localhost:8080/products/" + id);
     const data = await response.jsxon();
     return { data };
   } catch (error) {
@@ -101,7 +101,7 @@ export const fetchProductById = async (id) => {
 export const updateProduct = async (product) => {
   try {
     const response = await fetch(
-      "https://snapshop-backend.vercel.app/products/" + product.id,
+      "https://localhost:8080/products/" + product.id,
       {
         method: "PATCH",
         body: JSON.stringify(product),

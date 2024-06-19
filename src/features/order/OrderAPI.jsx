@@ -1,6 +1,6 @@
 export const AddOrders = async (order) => {
   try {
-    const response = await fetch("https://snapshop-backend.vercel.app/order/", {
+    const response = await fetch("https://localhost:8080/order/", {
       method: "POST",
       body: JSON.stringify(order),
       headers: { "content-type": "application/json" },
@@ -16,7 +16,7 @@ export const AddOrders = async (order) => {
 export const UpdateOrder = async (order) => {
   try {
     const response = await fetch(
-      "https://snapshop-backend.vercel.app/order/UpdateOrder/" + order.id,
+      "https://localhost:8080/order/UpdateOrder/" + order.id,
       {
         method: "PATCH",
         body: JSON.stringify(order),
@@ -39,7 +39,7 @@ export const fetchAllOrder = async (pagination) => {
       queryString += `${key}=${pagination[key]}&`;
     }
 
-    const response = await fetch("https://snapshop-backend.vercel.app/order/?" + queryString);
+    const response = await fetch("https://localhost:8080/order/?" + queryString);
     const data = await response.jsxon();
     const totalOrder = await response.headers.get("x-Total-Count");
     return { data: { order: data, totalOrder: +totalOrder } };
