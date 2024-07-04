@@ -1,6 +1,6 @@
 export const fetchOrders = async () => {
   try {
-    const response = await fetch("https://localhost:8080/order/user");
+    const response = await fetch("https://snapshop-backend.vercel.app/order/user");
     const data= await response.jsxon();
     return ({data})
   } catch (error) {
@@ -12,7 +12,7 @@ export const fetchOrders = async () => {
 
 export const fetchLogInUser  = async () => {
   try {
-    const response = await fetch("https://localhost:8080/user/info");
+    const response = await fetch("https://snapshop-backend.vercel.app/user/info");
     const data= await response.jsxon();
     return {data}
   } catch (error) {
@@ -35,7 +35,7 @@ export const fetchLogInUser  = async () => {
 
 export const updateUser = async (userData) => {
   try {
-    const response = await fetch("https://localhost:8080/user/update", {
+    const response = await fetch("https://snapshop-backend.vercel.app/user/update", {
       method: "PATCH",
       body: JSON.stringify(userData),
       headers: { "content-type": "application/json" },

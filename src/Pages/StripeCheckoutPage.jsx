@@ -17,7 +17,7 @@ export default function StripCheckoutPage() {
 
 
   useEffect(() => {
-    fetch("https://localhost:8080/create-payment-intent", {
+    fetch("https://snapshop-backend.vercel.app/create-payment-intent", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ totalAmount: currentOrder.totalAmount }),
